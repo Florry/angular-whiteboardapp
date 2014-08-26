@@ -1,7 +1,25 @@
 /* Space out content a bit */
 body {
+<<<<<<< HEAD
   padding: 20px;
   background-color: lightgrey;
+=======
+  padding-top: 0px;
+  padding-bottom: 20px;
+  background-image: './images/brick_wall_pattern.jpg';
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.whiteboard div{
+  min-height: 100%;
+>>>>>>> 27e3621be30926d4f45ad012159a55590f48fb35
 }
 
 .whiteboard{
