@@ -2,6 +2,7 @@
 body {
   padding-top: 0px;
   padding-bottom: 20px;
+  background-image: './images/brick_wall_pattern.jpg';
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -11,15 +12,7 @@ body {
   padding-left: 15px;
   padding-right: 15px;
 }
-.green{
-  background-color: green;
-}
-.yellow{
-  background-color: yellow;
-}
-.orange{
-  background-color: orange;
-}
+
 .whiteboard div{
   min-height: 100%;
 }
