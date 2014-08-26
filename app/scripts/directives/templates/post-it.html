@@ -1,4 +1,11 @@
-<div style="height: 200px; width: 200px; padding:">
-	<img src="https://avatars2.githubusercontent.com/u/5434997?v=2&s=460" height="100" width="100"/>
-	<br/>
+<div ng-class="getStatusCss()">
+	<center>
+		<wb-post-it-status-panel status="content.status"></wb-post-it-status-panel>
+
+		<br/>
+		<b>{{content.author}}<br/></b>
+		<i>{{content.text}}<br/></i>
+		<h6>{{content.timestamp}}<br/></h6>
+		{{content.status}}<br/>
+	</center>
 </div>

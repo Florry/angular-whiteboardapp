@@ -1,0 +1,10 @@
+<div class="btn-group">
+	<button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+		{{ status }}<span class="caret"></span>
+	</button>
+	<ul class="dropdown-menu" role="menu">
+		<li class="not-started" ng-click="changeStatus(notStarted)">Not started</li>
+		<li class="in-progress" ng-click="changeStatus(inProgress)">In progress</li>
+		<li class="done" ng-click="changeStatus(done)">Done</li>
+	</ul>
+</div>

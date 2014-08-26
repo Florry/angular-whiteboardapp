@@ -11,8 +11,13 @@ angular.module('whiteboardApp')
 		return {
 			templateUrl: './scripts/directives/templates/post-it.html',
 			restrict: 'E',
-			controller: function ($scope) {
-
+			scope: {
+				content: '='
+			},
+			controller: function postItCtrl($scope) {
+				$scope.getStatusCss = function () {
+					return $scope.content.status.replace(' ', '-');
+				};
 			}
 		};
 	});
