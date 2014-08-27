@@ -10,6 +10,18 @@ angular.module('whiteboardApp')
 	.directive('wbPostItCreate', function() {
 		return {
 			templateUrl: './scripts/directives/templates/postit-create.html',
-			restrict: 'E'
+			restrict: 'E',
+			link: function(scope, element) {
+
+				$("#createPostItFormDiv").hide();
+
+				scope.showCreatePostItForm = function() {
+					$("#createPostItFormDiv").fadeIn();
+				};
+
+				scope.hideCreatePostItForm = function() {
+					$("#createPostItFormDiv").fadeOut();
+				};
+			}
 		};
 	});

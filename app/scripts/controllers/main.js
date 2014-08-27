@@ -98,14 +98,4 @@ angular.module('whiteboardApp')
 			removed: false,
 			timestamp: '2014-08-32'
 		}];
-
-		$scope.createPostItFormShown = false;
-
-		$scope.showCreatePostItForm = function() {
-			$scope.createPostItFormShown = true;
-		};
-
-		$scope.hideCreatePostItForm = function() {
-			$scope.createPostItFormShown = false;
-		};
 	});
