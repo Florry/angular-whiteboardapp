@@ -16,13 +16,13 @@ angular.module('whiteboardApp')
 			text: 'Helt automagiskt',
 			status: 'not started',
 			position: {
-				x: 30,
-				y: 30
+				x: 200,
+				y: 23
 			},
 			removed: false,
 			timestamp: '2014-08-32'
 		}, {
-			id: 1,
+			id: 2,
 			author: 'Bobby Thompson',
 			text: 'Lorem ipsum',
 			status: 'not started',
@@ -33,68 +33,68 @@ angular.module('whiteboardApp')
 			removed: false,
 			timestamp: '2014-08-32'
 		}, {
-			id: 1,
+			id: 3,
 			author: 'Bobby Thompson',
 			text: 'Plan your funeral, kid',
 			status: 'not started',
 			position: {
-				x: 30,
+				x: 90,
 				y: 30
 			},
 			removed: false,
 			timestamp: '2014-08-32'
 		}, {
-			id: 1,
+			id: 4,
 			author: 'Bobby Thompson',
 			text: 'Plan your funeral, kid',
 			status: 'not started',
 			position: {
-				x: 30,
-				y: 30
+				x: 45,
+				y: 10
 			},
 			removed: false,
 			timestamp: '2014-08-32'
 		}, {
-			id: 1,
+			id: 5,
 			author: 'Bobby Thompson',
 			text: 'Plan your funeral, kid',
 			status: 'not started',
 			position: {
-				x: 30,
-				y: 30
+				x: 900,
+				y: 600
 			},
 			removed: false,
 			timestamp: '2014-08-32'
 		}, {
-			id: 1,
+			id: 6,
 			author: 'Bobby Thompson',
 			text: 'Plan your funeral, kid',
 			status: 'not started',
 			position: {
-				x: 30,
-				y: 30
+				x: 200,
+				y: 100
 			},
 			removed: false,
 			timestamp: '2014-08-32'
 		}, {
-			id: 1,
+			id: 7,
 			author: 'Bobby Thompson',
 			text: 'Plan your funeral, kid',
 			status: 'not started',
 			position: {
-				x: 30,
-				y: 30
+				x: 50,
+				y: 52
 			},
 			removed: false,
 			timestamp: '2014-08-32'
 		}, {
-			id: 1,
+			id: 8,
 			author: 'Bobby Thompson',
 			text: 'Plan your funeral, kid',
 			status: 'not started',
 			position: {
-				x: 30,
-				y: 30
+				x: 100,
+				y: 90
 			},
 			removed: false,
 			timestamp: '2014-08-32'

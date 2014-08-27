@@ -1,25 +1,8 @@
 /* Space out content a bit */
 body {
-<<<<<<< HEAD
   padding: 20px;
   background-color: lightgrey;
-=======
-  padding-top: 0px;
-  padding-bottom: 20px;
-  background-image: './images/brick_wall_pattern.jpg';
-}
-
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-.whiteboard div{
-  min-height: 100%;
->>>>>>> 27e3621be30926d4f45ad012159a55590f48fb35
+  background-image: url(../images/brick_wall_pattern.jpg);
 }
 
 .whiteboard{
@@ -28,6 +11,7 @@ body {
   border-radius: 10px;
   overflow: hidden;
   background-color: white;
+  box-shadow: 10px 10px 10px #222;
 }
 
 wb-post-it{
@@ -40,6 +24,12 @@ wb-post-it{
   /*position: absolute;*/
   cursor: move;
   overflow: hidden;
+  border: 5px ridge #d9534f;
+}
+
+wb-post-it-status-panel .btn-group button{
+  padding: 1px;
+  min-width: 80px;
 }
 
 .not-started, .not-started button{
@@ -48,6 +38,7 @@ wb-post-it{
   width: 100%;
   height: 100%;
 }
+
 .in-progress, .in-progress button{
   background-color: #5bc0de;
   transition: all 0.5s ease-in-out;
