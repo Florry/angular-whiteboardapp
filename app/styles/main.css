@@ -3,6 +3,7 @@ body {
   padding: 20px;
   background-color: lightgrey;
   background-image: url(../images/brick_wall_pattern.jpg);
+  user-select: none;
 }
 
 .whiteboard{
@@ -11,20 +12,22 @@ body {
   border-radius: 10px;
   overflow: hidden;
   background-color: white;
-  box-shadow: 10px 10px 10px #222;
+  box-shadow: 10px 10px 5px rgba(10, 10, 10, 0.4);
 }
 
 wb-post-it{
   height: 150px; 
   width: 150px; 
   margin: 10px; 
-  box-shadow: 5px 5px 5px #aaa; 
+  box-shadow: 5px 5px 10px rgba(10, 10, 10, 0.4);
   background-color: #FFFA6B;
   float: left;
   /*position: absolute;*/
   cursor: move;
   overflow: hidden;
-  border: 5px ridge #d9534f;
+  border: 5px solid #d9534f;
+  position:absolute;
+
 }
 
 wb-post-it-status-panel .btn-group button{
