@@ -2,6 +2,7 @@
 body {
   padding: 20px;
   background-color: lightgrey;
+  background-image: url(../images/brick_wall_pattern.jpg);
 }
 
 .whiteboard{
@@ -10,6 +11,7 @@ body {
   border-radius: 10px;
   overflow: hidden;
   background-color: white;
+  box-shadow: 10px 10px 10px #222;
 }
 
 wb-post-it{
@@ -22,12 +24,12 @@ wb-post-it{
   /*position: absolute;*/
   cursor: move;
   overflow: hidden;
-  border: 5px solid #d9534f;
+  border: 5px ridge #d9534f;
 }
 
 wb-post-it-status-panel .btn-group button{
-padding: 1px;
-min-width: 80px;
+  padding: 1px;
+  min-width: 80px;
 }
 
 .not-started, .not-started button{
