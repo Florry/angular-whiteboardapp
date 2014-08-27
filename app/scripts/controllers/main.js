@@ -8,7 +8,7 @@
  * Controller of the whiteboardApp
  */
 angular.module('whiteboardApp')
-	.controller('MainCtrl', function ($scope) {
+	.controller('MainCtrl', function($scope, CRUDFactory) {
 
 		$scope.postits = [{
 			id: 1,
@@ -99,4 +99,6 @@ angular.module('whiteboardApp')
 			removed: false,
 			timestamp: '2014-08-32'
 		}];
+
+
 	});
