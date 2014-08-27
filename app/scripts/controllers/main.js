@@ -8,8 +8,7 @@
  * Controller of the whiteboardApp
  */
 angular.module('whiteboardApp')
-	.controller('MainCtrl', function($scope) {
-
+	.controller('MainCtrl', function($scope, CRUDFactory) {
 		$scope.postits = [{
 			id: 1,
 			author: 'Tom Whitemore',
