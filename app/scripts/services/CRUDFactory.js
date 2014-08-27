@@ -11,9 +11,9 @@ angular.module('whiteboardApp')
 		var URL = 'http://api.beta2.se/wb-div-postits';
 
 		return {
-			updatePostIt: function(postIt) {
-				$http.put(URL + '/' + postIt.id, postIt);
-				console.log(postIt);
+			updatePostit: function(postit) {
+				$http.put(URL + '/' + postit.id, postit);
+				console.log(postit);
 			}
 		};
 
