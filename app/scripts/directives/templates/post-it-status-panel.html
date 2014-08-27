@@ -1,10 +1,11 @@
-<div class="btn-group">
+<span class="glyphicon glyphicon-remove pull-left" ng-click=""></span>
+<div class="btn-group pull-right">
 	<button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
 		{{ status }}<span class="caret"></span>
 	</button>
-	<ul class="dropdown-menu" role="menu">
-		<li class="not-started" ng-click="changeStatus(notStarted)">Not started</li>
-		<li class="in-progress" ng-click="changeStatus(inProgress)">In progress</li>
-		<li class="done" ng-click="changeStatus(done)">Done</li>
+	<ul class="dropdown-menu" style="text-align: center;" role="menu">
+		<li class="not-started" ng-click="changeStatus(notStarted)">not started</li>
+		<li class="in-progress" ng-click="changeStatus(inProgress)">in progress</li>
+		<li class="done" ng-click="changeStatus(done)">done</li>
 	</ul>
 </div>
