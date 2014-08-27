@@ -1,0 +1,19 @@
+<div style="padding-bottom: 1px; border-radius: 5px 5px; border: 1px solid black; background-color: lightgrey; width: 150px; height: auto">
+	<form>
+		<h3>This is the postit create form</h3>
+		<div class="input-group">
+			<span class="input-group-addon">Text</span>
+			<input type="text" class="form-control">
+		</div>
+
+		<ul style="list-style: none">
+			<li><input type="radio" name="color" value="yellow"/>Yellow</li>
+			<li><input type="radio" name="color" value="blue"/>Blue</li>
+			<li><input type="radio" name="color" value="green"/>Green</li>
+			<li><input type="radio" name="color" value="red"/>Red</li>
+		</ul>
+
+		<button class="btn btn-danger" ng-click="hideCreatePostItForm()">Cancel</button>
+		<button class="btn btn-success">Create</button>
+	</form>
+</div>

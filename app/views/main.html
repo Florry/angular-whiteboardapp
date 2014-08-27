@@ -1,8 +1,12 @@
 <div class="container-full">
-	<h1>Whiteboard</h1>
-	<div class="whiteboard" >
+	<div style="margin-bottom: 20px">
+	<h1 style="display: inline">Whiteboard</h1>
+	<div>
+		<button class="btn btn-warning pull-right" ng-click="showCreatePostItForm()"><span class="glyphicon glyphicon-plus"></span></button>
+		<wb-post-it-create ng-show="createPostItFormShown"></wb-post-it-create>
+	</div>
+	</div>
+	<div class="whiteboard">
 		<wb-post-it ng-repeat="postit in postits" content="postit"></wb-post-it>
 	</div>
-
-	<button ng-click=""></button>
 </div>
