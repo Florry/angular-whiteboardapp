@@ -1,11 +1,17 @@
-<span class="glyphicon glyphicon-remove pull-left" ng-click=""></span>
+
+<span class="remove-icon glyphicon glyphicon-remove pull-left" style="margin-left: 2px; margin-top: 2px; margin-right: 5px;" ng-click=""></span>
+<span class="edit-icon glyphicon glyphicon-pencil pull-left" style="margin-left: 5px; margin-top: 2px;" ng-click="showEdit()"></span>
 <div class="btn-group pull-right">
 	<button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-		{{ status }}<span class="caret"></span>
+		{{ content.status }}<span class="caret"></span>
 	</button>
 	<ul class="dropdown-menu" style="text-align: center;" role="menu">
 		<li class="not-started" ng-click="changeStatus(notStarted)">not started</li>
 		<li class="in-progress" ng-click="changeStatus(inProgress)">in progress</li>
 		<li class="done" ng-click="changeStatus(done)">done</li>
 	</ul>
+</div>
+
+<div class="editFormWrapperInner" style="position: absolute; left: {{content.position.y - 40}}px; top: {{content.position.x - 40}}px; background-color: red; width: 100px; z-index: 100; overflow: visable;">
+<wb-postit-edit ng-show="showEditForm" style="position: relative;"></wb-postit-edit>
 </div>

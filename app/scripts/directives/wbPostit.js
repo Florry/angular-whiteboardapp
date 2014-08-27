@@ -7,7 +7,7 @@
  * # postIt
  */
 angular.module('whiteboardApp')
-	.directive('wbPostIt', function ($document) {
+	.directive('wbPostIt', function ($document, CRUDFactory) {
 		return {
 			templateUrl: './scripts/directives/templates/post-it.html',
 			restrict: 'E',
@@ -17,8 +17,38 @@ angular.module('whiteboardApp')
 			link: function postItCtrl($scope, element) {
 				var startX = element.offset().left,
 					startY = element.offset().top,
-					x = 0,
-					y = 0;
+					y = 0,
+					x = 0;
+				var whiteBoard = $('.whiteboard');
+
+				function clampWidth(value) {
+					var maxValue = parseInt(whiteBoard.css('width')) - parseInt(element.css("width")),
+						minValue = whiteBoard.offset().left;
+					if (value >= maxValue) {
+						return maxValue;
+					} else if (value <= minValue) {
+						return minValue;
+					} else {
+						return value;
+					}
+				}
+
+				function clampHeight(value) {
+					var maxValue = parseInt(whiteBoard.css('height')) - parseInt(element.css("height")) + parseInt(whiteBoard.offset().top),
+						minValue = whiteBoard.offset().top;
+					if (value > maxValue) {
+						return maxValue;
+					} else if (value < minValue) {
+						return minValue;
+					} else {
+						return value;
+					}
+				}
+
+				element.css({
+					left: $scope.content.position.x + 'px',
+					top: $scope.content.position.y + 'px'
+				});
 
 				$scope.getStatusCss = function () {
 					return $scope.content.status.replace(' ', '-');
@@ -45,7 +75,20 @@ angular.module('whiteboardApp')
 				function mouseup() {
 					$document.unbind('mousemove', movePostit);
 					$document.unbind('mouseup', mouseup);
+
+					y = clampHeight(y);
+					x = clampWidth(x);
+					element.css({
+						top: y + 'px',
+						left: x + 'px'
+					});
+
+					$scope.content.position.x = x;
+					$scope.content.position.y = y;
+					CRUDFactory.updatePostIt($scope.content);
 				}
+
+
 			}
 		};
 	});
