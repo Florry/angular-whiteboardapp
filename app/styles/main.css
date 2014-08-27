@@ -22,6 +22,7 @@ wb-post-it{
   /*position: absolute;*/
   cursor: move;
   overflow: hidden;
+  border: 5px solid #d9534f;
 }
 
 wb-post-it-status-panel .btn-group button{
