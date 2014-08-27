@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('whiteboardApp')
-	.factory('CRUDFactory', function($http) {
+	.factory('CRUDFactory', function ($http) {
 
 		// C POST OBJ TO URL http://api.beta2.se/wb-div-postits
 		// R GET OBJ FROM URL http://api.beta2.se/wb-div-postits
@@ -11,7 +11,7 @@ angular.module('whiteboardApp')
 		var URL = 'http://api.beta2.se/wb-div-postits';
 
 		return {
-			updatePostIt: function(postIt) {
+			updatePostIt: function (postIt) {
 				$http.put(URL + '/' + postIt.id, postIt);
 				console.log(postIt);
 			}
