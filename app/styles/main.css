@@ -24,7 +24,7 @@ wb-post-it{
   overflow: hidden;
 }
 
-.dropdown-toggle{
+wb-post-it-status-panel .btn-group button{
 padding: 1px;
 min-width: 80px;
 }
