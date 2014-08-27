@@ -7,22 +7,32 @@
  * # wbPostItStatusPanel
  */
 angular.module('whiteboardApp')
-	.directive('wbPostItStatusPanel', function () {
+	.directive('wbPostItStatusPanel', function() {
 		return {
 			templateUrl: './scripts/directives/templates/post-it-status-panel.html',
 			restrict: 'E',
 			scope: {
-				status: '='
+				content: '='
 			},
-			link: function postLink(scope, $scope, element, attrs) {
+			link: function postLink(scope, $scope, element, attrs, CRUDFactory) {
 				scope.done = 'done';
 				scope.inProgress = 'in progress';
 				scope.notStarted = 'not started';
+				scope.showEditForm = false;
 
-				scope.changeStatus = function (newStatus) {
-					scope.status = newStatus;
+				scope.showEdit = function() {
+					scope.showEditForm = (scope.showEditForm === false) ? true : false;
+				};
+
+				scope.changeStatus = function(newStatus) {
+					scope.content.status = newStatus;
 
 					//CONNECT TO THE FUCKING SERVER YOU SON OF A BITCH!!
+				};
+
+				scope.updatePostit = function() {
+
+					CRUDFactory.updatePostit();
 				};
 			}
 		};
