@@ -24,7 +24,6 @@ wb-post-it{
   float: left;
   /*position: absolute;*/
   cursor: move;
-  overflow: hidden;
   border: 5px solid #d9534f;
   position:absolute;
 
@@ -40,6 +39,8 @@ wb-post-it-status-panel .btn-group button{
   transition: all 0.5s ease-in-out;
   width: 100%;
   height: 100%;
+  overflow: hidden;
+
 }
 
 .in-progress, .in-progress button{
@@ -47,12 +48,16 @@ wb-post-it-status-panel .btn-group button{
   transition: all 0.5s ease-in-out;
   width: 100%;
   height: 100%;
+  overflow: hidden;
+
 }
 .done, .done button{
   background-color: #5cb85c;
   transition: all 0.5s ease-in-out;
   width: 100%;
   height: 100%;
+  overflow: hidden;
+
 }
 
 wb-post-it-status-panel{
