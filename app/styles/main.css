@@ -23,7 +23,6 @@ wb-post-it, .post-it-ghost{
   box-shadow: 5px 5px 10px rgba(10, 10, 10, 0.4);
   background-color: #FFFA6B;
   float: left;
-  /*position: absolute;*/
   cursor: move;
   position:absolute;
   
@@ -31,6 +30,7 @@ wb-post-it, .post-it-ghost{
 
 .post-it-ghost{
   opacity: 0.3;
+  position: fixed;
 }
 
 wb-post-it-status-panel .btn-group button{
