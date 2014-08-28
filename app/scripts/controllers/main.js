@@ -27,9 +27,27 @@ angular.module('whiteboardApp')
 		CRUDFactory.readPostIt(function () {
 			$scope.postits = CRUDFactory.getPostIts();
 		});
+
 		$interval(function () {
 			CRUDFactory.readPostIt(function () {
-				$scope.postits = CRUDFactory.getPostIts();
+				var getPostits = CRUDFactory.getPostIts();
+				for (var i = 0; i < getPostits.length; i++) {
+					var getPostit = getPostits[i],
+						oldPostit = $scope.postits[i];
+					for (var key in getPostit) {
+						if (getPostit.hasOwnProperty(key)) {
+							if (key !== 'position') {
+								if (getPostit[key] !== oldPostit[key]) {
+									$scope.postits[i] = getPostit;
+									break;
+								}
+							}
+						}
+					}
+					if ((getPostit.position.x !== oldPostit.position.x) || (getPostit.position.y !== oldPostit.position.y)) {
+						$scope.postits[i] = getPostit;
+					}
+				}
 			});
 		}, 1000);
 
