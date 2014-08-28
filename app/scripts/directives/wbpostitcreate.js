@@ -25,21 +25,20 @@ angular.module('whiteboardApp')
 				scope.ghostActive = false;
 
 				scope.createPostItGhost = function($event) {
-					if (scope.createForm.$valid) {
-						scope.postIt = {
-							author: 'Tom Whitemore',
-							text: scope.postItText,
-							status: 'not started',
-							position: {
-								x: 0,
-								y: 0
-							},
-							color: scope.color,
-							removed: false
-						};
-						bindElementMove($event);
-						scope.ghostActive = true;
-					}
+					scope.postIt = {
+						id: "",
+						author: 'Tom Whitemore',
+						text: scope.postItText,
+						status: 'not started',
+						position: {
+							x: 0,
+							y: 0
+						},
+						color: scope.color,
+						removed: false
+					};
+					bindElementMove($event);
+					scope.ghostActive = true;
 				};
 
 				function createPostIt() {

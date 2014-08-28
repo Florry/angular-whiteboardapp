@@ -14,5 +14,5 @@
 	<div class="post-it-ghost" ng-show="ghostActive"></div>
 
 	<button class="btn btn-danger" ng-click="hideCreatePostItForm()">Cancel</button>
-	<input type="submit" class="btn btn-success" value="Create"/>
+	<input type="submit" class="btn btn-success" value="Create" ng-disabled="createPostItForm.$valid"/>
 </form>
