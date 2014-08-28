@@ -7,7 +7,8 @@ body {
 }
 
 .whiteboard{
-  min-height: 400px;
+  height: 600px;
+  width: 1360px;
   border: 2px solid black;
   border-radius: 10px;
   overflow: hidden;

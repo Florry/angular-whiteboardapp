@@ -12,22 +12,21 @@ angular.module('whiteboardApp')
 			templateUrl: './scripts/directives/templates/post-it-status-panel.html',
 			restrict: 'E',
 			scope: {
-				content: '=',
-				showEditForm: '='
+				content: '='
 			},
-			link: function postLink(scope, $scope, element, attrs) {
-				scope.done = 'done';
-				scope.inProgress = 'in progress';
-				scope.notStarted = 'not started';
+			controller: function postLink($scope) {
+				$scope.done = 'done';
+				$scope.inProgress = 'in progress';
+				$scope.notStarted = 'not started';
 				$scope.showEditForm = false;
 
-				scope.showEdit = function() {
+				$scope.showEdit = function() {
 
-					$scope.showEditForm = ($scope.showEditForm === false) ? true : false;
+					$scope.showEditForm = !$scope.showEditForm;
 				};
 
-				scope.changeStatus = function(newStatus) {
-					scope.content.status = newStatus;
+				$scope.changeStatus = function(newStatus) {
+					$scope.content.status = newStatus;
 
 					//CONNECT TO THE FUCKING SERVER YOU SON OF A BITCH!!
 				};

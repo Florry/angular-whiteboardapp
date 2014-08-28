@@ -2,9 +2,10 @@
 	<fieldset>
 		<label>Update Content</label>
 		
-	<textarea class="form-control" ng-model="inputText" rows="10">{{content.text}}</textarea>
-				<a type="button" class="btn btn-default btn-sm">Cancel</a>
-				<a type="button" ng-click="updatePostit(inputText)" class="btn btn-primary btn-sm">Update</a>
-			
+		<textarea class="form-control" ng-model="inputText" rows="10">{{inputText}}</textarea>
+
+		<a type="button" ng-click="closeEditForm()" class="btn btn-default btn-sm">Cancel</a>
+		<a type="button" ng-click="updatePostit()" class="btn btn-primary btn-sm">Update</a>
+
 	</fieldset>
 </form>

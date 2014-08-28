@@ -87,7 +87,7 @@ angular.module('whiteboardApp')
 					startY = event.screenY;
 					$document.bind('mousemove', movePostIt);
 					$document.bind('mousedown', unbindEvents);
-					console.log("bindElementMove() says: " + x + " " + y);
+					//console.log("bindElementMove() says: " + x + " " + y);
 				}
 
 				function movePostIt(event) {
@@ -97,13 +97,13 @@ angular.module('whiteboardApp')
 						top: y + 'px',
 						left: x + 'px'
 					});
-					console.log("movePostIt() says: " + x + " " + y);
+					//console.log("movePostIt() says: " + x + " " + y);
 				}
 
 				function unbindEvents() {
 					$document.unbind('mousemove', movePostIt);
 					$document.unbind('mousedown', unbindEvents);
-					console.log("unbindEvents() says: " + x + " " + y);
+					//console.log("unbindEvents() says: " + x + " " + y);
 				}
 			}
 		};
