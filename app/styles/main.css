@@ -15,7 +15,7 @@ body {
   box-shadow: 10px 10px 5px rgba(10, 10, 10, 0.4);
 }
 
-wb-post-it{
+wb-post-it, .post-it-ghost{
   height: 150px; 
   width: 150px; 
   margin: 10px; 
@@ -27,7 +27,10 @@ wb-post-it{
   overflow: hidden;
   border: 5px solid #d9534f;
   position:absolute;
+}
 
+.post-it-ghost{
+  opacity: 0.3;
 }
 
 wb-post-it-status-panel .btn-group button{
