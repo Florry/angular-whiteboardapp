@@ -43,17 +43,12 @@ angular.module('whiteboardApp')
 				for (var i = 0; i < $scope.postits.length; i++) {
 					var getPostit = getPostits[i],
 						oldPostit = $scope.postits[i];
-					for (var key in getPostit) {
-						if (getPostit.hasOwnProperty(key)) {
-							if (key !== 'position') {
-								if (getPostit[key] !== oldPostit[key]) {
-									$scope.postits[i] = getPostit;
-									break;
-								}
-							}
-						}
-					}
-					if ((getPostit.position.x !== oldPostit.position.x) || (getPostit.position.y !== oldPostit.position.y)) {
+
+					if (oldPostit.timestamp !== getPostit.timestamp) {
+						$scope.postits[i] = getPostit;
+					} else if ((getPostit.position.x !== oldPostit.position.x) || (getPostit.position.y !== oldPostit.position.y)) {
+						$scope.postits[i] = getPostit;
+					} else if (oldPostit.status !== getPostit.status) {
 						$scope.postits[i] = getPostit;
 					}
 				}
@@ -63,7 +58,7 @@ angular.module('whiteboardApp')
 					}
 				}
 			});
-		}, 100000);
+		}, 1000);
 
 		$scope.populatePostits = function () {
 			//DEBUG STUFFS
