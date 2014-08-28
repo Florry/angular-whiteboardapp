@@ -31,7 +31,7 @@ angular.module('whiteboardApp')
 			id: 1,
 			author: 'Admin',
 			text: 'The post-its could not be read, please try again later!',
-			status: 'btn-danger',
+			status: 'admin-note',
 			position: {
 				x: 200,
 				y: 200
@@ -46,21 +46,23 @@ angular.module('whiteboardApp')
 		$interval(function () {
 			CRUDFactory.readPostIt(function () {
 				var getPostits = CRUDFactory.getPostIts();
-				for (var i = 0; i < $scope.postits.length; i++) {
-					var getPostit = getPostits[i],
-						oldPostit = $scope.postits[i];
+				if (getPostits.length > 0) {
+					for (var i = 0; i < $scope.postits.length; i++) {
+						var getPostit = getPostits[i],
+							oldPostit = $scope.postits[i];
 
-					if (oldPostit.timestamp !== getPostit.timestamp) {
-						$scope.postits[i] = getPostit;
-					} else if ((getPostit.position.x !== oldPostit.position.x) || (getPostit.position.y !== oldPostit.position.y)) {
-						$scope.postits[i] = getPostit;
-					} else if (oldPostit.status !== getPostit.status) {
-						$scope.postits[i] = getPostit;
+						if (oldPostit.timestamp !== getPostit.timestamp) {
+							$scope.postits[i] = getPostit;
+						} else if ((getPostit.position.x !== oldPostit.position.x) || (getPostit.position.y !== oldPostit.position.y)) {
+							$scope.postits[i] = getPostit;
+						} else if (oldPostit.status !== getPostit.status) {
+							$scope.postits[i] = getPostit;
+						}
 					}
-				}
-				if (getPostits.length > $scope.postits.length) {
-					for (i = 0; i < getPostits.length - $scope.postits.length; i++) {
-						$scope.postits.push(getPostits[i]);
+					if (getPostits.length > $scope.postits.length) {
+						for (i = 0; i < getPostits.length - $scope.postits.length; i++) {
+							$scope.postits.push(getPostits[i]);
+						}
 					}
 				}
 			});

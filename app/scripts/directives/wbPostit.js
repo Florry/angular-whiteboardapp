@@ -82,6 +82,7 @@ angular.module('whiteboardApp')
 					scope.content.position.x = x;
 					scope.content.position.y = y;
 					CRUDFactory.updatePostIt(scope.content);
+					//Uppdaterar vid varje klick
 				}
 
 				scope.getStatusCss = function () {
