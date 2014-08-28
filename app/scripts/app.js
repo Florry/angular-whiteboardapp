@@ -19,7 +19,7 @@ angular
 		'LocalStorageModule'
 	]).config(['localStorageServiceProvider',
 		function (localStorageServiceProvider) {
-			localStorageServiceProvider.setPrefix('ls');
+			localStorageServiceProvider.setPrefix('wb-div');
 		}
 	])
 	.config(function ($routeProvider) {
