@@ -14,15 +14,15 @@ angular.module('whiteboardApp')
 			scope: {
 				content: '='
 			},
-			link: function postItCtrl($scope, element) {
+			link: function postItCtrl(scope, element) {
 				var startX = element.offset().left,
 					startY = element.offset().top,
-					y = 0,
-					x = 0;
+					y = scope.content.position.y,
+					x = scope.content.position.x;
 				var whiteBoard = $('.whiteboard');
 
 				function clampWidth(value) {
-					var maxValue = parseInt(whiteBoard.css('width')) - parseInt(element.css("width")),
+					var maxValue = parseInt(whiteBoard.css('width')) - parseInt(element.css('width')),
 						minValue = whiteBoard.offset().left;
 					if (value >= maxValue) {
 						return maxValue;
@@ -34,7 +34,7 @@ angular.module('whiteboardApp')
 				}
 
 				function clampHeight(value) {
-					var maxValue = parseInt(whiteBoard.css('height')) - parseInt(element.css("height")) + parseInt(whiteBoard.offset().top),
+					var maxValue = parseInt(whiteBoard.css('height')) + parseInt(whiteBoard.offset().top) - 50,
 						minValue = whiteBoard.offset().top;
 					if (value > maxValue) {
 						return maxValue;
@@ -46,16 +46,13 @@ angular.module('whiteboardApp')
 				}
 
 				element.css({
-					left: $scope.content.position.x + 'px',
-					top: $scope.content.position.y + 'px'
+					left: scope.content.position.x + 'px',
+					top: scope.content.position.y + 'px'
 				});
-
-				$scope.getStatusCss = function () {
-					return $scope.content.status.replace(' ', '-');
-				};
 
 				(function bindElementMove() {
 					element.bind('mousedown', function (event) {
+						//If event.element == draggable space
 						startX = event.screenX - element.offset().left;
 						startY = event.screenY - element.offset().top;
 						$document.bind('mousemove', movePostit);
@@ -83,10 +80,14 @@ angular.module('whiteboardApp')
 						left: x + 'px'
 					});
 
-					$scope.content.position.x = x;
-					$scope.content.position.y = y;
-					CRUDFactory.updatePostIt($scope.content);
+					scope.content.position.x = x;
+					scope.content.position.y = y;
+					CRUDFactory.updatePostIt(scope.content);
 				}
+
+				scope.getStatusCss = function () {
+					return scope.content.status.replace(' ', '-');
+				};
 
 
 			}

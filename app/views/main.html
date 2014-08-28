@@ -1,8 +1,14 @@
 <div class="container-full">
-	<h1>Whiteboard</h1>
-	<div class="whiteboard" >
+	<div style="margin-bottom: 20px">
+		<h1 style="display: inline">Whiteboard</h1>
+		<div class="pull-right">
+			<wb-post-it-create></wb-post-it-create>
+		</div>
+	</div>
+	<div class="whiteboard">
 		<wb-post-it ng-repeat="postit in postits" content="postit"></wb-post-it>
 	</div>
 
-	<button ng-click=""></button>
+	<button ng-click="populatePostits()"></button>
+
 </div>
