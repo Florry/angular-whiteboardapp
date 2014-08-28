@@ -2,10 +2,25 @@
 	<div style="margin-bottom: 20px">
 		<h1 style="display: inline">Whiteboard</h1>
 		<div class="pull-right">
-			<wb-post-it-create></wb-post-it-create>
+			<span ng-show="!loggedIn">
+				<span class="label label-default">Username: </span>
+				<input ng-model="username" type="text"></input>
+				<button type="submit" class="btn btn-primary" style="color: white;" ng-disabled="!username" ng-click="login()">
+					Login
+				</button>
+			</span>
+			<span ng-show="loggedIn">
+				<span class="label label-default" ng-click="logout()" style="cursor:pointer;">Logout</span><br/>
+				<span class="label label-primary">Logged in as {{username}} </span>
+			</span>			
+			<div style="position:absolute; height: 600px; width: 100%; z-index: 1; left: 0px; width: 100%; background-color: RGBA(0,0,0,0.5);" ng-show="!loggedIn"> 
+			</div>
+			<wb-post-it-create ng-show="loggedIn"></wb-post-it-create>
 		</div>
 	</div>
-	<div class="whiteboard">
+
+
+	<div class="whiteboard" >
 		<wb-post-it ng-repeat="postit in postits" content="postit"></wb-post-it>
 	</div>
 

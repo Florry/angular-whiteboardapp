@@ -14,26 +14,24 @@ angular.module('whiteboardApp')
 			scope: {
 				content: '='
 			},
-			link: function postLink(scope, element, attrs, CRUDFactory) {
-				scope.done = 'done';
-				scope.inProgress = 'in progress';
-				scope.notStarted = 'not started';
-				scope.showEditForm = false;
+			controller: function postLink($scope) {
+				$scope.done = 'done';
+				$scope.inProgress = 'in progress';
+				$scope.notStarted = 'not started';
+				$scope.showEditForm = false;
 
-				scope.showEdit = function() {
+				$scope.showEdit = function() {
 
-					scope.showEditForm = (scope.showEditForm === false) ? true : false;
+					$scope.showEditForm = !$scope.showEditForm;
 				};
 
-				scope.changeStatus = function(newStatus) {
-					scope.content.status = newStatus;
+				$scope.changeStatus = function(newStatus) {
+					$scope.content.status = newStatus;
 
 					//CONNECT TO THE FUCKING SERVER YOU SON OF A BITCH!!
 				};
 
-				scope.updatePostit = function() {
-					CRUDFactory.updatePostit();
-				};
+
 			}
 		};
 	});

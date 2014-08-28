@@ -13,11 +13,26 @@ angular.module('whiteboardApp')
 			restrict: 'E',
 			scope: {
 				content: '='
-				/*,
-				showEditForm: '='*/
 			},
-			controller: function postItCtrl() {
-				//scope.showEditForm = false;
+			controller: function postItCtrl(CRUDFactory, $scope) {
+				//$scope.newContent = {};
+
+				$scope.inputText = $scope.content.text;
+
+				$scope.updatePostit = function() {
+					if ($scope.content.text !== $scope.inputText) {
+						var date = new Date();
+						$scope.content.text = $scope.inputText;
+						$scope.content.timestamp = date.getFullYear() + '-' + ((date.getMonth() + 1 < 10) ? '0' : '') + (date.getMonth() + 1) + '-' + date.getDate() + '-' + date.getTime();
+
+						CRUDFactory.updatePostIt($scope.content);
+					}
+					$scope.$parent.showEditForm = false;
+
+				};
+				$scope.closeEditForm = function() {
+					$scope.$parent.showEditForm = false;
+				};
 			}
 		};
 	});

@@ -8,8 +8,18 @@
  * Controller of the whiteboardApp
  */
 angular.module('whiteboardApp')
-	.controller('MainCtrl', function($interval, $scope, CRUDFactory) {
+	.controller('MainCtrl', function ($interval, $scope, CRUDFactory, localStorageService) {
 		$scope.date = new Date();
+		$scope.username = localStorageService.get('username');
+		$scope.loggedIn = Boolean(localStorageService.get('username') !== undefined && localStorageService.get('username') !== '');
+		$scope.login = function () {
+			localStorageService.add('username', $scope.username);
+			$scope.loggedIn = true;
+		};
+		$scope.logout = function () {
+			localStorageService.remove('username');
+			$scope.loggedIn = false;
+		};
 		$scope.postits = [{
 			//Error message
 			id: 1,
@@ -24,33 +34,33 @@ angular.module('whiteboardApp')
 			timestamp: $scope.date.getFullYear() + '-' + (($scope.date.getMonth() + 1 < 10) ? '0' : '') + ($scope.date.getMonth() + 1) + '-' + $scope.date.getDate()
 		}];
 
-		CRUDFactory.readPostIt(function() {
+		CRUDFactory.readPostIt(function () {
 			$scope.postits = CRUDFactory.getPostIts();
 		});
-		$interval(function() {
-			CRUDFactory.readPostIt(function() {
+		$interval(function () {
+			CRUDFactory.readPostIt(function () {
 				var getPostits = CRUDFactory.getPostIts();
-				for (var i = 0; i < getPostits.length; i++) {
+				for (var i = 0; i < $scope.postits.length; i++) {
 					var getPostit = getPostits[i],
 						oldPostit = $scope.postits[i];
-					for (var key in getPostit) {
-						if (getPostit.hasOwnProperty(key)) {
-							if (key !== 'position') {
-								if (getPostit[key] !== oldPostit[key]) {
-									$scope.postits[i] = getPostit;
-									break;
-								}
-							}
-						}
-					}
-					if ((getPostit.position.x !== oldPostit.position.x) || (getPostit.position.y !== oldPostit.position.y)) {
+
+					if (oldPostit.timestamp !== getPostit.timestamp) {
+						$scope.postits[i] = getPostit;
+					} else if ((getPostit.position.x !== oldPostit.position.x) || (getPostit.position.y !== oldPostit.position.y)) {
+						$scope.postits[i] = getPostit;
+					} else if (oldPostit.status !== getPostit.status) {
 						$scope.postits[i] = getPostit;
 					}
 				}
+				if (getPostits.length > $scope.postits.length) {
+					for (i = 0; i < getPostits.length - $scope.postits.length; i++) {
+						$scope.postits.push(getPostits[i]);
+					}
+				}
 			});
-		}, 100000);
+		}, 1000);
 
-		$scope.populatePostits = function() {
+		$scope.populatePostits = function () {
 			//DEBUG STUFFS
 			var postits = [{
 				id: 1,

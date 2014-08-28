@@ -89,6 +89,7 @@ angular.module('whiteboardApp')
 				function bindElementMove($event) {
 					$document.bind('mousemove', updateGraphicalPositions);
 					$document.bind('mousedown', unbindEvents);
+
 					$document.bind("mouseup", createPostIt);
 					startX = $event.screenX;
 					startY = $event.screenY;
