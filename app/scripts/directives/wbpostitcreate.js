@@ -12,50 +12,54 @@ angular.module('whiteboardApp')
 			templateUrl: './scripts/directives/templates/postit-create.html',
 			restrict: 'E',
 			link: function(scope, element) {
-				$("#createPostItForm").hide();
+				$('#createPostItForm').hide();
 
 				scope.showCreatePostItForm = function() {
-					$("#createPostItForm").fadeIn();
+					$('#createPostItForm').fadeIn();
 				};
 
 				scope.hideCreatePostItForm = function() {
-					$("#createPostItForm").fadeOut();
+					$('#createPostItForm').fadeOut();
 				};
 
 				scope.ghostActive = false;
 
 				scope.createPostItGhost = function() {
-					if (scope.createForm.$valid) {
-						scope.postIt = {
-							author: 'Tom Whitemore',
-							text: scope.postItText,
-							status: 'not started',
-							position: {
-								x: 200,
-								y: 23
-							},
-							color: scope.color,
-							removed: false
-						};
-						bindElementMove();
-						scope.ghostActive = true;
-					}
+					// if (scope.createForm.$valid) {
+					scope.postIt = {
+						author: 'Tom Whitemore',
+						text: scope.postItText,
+						status: 'not started',
+						position: {
+							x: 200,
+							y: 23
+						},
+						color: scope.color,
+						removed: false
+					};
+					bindElementMove();
+					scope.ghostActive = true;
+					// }
 				};
 
 				scope.sendForm = function() {
 					CRUDFactory.createPostIt(scope.postIt);
 				};
 
-				// GHOST MOUSE TRACKING FUNCTIONALITY
 
-				var startX = element.offset().left,
-					startY = element.offset().top,
+				// GHOST POST IT MOUSE TRACKING FUNCTIONALITY
+
+				var ghost = $('.post-it-ghost');
+
+				var startX,
+					startY,
 					y,
 					x;
+
 				var whiteBoard = $('.whiteboard');
 
 				function clampWidth(value) {
-					var maxValue = parseInt(whiteBoard.css('width')) - parseInt(element.css("width")),
+					var maxValue = parseInt(whiteBoard.css('width')) - parseInt(ghost.css('width')),
 						minValue = whiteBoard.offset().left;
 					if (value >= maxValue) {
 						return maxValue;
@@ -79,25 +83,27 @@ angular.module('whiteboardApp')
 				}
 
 				function bindElementMove() {
-					startX = event.screenX - element.offset().left;
-					startY = event.screenY - element.offset().top;
+					startX = event.screenX;
+					startY = event.screenY;
 					$document.bind('mousemove', movePostIt);
-					$document.bind('mousedown', mousedown);
-				};
+					$document.bind('mousedown', unbindEvents);
+					console.log("bindElementMove() says: " + x + " " + y);
+				}
 
 				function movePostIt(event) {
-					y = event.screenY - startY;
-					x = event.screenX - startX;
-					console.log($(".post-it-ghost").css('left'));
-					$(".post-it-ghost").css({
+					y = event.screenY;
+					x = event.screenX;
+					ghost.css({
 						top: y + 'px',
 						left: x + 'px'
 					});
+					console.log("movePostIt() says: " + x + " " + y);
 				}
 
-				function mousedown() {
+				function unbindEvents() {
 					$document.unbind('mousemove', movePostIt);
-					$document.unbind('mousedown', mousedown);
+					$document.unbind('mousedown', unbindEvents);
+					console.log("unbindEvents() says: " + x + " " + y);
 				}
 			}
 		};
