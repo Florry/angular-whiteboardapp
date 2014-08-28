@@ -11,7 +11,7 @@ angular.module('whiteboardApp')
 		return {
 			templateUrl: './scripts/directives/templates/postit-create.html',
 			restrict: 'E',
-			link: function(scope, element) {
+			link: function(scope, element, attrs) {
 				$('#createPostItForm').hide();
 
 				scope.showCreatePostItForm = function() {
@@ -24,27 +24,31 @@ angular.module('whiteboardApp')
 
 				scope.ghostActive = false;
 
-				scope.createPostItGhost = function() {
-					// if (scope.createForm.$valid) {
-					scope.postIt = {
-						author: 'Tom Whitemore',
-						text: scope.postItText,
-						status: 'not started',
-						position: {
-							x: 200,
-							y: 23
-						},
-						color: scope.color,
-						removed: false
-					};
-					bindElementMove();
-					scope.ghostActive = true;
-					// }
+				scope.createPostItGhost = function($event) {
+					if (scope.createForm.$valid) {
+						scope.postIt = {
+							author: 'Tom Whitemore',
+							text: scope.postItText,
+							status: 'not started',
+							position: {
+								x: 0,
+								y: 0
+							},
+							color: scope.color,
+							removed: false
+						};
+						bindElementMove($event);
+						scope.ghostActive = true;
+					}
 				};
 
-				scope.sendForm = function() {
+				function createPostIt() {
+					scope.postIt.position.x = x;
+					scope.postIt.position.y = y;
+					scope.postits.push(scope.postIt);
 					CRUDFactory.createPostIt(scope.postIt);
-				};
+					$document.unbind("mouseup", createPostIt);
+				}
 
 
 				// GHOST POST IT MOUSE TRACKING FUNCTIONALITY
@@ -53,8 +57,8 @@ angular.module('whiteboardApp')
 
 				var startX,
 					startY,
-					y,
-					x;
+					x,
+					y;
 
 				var whiteBoard = $('.whiteboard');
 
@@ -82,28 +86,28 @@ angular.module('whiteboardApp')
 					}
 				}
 
-				function bindElementMove() {
-					startX = event.screenX;
-					startY = event.screenY;
-					$document.bind('mousemove', movePostIt);
+				function bindElementMove($event) {
+					$document.bind('mousemove', updateGraphicalPositions);
 					$document.bind('mousedown', unbindEvents);
-					console.log("bindElementMove() says: " + x + " " + y);
+					$document.bind("mouseup", createPostIt);
+					startX = $event.screenX;
+					startY = $event.screenY;
+					updateGraphicalPositions();
 				}
 
-				function movePostIt(event) {
-					y = event.screenY;
-					x = event.screenX;
+				function updateGraphicalPositions() {
+					x = event.screenX - ghost.width();
+					y = event.screenY - ghost.height();
 					ghost.css({
 						top: y + 'px',
 						left: x + 'px'
 					});
-					console.log("movePostIt() says: " + x + " " + y);
 				}
 
 				function unbindEvents() {
-					$document.unbind('mousemove', movePostIt);
 					$document.unbind('mousedown', unbindEvents);
-					console.log("unbindEvents() says: " + x + " " + y);
+					scope.ghostActive = false;
+					scope.$apply();
 				}
 			}
 		};

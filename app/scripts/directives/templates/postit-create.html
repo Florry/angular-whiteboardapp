@@ -1,6 +1,6 @@
 <button class="btn btn-warning" ng-click="showCreatePostItForm()"><span class="glyphicon glyphicon-plus"></span></button>
 
-<form id="createPostItForm" name="createForm" ng-submit="createPostItGhost()" style="position: absolute; right: 18px; z-index: 1; padding-bottom: 1px; border-radius: 5px 5px; border: 1px solid black; background-color: lightgrey; width: 150px;">
+<form id="createPostItForm" name="createForm" ng-submit="createPostItGhost($event)" style="position: absolute; right: 18px; z-index: 1; padding-bottom: 1px; border-radius: 5px 5px; border: 1px solid black; background-color: lightgrey; width: 150px;">
 	<h4>Create Post It</h4>
 	<textarea ng-model="postItText" ng-required>Write something here</textarea>
 
