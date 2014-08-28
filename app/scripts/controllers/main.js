@@ -10,6 +10,11 @@
 angular.module('whiteboardApp')
 	.controller('MainCtrl', function ($interval, $scope, CRUDFactory) {
 		$scope.date = new Date();
+		$scope.username = '';
+		$scope.loggedIn = false;
+		$scope.logout = function () {
+			$scope.loggedIn = false;
+		};
 		$scope.postits = [{
 			//Error message
 			id: 1,
@@ -31,7 +36,7 @@ angular.module('whiteboardApp')
 		$interval(function () {
 			CRUDFactory.readPostIt(function () {
 				var getPostits = CRUDFactory.getPostIts();
-				for (var i = 0; i < getPostits.length; i++) {
+				for (var i = 0; i < $scope.postits.length; i++) {
 					var getPostit = getPostits[i],
 						oldPostit = $scope.postits[i];
 					for (var key in getPostit) {
@@ -46,6 +51,11 @@ angular.module('whiteboardApp')
 					}
 					if ((getPostit.position.x !== oldPostit.position.x) || (getPostit.position.y !== oldPostit.position.y)) {
 						$scope.postits[i] = getPostit;
+					}
+				}
+				if (getPostits.length > $scope.postits.length) {
+					for (i = 0; i < getPostits.length - $scope.postits.length; i++) {
+						$scope.postits.push(getPostits[i]);
 					}
 				}
 			});

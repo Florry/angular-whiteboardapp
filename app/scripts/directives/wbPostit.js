@@ -52,7 +52,6 @@ angular.module('whiteboardApp')
 
 				(function bindElementMove() {
 					element.bind('mousedown', function (event) {
-						//If event.element == draggable space
 						startX = event.screenX - element.offset().left;
 						startY = event.screenY - element.offset().top;
 						$document.bind('mousemove', movePostit);
