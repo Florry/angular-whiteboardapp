@@ -11,7 +11,13 @@ angular.module('whiteboardApp')
 	.controller('MainCtrl', function ($interval, $scope, CRUDFactory, localStorageService) {
 		$scope.date = new Date();
 		$scope.username = localStorageService.get('username');
-		$scope.loggedIn = Boolean(localStorageService.get('username') !== undefined && localStorageService.get('username') !== '');
+		$scope.loggedIn = (function () {
+			if ($scope.username === undefined) {
+				return true;
+			} else {
+				return false;
+			}
+		}());
 		$scope.login = function () {
 			localStorageService.add('username', $scope.username);
 			$scope.loggedIn = true;
