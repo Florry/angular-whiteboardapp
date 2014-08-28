@@ -11,14 +11,14 @@ angular.module('whiteboardApp')
 	.controller('MainCtrl', function ($interval, $scope, CRUDFactory, localStorageService) {
 		$scope.date = new Date();
 		$scope.username = localStorageService.get('username');
-		$scope.loggedIn = Boolean(localStorageService.get('username') !== undefined);
+		$scope.loggedIn = Boolean(localStorageService.get('username') !== undefined && localStorageService.get('username') !== '');
 		$scope.login = function () {
-			localStorageService.add('todos', $scope.username);
+			localStorageService.add('username', $scope.username);
 			$scope.loggedIn = true;
 		};
 		$scope.logout = function () {
+			localStorageService.remove('username');
 			$scope.loggedIn = false;
-			localStorageService.delete('username');
 		};
 		$scope.postits = [{
 			//Error message
