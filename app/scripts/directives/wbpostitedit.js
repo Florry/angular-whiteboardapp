@@ -13,11 +13,14 @@ angular.module('whiteboardApp')
 			restrict: 'E',
 			scope: {
 				content: '='
-				/*,
-				showEditForm: '='*/
 			},
-			controller: function postItCtrl() {
-				//scope.showEditForm = false;
+			controller: function postItCtrl(CRUDFactory, $scope) {
+				$scope.newContent = $scope.content;
+				$scope.inputContent = {};
+				$scope.updatePostit = function(newContent) {
+					console.log(newContent);
+					//CRUDFactory.updatePostit();
+				};
 			}
 		};
 	});

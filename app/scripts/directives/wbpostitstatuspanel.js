@@ -14,7 +14,7 @@ angular.module('whiteboardApp')
 			scope: {
 				content: '='
 			},
-			link: function postLink(scope, element, attrs, CRUDFactory) {
+			link: function postLink(scope, element, attrs) {
 				scope.done = 'done';
 				scope.inProgress = 'in progress';
 				scope.notStarted = 'not started';
@@ -31,9 +31,7 @@ angular.module('whiteboardApp')
 					//CONNECT TO THE FUCKING SERVER YOU SON OF A BITCH!!
 				};
 
-				scope.updatePostit = function() {
-					CRUDFactory.updatePostit();
-				};
+
 			}
 		};
 	});

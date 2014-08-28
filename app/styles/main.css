@@ -73,3 +73,15 @@ wb-post-it-status-panel{
   background-color: white;
   transition: none;
 }
+
+.edit-form{
+ min-width: 250px;
+ min-height: 250px;
+ padding: 15px; 
+ padding-bottom: 0px; 
+ position: absolute; 
+ left: 20px; 
+ top: 20px; 
+ overflow: visable; 
+ display: block;
+}
