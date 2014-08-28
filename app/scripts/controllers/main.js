@@ -12,7 +12,7 @@ angular.module('whiteboardApp')
 		$scope.date = new Date();
 		$scope.username = localStorageService.get('username');
 		$scope.loggedIn = (function () {
-			if ($scope.username === undefined) {
+			if ($scope.username !== undefined && $scope.username !== '' && $scope.username !== null) {
 				return true;
 			} else {
 				return false;
