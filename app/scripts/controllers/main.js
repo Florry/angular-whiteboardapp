@@ -8,12 +8,17 @@
  * Controller of the whiteboardApp
  */
 angular.module('whiteboardApp')
-	.controller('MainCtrl', function($interval, $scope, CRUDFactory) {
+	.controller('MainCtrl', function ($interval, $scope, CRUDFactory, localStorageService) {
 		$scope.date = new Date();
-		$scope.username = '';
-		$scope.loggedIn = false;
+		$scope.username = localStorageService.get('username');
+		$scope.loggedIn = Boolean(localStorageService.get('username') !== undefined);
+		$scope.login = function () {
+			localStorageService.add('todos', $scope.username);
+			$scope.loggedIn = true;
+		};
 		$scope.logout = function () {
 			$scope.loggedIn = false;
+			localStorageService.delete('username');
 		};
 		$scope.postits = [{
 			//Error message
@@ -29,11 +34,11 @@ angular.module('whiteboardApp')
 			timestamp: $scope.date.getFullYear() + '-' + (($scope.date.getMonth() + 1 < 10) ? '0' : '') + ($scope.date.getMonth() + 1) + '-' + $scope.date.getDate()
 		}];
 
-		CRUDFactory.readPostIt(function() {
+		CRUDFactory.readPostIt(function () {
 			$scope.postits = CRUDFactory.getPostIts();
 		});
-		$interval(function() {
-			CRUDFactory.readPostIt(function() {
+		$interval(function () {
+			CRUDFactory.readPostIt(function () {
 				var getPostits = CRUDFactory.getPostIts();
 				for (var i = 0; i < $scope.postits.length; i++) {
 					var getPostit = getPostits[i],
@@ -60,7 +65,7 @@ angular.module('whiteboardApp')
 			});
 		}, 100000);
 
-		$scope.populatePostits = function() {
+		$scope.populatePostits = function () {
 			//DEBUG STUFFS
 			var postits = [{
 				id: 1,
