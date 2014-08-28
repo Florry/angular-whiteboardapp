@@ -14,13 +14,14 @@ angular.module('whiteboardApp')
 			scope: {
 				content: '='
 			},
-			link: function postLink(scope, $scope, element, attrs, CRUDFactory) {
+			link: function postLink(scope, element, attrs, CRUDFactory) {
 				scope.done = 'done';
 				scope.inProgress = 'in progress';
 				scope.notStarted = 'not started';
 				scope.showEditForm = false;
 
 				scope.showEdit = function() {
+
 					scope.showEditForm = (scope.showEditForm === false) ? true : false;
 				};
 
@@ -31,7 +32,6 @@ angular.module('whiteboardApp')
 				};
 
 				scope.updatePostit = function() {
-
 					CRUDFactory.updatePostit();
 				};
 			}

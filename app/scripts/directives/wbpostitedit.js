@@ -13,9 +13,11 @@ angular.module('whiteboardApp')
 			restrict: 'E',
 			scope: {
 				content: '='
+				/*,
+				showEditForm: '='*/
 			},
-			controller: function postItCtrl($scope) {
-
+			controller: function postItCtrl() {
+				//scope.showEditForm = false;
 			}
 		};
 	});

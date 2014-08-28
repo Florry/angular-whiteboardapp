@@ -17,12 +17,12 @@ angular.module('whiteboardApp')
 			link: function postItCtrl(scope, element) {
 				var startX = element.offset().left,
 					startY = element.offset().top,
-					y = 0,
-					x = 0;
+					y = scope.content.position.y,
+					x = scope.content.position.x;
 				var whiteBoard = $('.whiteboard');
 
 				function clampWidth(value) {
-					var maxValue = parseInt(whiteBoard.css('width')) - parseInt(element.css("width")),
+					var maxValue = parseInt(whiteBoard.css('width')) - parseInt(element.css('width')),
 						minValue = whiteBoard.offset().left;
 					if (value >= maxValue) {
 						return maxValue;
