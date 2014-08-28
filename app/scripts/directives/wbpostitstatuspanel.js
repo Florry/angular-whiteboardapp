@@ -12,17 +12,18 @@ angular.module('whiteboardApp')
 			templateUrl: './scripts/directives/templates/post-it-status-panel.html',
 			restrict: 'E',
 			scope: {
-				content: '='
+				content: '=',
+				showEditForm: '='
 			},
-			link: function postLink(scope, element, attrs) {
+			link: function postLink(scope, $scope, element, attrs) {
 				scope.done = 'done';
 				scope.inProgress = 'in progress';
 				scope.notStarted = 'not started';
-				scope.showEditForm = false;
+				$scope.showEditForm = false;
 
 				scope.showEdit = function() {
 
-					scope.showEditForm = (scope.showEditForm === false) ? true : false;
+					$scope.showEditForm = ($scope.showEditForm === false) ? true : false;
 				};
 
 				scope.changeStatus = function(newStatus) {

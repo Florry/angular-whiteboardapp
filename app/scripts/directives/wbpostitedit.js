@@ -12,14 +12,17 @@ angular.module('whiteboardApp')
 			templateUrl: './scripts/directives/templates/post-it-edit.html',
 			restrict: 'E',
 			scope: {
-				content: '='
+				content: '=',
+				showEditForm: '='
 			},
 			controller: function postItCtrl(CRUDFactory, $scope) {
-				$scope.newContent = $scope.content;
-				$scope.inputContent = {};
-				$scope.updatePostit = function(newContent) {
-					console.log(newContent);
+				$scope.newContent = {};
+				$scope.inputText = $scope.content.text;
+				$scope.updatePostit = function(newcontent) {
+					console.log(newcontent);
+					$scope.content.text = newcontent;
 					//CRUDFactory.updatePostit();
+					$scope.showEditForm = false;
 				};
 			}
 		};
