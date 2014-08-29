@@ -95,11 +95,11 @@ angular.module('whiteboardApp')
 
 				element.hover(
 					function () {
-						$(this).children().children().children('wb-post-it-status-panel').css('visibility', 'visible');
+						$(this).children().children().children('wb-post-it-status-panel').css('opacity', '1');
 					},
 					function () {
 						if (!scope.isBeingEdited) {
-							$(this).children().children().children('wb-post-it-status-panel').css('visibility', 'collapse');
+							$(this).children().children().children('wb-post-it-status-panel').css('opacity', '0');
 						}
 					}
 				);

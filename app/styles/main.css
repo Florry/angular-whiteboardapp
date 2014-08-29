@@ -25,7 +25,9 @@ wb-post-it, .post-it-ghost{
   float: left;
   cursor: move;
   position:absolute;
-  
+}
+wb-post-it:hover{
+  z-index: 1000;
 }
 
 .post-it-ghost{
@@ -81,7 +83,9 @@ wb-post-it-status-panel .btn-group button{
 wb-post-it-status-panel{
   cursor: pointer;
   height: 100%;
-  visibility:collapse;
+  transition: opacity 0.25s ease-in;
+  /*visibility:collapse;*/
+  opacity: 0;
 }
 
 .dropdown-menu{
@@ -98,7 +102,6 @@ wb-post-it-status-panel{
   width: 300px;
   height: 300px;
   background-color: #d9534f;
-  transition: all 0.5s ease-in-out;
   box-shadow: 5px 5px 10px rgba(10, 10, 10, 0.4);
   -moz-transform: rotate(-7deg);
   -webkit-transform: rotate(-7deg);
