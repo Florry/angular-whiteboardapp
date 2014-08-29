@@ -7,7 +7,7 @@
  * # wbPostitEdit
  */
 angular.module('whiteboardApp')
-	.directive('wbPostitEdit', function() {
+	.directive('wbPostitEdit', function () {
 		return {
 			templateUrl: './scripts/directives/templates/post-it-edit.html',
 			restrict: 'E',
@@ -19,7 +19,7 @@ angular.module('whiteboardApp')
 
 				$scope.inputText = $scope.content.text;
 
-				$scope.updatePostit = function() {
+				$scope.updatePostit = function () {
 					if ($scope.content.text !== $scope.inputText) {
 						var date = new Date();
 						$scope.content.text = $scope.inputText;
@@ -27,11 +27,12 @@ angular.module('whiteboardApp')
 
 						CRUDFactory.updatePostIt($scope.content);
 					}
-					$scope.$parent.showEditForm = false;
+					$scope.closeEditForm();
 
 				};
-				$scope.closeEditForm = function() {
+				$scope.closeEditForm = function () {
 					$scope.$parent.showEditForm = false;
+					$scope.$parent.$parent.isBeingEdited = false;
 				};
 			}
 		};

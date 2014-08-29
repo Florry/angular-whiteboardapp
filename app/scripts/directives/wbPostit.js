@@ -60,36 +60,49 @@ angular.module('whiteboardApp')
 				}());
 
 				function movePostit(event) {
-					y = event.screenY - startY;
-					x = event.screenX - startX;
-					element.css({
-						top: y + 'px',
-						left: x + 'px'
-					});
+					if (!scope.isBeingEdited) {
+						y = event.screenY - startY;
+						x = event.screenX - startX;
+						element.css({
+							top: y + 'px',
+							left: x + 'px'
+						});
+					}
 				}
 
 				function mouseup() {
 					$document.unbind('mousemove', movePostit);
 					$document.unbind('mouseup', mouseup);
+					if (!scope.isBeingEdited) {
+						y = clampHeight(y);
+						x = clampWidth(x);
+						element.css({
+							top: y + 'px',
+							left: x + 'px'
+						});
 
-					y = clampHeight(y);
-					x = clampWidth(x);
-					element.css({
-						top: y + 'px',
-						left: x + 'px'
-					});
-
-					scope.content.position.x = x;
-					scope.content.position.y = y;
-					CRUDFactory.updatePostIt(scope.content);
-					//Uppdaterar vid varje klick
+						scope.content.position.x = x;
+						scope.content.position.y = y;
+						CRUDFactory.updatePostIt(scope.content);
+						//Uppdaterar vid varje klick
+					}
 				}
 
 				scope.getStatusCss = function () {
 					return scope.content.status.replace(' ', '-');
 				};
+				scope.isBeingEdited = false;
 
-
+				element.hover(
+					function () {
+						$(this).children().children().children('wb-post-it-status-panel').css('visibility', 'visible');
+					},
+					function () {
+						if (!scope.isBeingEdited) {
+							$(this).children().children().children('wb-post-it-status-panel').css('visibility', 'collapse');
+						}
+					}
+				);
 			}
 		};
 	});

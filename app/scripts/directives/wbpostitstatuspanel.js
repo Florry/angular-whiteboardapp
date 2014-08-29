@@ -23,6 +23,7 @@ angular.module('whiteboardApp')
 
 				$scope.showEdit = function () {
 					$scope.showEditForm = !$scope.showEditForm;
+					$scope.$parent.isBeingEdited = true;
 				};
 
 				$scope.changeStatus = function (newStatus) {

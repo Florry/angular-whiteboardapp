@@ -38,11 +38,14 @@ wb-post-it-status-panel .btn-group button{
   min-width: 80px;
 }
 
+
 .not-started, .not-started button{
   background-color: #FFFA6B;
   transition: all 0.5s ease-in-out;
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  background-image: url(../images/postit.jpg);
 }
 
 .in-progress, .in-progress button{
@@ -50,6 +53,8 @@ wb-post-it-status-panel .btn-group button{
   transition: all 0.5s ease-in-out;
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  background-image: url(../images/postitprogress.jpg);
 }
 .done, .done button{
   background-color: #5cb85c;
@@ -57,6 +62,7 @@ wb-post-it-status-panel .btn-group button{
   width: 100%;
   height: 100%;
   overflow: hidden;
+  background-image: url(../images/postitdone.jpg);
 }
 .on-hold, .on-hold button{
   background-color: #d9534f;
@@ -64,16 +70,18 @@ wb-post-it-status-panel .btn-group button{
   width: 100%;
   height: 100%;
   overflow: hidden;
+  background-image: url(../images/postitonhold.jpg);
 }
 
-.notstarted:hover, .in-progress:hover, .done:hover, .on-hold:hover{
-  overflow-y: scroll;
+.not-started:hover, .in-progress:hover, .done:hover, .on-hold:hover{
+  overflow-y: overlay;
   overflow-x: hidden;
 }
 
 wb-post-it-status-panel{
   cursor: pointer;
   height: 100%;
+  visibility:collapse;
 }
 
 .dropdown-menu{
