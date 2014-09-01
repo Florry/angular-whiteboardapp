@@ -29,18 +29,18 @@ angular.module('whiteboardApp')
 		$scope.postits = [];
 
 		function updatePostits(postitArray, current, iterator) {
-			CRUDFactory.readPostIt(function() {
-				postitArray = CRUDFactory.getPostIts();
+			CRUDFactory.readPostIts(function(data) {
+				postitArray = data;
 			});
 			current = postitArray[iterator];
 		}
 
-		CRUDFactory.readPostIt(function() {
-			$scope.postits = CRUDFactory.getPostIts();
+		CRUDFactory.readPostIts(function(data) {
+			$scope.postits = data;
 		});
 		$interval(function() {
-			CRUDFactory.readPostIt(function() {
-				var getPostits = CRUDFactory.getPostIts();
+			CRUDFactory.readPostIts(function(data) {
+				var getPostits = data;
 				if (getPostits.length > 0) {
 					for (var i = 0; i < $scope.postits.length; i++) {
 						var getPostit = getPostits[i],
@@ -65,13 +65,13 @@ angular.module('whiteboardApp')
 							}
 						}
 					}
-					getPostits = CRUDFactory.getPostIts();
+					getPostits = data;
 					if (getPostits.length > $scope.postits.length) {
 						for (i = 0; i < getPostits.length - $scope.postits.length; i++) {
 							$scope.postits.push(getPostits[i]);
 						}
 					}
-					getPostits = CRUDFactory.getPostIts();
+					getPostits = data;
 					if (getPostits.length < $scope.postits.length) {
 						$scope.postits = getPostits;
 					}

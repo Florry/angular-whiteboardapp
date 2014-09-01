@@ -103,9 +103,13 @@ angular.module('whiteboardApp')
 					function() {
 						if (!scope.isBeingEdited) {
 							$(this).find('wb-post-it-status-panel').css('opacity', '0');
+							$(this).children().animate({
+								scrollTop: 0
+							}, 600);
 						}
 					}
 				);
+
 			}
 		};
 	});
