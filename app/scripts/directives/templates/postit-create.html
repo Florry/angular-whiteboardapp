@@ -1,9 +1,15 @@
 <button class="btn btn-warning" ng-click="toggleForm()"><span class="glyphicon glyphicon-plus"></span></button>
 
-<form id="createPostItForm" name="createForm" ng-submit="createPostItGhost($event)">
-	<h4>Create Post It</h4>
-	<textarea ng-model="postItText" required>Write something here</textarea>
-	<button class="btn btn-danger" ng-click="cancelCreation()">Cancel</button>
-	<input type="submit" class="btn btn-success" value="Create" ng-disabled="createForm.$invalid"/>
-</form>
+<div class="dropdown-menu create-form" id="createPostItForm">
+	<form ng-submit="createPostItGhost($event)">
+		<fieldset>
+			<label>Create Post It</label>
+			<textarea class="form-control" ng-model="postItText" rows="10" required>Write something here</textarea>
+			<button class="btn btn-default btn-sm" ng-click="cancelCreation()">Cancel</button>
+			<input type="submit" class="btn btn-primary btn-sm" value="Create" ng-disabled="createForm.$invalid"/>
+		</fieldset>
+	</form>
+</div>
 <div id="post-it-ghost" ng-show="ghostActive"></div>
+
+
