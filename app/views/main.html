@@ -1,5 +1,7 @@
 <div class="container-full">
-<div style="position: relative; margin-bottom: 20px; width: 100%; max-width: 1360px; min-width: 350px;">
+<div class="not-logged-in" ng-show="!loggedIn"> 
+			</div>	
+<div class="login-create-form">
 		<h1 style="display: inline">Whiteboard</h1>
 		<div class="pull-right">
 			<span ng-show="!loggedIn">
@@ -13,8 +15,7 @@
 				<span class="label label-default" ng-click="logout()" style="cursor:pointer;">Logout</span><br/>
 				<span class="label label-primary">Logged in as {{username}} </span>
 			</span>			
-			<div class="not-logged-in" ng-show="!loggedIn"> 
-			</div>			
+					
 			<wb-post-it-create ng-show="loggedIn"></wb-post-it-create>
 		</div>
 	</div>

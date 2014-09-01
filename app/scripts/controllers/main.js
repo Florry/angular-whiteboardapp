@@ -8,21 +8,21 @@
  * Controller of the whiteboardApp
  */
 angular.module('whiteboardApp')
-	.controller('MainCtrl', function ($interval, $scope, CRUDFactory, localStorageService) {
+	.controller('MainCtrl', function($interval, $scope, CRUDFactory, localStorageService) {
 		$scope.date = new Date();
 		$scope.username = localStorageService.get('username');
-		$scope.loggedIn = (function () {
+		$scope.loggedIn = (function() {
 			if ($scope.username !== undefined && $scope.username !== '' && $scope.username !== null) {
 				return true;
 			} else {
 				return false;
 			}
 		}());
-		$scope.login = function () {
+		$scope.login = function() {
 			localStorageService.add('username', $scope.username);
 			$scope.loggedIn = true;
 		};
-		$scope.logout = function () {
+		$scope.logout = function() {
 			localStorageService.remove('username');
 			$scope.loggedIn = false;
 		};
@@ -41,17 +41,17 @@ angular.module('whiteboardApp')
 		}];
 
 		function updatePostits(postitArray, current, iterator) {
-			CRUDFactory.readPostIts(function (data) {
+			CRUDFactory.readPostIts(function(data) {
 				postitArray = data;
 			});
 			current = postitArray[iterator];
 		}
 
-		CRUDFactory.readPostIts(function (data) {
+		CRUDFactory.readPostIts(function(data) {
 			$scope.postits = data;
 		});
-		$interval(function () {
-			CRUDFactory.readPostIts(function (data) {
+		$interval(function() {
+			CRUDFactory.readPostIts(function(data) {
 				var getPostits = data;
 				if (getPostits.length > 0) {
 					for (var i = 0; i < $scope.postits.length; i++) {
@@ -91,7 +91,7 @@ angular.module('whiteboardApp')
 			});
 		}, 1000);
 
-		$scope.populatePostits = function () {
+		$scope.populatePostits = function() {
 			//DEBUG STUFFS
 			var postits = [{
 				'id': 1,

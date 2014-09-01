@@ -120,6 +120,7 @@ wb-post-it-status-panel{
   height: 800px;  
   z-index: 50000; 
   left: 0px; 
+  top: 0px;
   width: 1500px; 
   background-color: RGBA(0,0,0,0.5);
 }
@@ -149,6 +150,15 @@ wb-post-it-status-panel{
 .edit-form textarea, .create-form textarea{
   margin-bottom: 5px;
   max-width: 228px;
+}
+
+.login-create-form{
+ position: relative; 
+ margin-bottom: 20px; 
+ width: 100%; 
+ max-width: 1360px; 
+ min-width: 350px; 
+ z-index: 50010
 }
 
 .create-form{
