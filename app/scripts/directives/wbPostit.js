@@ -63,6 +63,8 @@ angular.module('whiteboardApp')
 					if (!scope.isBeingEdited) {
 						y = event.screenY - startY;
 						x = event.screenX - startX;
+						y = clampHeight(y);
+						x = clampWidth(x);
 						element.css({
 							top: y + 'px',
 							left: x + 'px'
@@ -74,17 +76,17 @@ angular.module('whiteboardApp')
 					$document.unbind('mousemove', movePostit);
 					$document.unbind('mouseup', mouseup);
 					if (!scope.isBeingEdited) {
-						y = clampHeight(y);
-						x = clampWidth(x);
+
 						element.css({
 							top: y + 'px',
 							left: x + 'px'
 						});
 
-						scope.content.position.x = x;
-						scope.content.position.y = y;
-						CRUDFactory.updatePostIt(scope.content);
-						//Uppdaterar vid varje klick
+						if (x !== scope.content.position.x || y !== scope.content.position.y) {
+							scope.content.position.x = x;
+							scope.content.position.y = y;
+							CRUDFactory.updatePostIt(scope.content);
+						}
 					}
 				}
 
@@ -96,11 +98,11 @@ angular.module('whiteboardApp')
 
 				element.hover(
 					function() {
-						$(this).children().children().children('wb-post-it-status-panel').css('opacity', '1');
+						$(this).find('wb-post-it-status-panel').css('opacity', '1');
 					},
 					function() {
 						if (!scope.isBeingEdited) {
-							$(this).children().children().children('wb-post-it-status-panel').css('opacity', '0');
+							$(this).find('wb-post-it-status-panel').css('opacity', '0');
 						}
 					}
 				);

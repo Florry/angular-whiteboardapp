@@ -28,8 +28,7 @@ angular.module('whiteboardApp')
 
 				$scope.changeStatus = function (newStatus) {
 					$scope.content.status = newStatus;
-
-					//CONNECT TO THE FUCKING SERVER YOU SON OF A BITCH!!
+					CRUDFactory.updatePostIt($scope.content);
 				};
 
 				$scope.deletePostIt = function (id) {
