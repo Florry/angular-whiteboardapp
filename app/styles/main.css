@@ -144,7 +144,7 @@ wb-post-it-status-panel{
   right: 18px;
   left: auto;
   top: 80px;
-  z-index: 1000;
+  z-index: 1001;
   min-height: 250px;
   padding: 10px;  
   overflow: visable; 

@@ -40,6 +40,13 @@ angular.module('whiteboardApp')
 			timestamp: $scope.date.getFullYear() + '-' + (($scope.date.getMonth() + 1 < 10) ? '0' : '') + ($scope.date.getMonth() + 1) + '-' + $scope.date.getDate()
 		}];
 
+		function updatePostits(postitArray, current, iterator) {
+			CRUDFactory.readPostIt(function () {
+				postitArray = CRUDFactory.getPostIts();
+			});
+			current = postitArray[iterator];
+		}
+
 		CRUDFactory.readPostIt(function () {
 			$scope.postits = CRUDFactory.getPostIts();
 		});
@@ -51,18 +58,34 @@ angular.module('whiteboardApp')
 						var getPostit = getPostits[i],
 							oldPostit = $scope.postits[i];
 
-						if (oldPostit.timestamp !== getPostit.timestamp) {
-							$scope.postits[i] = getPostit;
-						} else if ((getPostit.position.x !== oldPostit.position.x) || (getPostit.position.y !== oldPostit.position.y)) {
-							$scope.postits[i] = getPostit;
-						} else if (oldPostit.status !== getPostit.status) {
-							$scope.postits[i] = getPostit;
+						if (getPostit !== undefined) {
+							$scope.postits[i].text = getPostit.text;
+							$scope.postits[i].timestamp = getPostit.timestamp;
+						}
+
+						updatePostits(getPostits, getPostit, i);
+
+						if (getPostit !== undefined) {
+							if ($scope.postits[i].status !== getPostit.status) {
+								$scope.postits[i] = getPostit;
+							}
+						}
+						updatePostits(getPostits, getPostit, i);
+						if (getPostit !== undefined) {
+							if (getPostit.position.x !== oldPostit.position.x || getPostit.position.y !== oldPostit.position.y) {
+								$scope.postits[i] = getPostit;
+							}
 						}
 					}
+					getPostits = CRUDFactory.getPostIts();
 					if (getPostits.length > $scope.postits.length) {
 						for (i = 0; i < getPostits.length - $scope.postits.length; i++) {
 							$scope.postits.push(getPostits[i]);
 						}
+					}
+					getPostits = CRUDFactory.getPostIts();
+					if (getPostits.length < $scope.postits.length) {
+						$scope.postits = getPostits;
 					}
 				}
 			});

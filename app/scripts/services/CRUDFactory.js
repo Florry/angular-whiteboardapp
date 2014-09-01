@@ -13,9 +13,9 @@ angular.module('whiteboardApp')
 
 		return {
 			//C
-			createPostIt: function (postIt, callback) {
-				$http.post(URL, postIt).success(function () {
-					callback();
+			createPostIt: function (newPostIt, callback) {
+				$http.post(URL, newPostIt).success(function (data) {
+					callback(data);
 				});
 			},
 			//R
