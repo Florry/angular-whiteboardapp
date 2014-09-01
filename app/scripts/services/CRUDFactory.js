@@ -8,8 +8,7 @@ angular.module('whiteboardApp')
 		// U PUT OBJ TO URL http://api.beta2.se/wb-div-postits/:id
 		// D DELETE OBJ TO URL http://api.beta2.se/wb-div-postits/:id
 
-		var URL = 'http://api.beta2.se/wb-div-postits',
-			postits = [];
+		var URL = 'http://192.168.1.17:14782/wb-div-postits';
 
 		return {
 			//C
@@ -19,10 +18,9 @@ angular.module('whiteboardApp')
 				});
 			},
 			//R
-			readPostIt: function (callback) {
+			readPostIts: function (callback) {
 				$http.get(URL + '/').success(function (data) {
-					postits = data;
-					callback();
+					callback(data);
 				});
 			},
 			//U
@@ -34,11 +32,6 @@ angular.module('whiteboardApp')
 			deletePostIt: function (postIt) {
 				$http.delete(URL + '/' + postIt);
 				console.log(postIt + ' was deleted from the server');
-			},
-
-			getPostIts: function () {
-				// console.log(postits);
-				return postits;
 			}
 		};
 

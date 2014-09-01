@@ -41,17 +41,17 @@ angular.module('whiteboardApp')
 		}];
 
 		function updatePostits(postitArray, current, iterator) {
-			CRUDFactory.readPostIt(function () {
-				postitArray = CRUDFactory.getPostIts();
+			CRUDFactory.readPostIts(function (data) {
+				postitArray = data;
 			});
 			current = postitArray[iterator];
 		}
 
-		CRUDFactory.readPostIt(function () {
-			$scope.postits = CRUDFactory.getPostIts();
+		CRUDFactory.readPostIts(function (data) {
+			$scope.postits = data;
 		});
 		$interval(function () {
-			CRUDFactory.readPostIt(function () {
+			CRUDFactory.readPostIts(function () {
 				var getPostits = CRUDFactory.getPostIts();
 				if (getPostits.length > 0) {
 					for (var i = 0; i < $scope.postits.length; i++) {
