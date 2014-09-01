@@ -82,10 +82,11 @@ angular.module('whiteboardApp')
 							left: x + 'px'
 						});
 
-						scope.content.position.x = x;
-						scope.content.position.y = y;
-						CRUDFactory.updatePostIt(scope.content);
-						//Uppdaterar vid varje klick
+						if (x !== scope.content.position.x || y !== scope.content.position.y) {
+							scope.content.position.x = x;
+							scope.content.position.y = y;
+							CRUDFactory.updatePostIt(scope.content);
+						}
 					}
 				}
 
