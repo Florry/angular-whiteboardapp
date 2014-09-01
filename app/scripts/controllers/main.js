@@ -26,19 +26,7 @@ angular.module('whiteboardApp')
 			localStorageService.remove('username');
 			$scope.loggedIn = false;
 		};
-		$scope.postits = [{
-			//Error message
-			id: 1,
-			author: 'Admin',
-			text: 'The post-its could not be read, please try again later!',
-			status: 'admin-note',
-			position: {
-				x: 200,
-				y: 200
-			},
-			removed: false,
-			timestamp: $scope.date.getFullYear() + '-' + (($scope.date.getMonth() + 1 < 10) ? '0' : '') + ($scope.date.getMonth() + 1) + '-' + $scope.date.getDate()
-		}];
+		$scope.postits = [];
 
 		function updatePostits(postitArray, current, iterator) {
 			CRUDFactory.readPostIts(function(data) {

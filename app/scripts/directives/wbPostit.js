@@ -7,7 +7,7 @@
  * # postIt
  */
 angular.module('whiteboardApp')
-	.directive('wbPostIt', function ($document, CRUDFactory) {
+	.directive('wbPostIt', function($document, CRUDFactory) {
 		return {
 			templateUrl: './scripts/directives/templates/post-it.html',
 			restrict: 'E',
@@ -22,7 +22,7 @@ angular.module('whiteboardApp')
 				var whiteBoard = $('.whiteboard');
 
 				function clampWidth(value) {
-					var maxValue = parseInt(whiteBoard.css('width')) - parseInt(element.css('width')),
+					var maxValue = whiteBoard.width() - element.width(),
 						minValue = whiteBoard.offset().left;
 					if (value >= maxValue) {
 						return maxValue;
@@ -34,7 +34,7 @@ angular.module('whiteboardApp')
 				}
 
 				function clampHeight(value) {
-					var maxValue = parseInt(whiteBoard.css('height')) + parseInt(whiteBoard.offset().top) - 50,
+					var maxValue = whiteBoard.height() + whiteBoard.offset().top - 50,
 						minValue = whiteBoard.offset().top;
 					if (value > maxValue) {
 						return maxValue;
@@ -51,7 +51,7 @@ angular.module('whiteboardApp')
 				});
 
 				(function bindElementMove() {
-					element.bind('mousedown', function (event) {
+					element.bind('mousedown', function(event) {
 						startX = event.screenX - element.offset().left;
 						startY = event.screenY - element.offset().top;
 						$document.bind('mousemove', movePostit);
@@ -90,16 +90,17 @@ angular.module('whiteboardApp')
 					}
 				}
 
-				scope.getStatusCss = function () {
+				scope.getStatusCss = function() {
 					return scope.content.status.replace(' ', '-');
 				};
+
 				scope.isBeingEdited = false;
 
 				element.hover(
-					function () {
+					function() {
 						$(this).find('wb-post-it-status-panel').css('opacity', '1');
 					},
-					function () {
+					function() {
 						if (!scope.isBeingEdited) {
 							$(this).find('wb-post-it-status-panel').css('opacity', '0');
 							$(this).children().animate({
