@@ -37,7 +37,7 @@ body:before {
   visibility: hidden;
 }
 
-wb-post-it{
+wb-post-it, #post-it-ghost{
   height: 150px; 
   width: 150px; 
   margin: 10px; 
