@@ -33,6 +33,10 @@ body:before {
   box-shadow: 10px 10px 5px rgba(10, 10, 10, 0.4);
 }
 
+.wb-post-it-status-panel-hidden{
+  visibility: hidden;
+}
+
 wb-post-it, #post-it-ghost{
   height: 150px; 
   width: 150px; 
@@ -67,28 +71,20 @@ wb-post-it-status-panel .btn-group button{
   background-image: url(../images/postit.jpg);
 }
 
-.in-progress, .in-progress button{
-  background-color: #5bc0de;
+.in-progress, .in-progress button, .done, .done button, .on-hold, .on-hold button{
   transition: all 0.5s ease-in-out;
   width: 100%;
   height: 100%;
   overflow: hidden;
+}
+
+.in-progress, .in-progress button{
   background-image: url(../images/postitprogress.jpg);
 }
 .done, .done button{
-  background-color: #5cb85c;
-  transition: all 0.5s ease-in-out;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
   background-image: url(../images/postitdone.jpg);
 }
 .on-hold, .on-hold button{
-  background-color: #d9534f;
-  transition: all 0.5s ease-in-out;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
   background-image: url(../images/postitonhold.jpg);
 }
 
@@ -101,7 +97,6 @@ wb-post-it-status-panel{
   cursor: pointer;
   height: 100%;
   transition: opacity 0.25s ease-in;
-  /*visibility:collapse;*/
   opacity: 0;
 }
 
