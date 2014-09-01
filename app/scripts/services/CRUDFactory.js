@@ -13,16 +13,14 @@ angular.module('whiteboardApp')
 
 		return {
 			//C
-			createPostIt: function (postIt) {
-				return $http.post(URL, postIt);
+			createPostIt: function (postIt, callback) {
+				$http.post(URL, postIt).success(function () {
+					callback();
+				});
 			},
 			//R
 			readPostIt: function (callback) {
-				$http({
-					method: 'GET',
-					url: URL + '/'
-				}).
-				success(function (data) {
+				$http.get(URL + '/').success(function (data) {
 					postits = data;
 					callback();
 				});
