@@ -66,7 +66,7 @@ angular.module('whiteboardApp')
 				}
 
 				function clampHeight(value) {
-					var maxValue = whiteBoard.height() + whiteBoard.offset().top - ghost.height() - 15,
+					var maxValue = whiteBoard.height() + whiteBoard.offset().top - 50,
 						minValue = whiteBoard.offset().top;
 					if (value > maxValue) {
 						return maxValue;
@@ -79,7 +79,6 @@ angular.module('whiteboardApp')
 
 				function bindGhostSpecificEvents($event) {
 					$document.bind('mouseup', createPostItAtGhostPosition);
-
 					updateGraphicalPositions($event.pageX - ghost.width(), $event.pageX - ghost.height());
 				}
 
