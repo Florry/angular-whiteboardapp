@@ -26,7 +26,7 @@ body:before {
 .whiteboard{
   height: 600px;
   width: 1360px;
-  border: 2px solid black;
+  border: 2px solid #949494;
   border-radius: 10px;
   overflow: hidden;
   background-color: white;
@@ -41,11 +41,17 @@ wb-post-it, #post-it-ghost{
   height: 150px; 
   width: 150px; 
   margin: 10px; 
-  box-shadow: 5px 5px 10px rgba(10, 10, 10, 0.4);
-  background-color: #FFFA6B;
+  background-image: url(../images/new/postit.png);
   float: left;
   cursor: move;
   position:absolute;
+}
+
+wb-post-it:before{
+  height: 153px;
+  background-color: red;
+  width: 153px;
+  background-image: url(../images/new/postitshadow.png);
 }
 
 wb-post-it:hover{
@@ -63,12 +69,11 @@ wb-post-it-status-panel .btn-group button{
 
 
 .not-started, .not-started button{
-  background-color: #FFFA6B;
   transition: all 0.5s ease-in-out;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-image: url(../images/postit.jpg);
+  background-image: url(../images/new/postit.png);
 }
 
 .in-progress, .in-progress button, .done, .done button, .on-hold, .on-hold button{
@@ -79,13 +84,13 @@ wb-post-it-status-panel .btn-group button{
 }
 
 .in-progress, .in-progress button{
-  background-image: url(../images/postitprogress.jpg);
+  background-image: url(../images/new/postitprogress.png);
 }
 .done, .done button{
-  background-image: url(../images/postitdone.jpg);
+  background-image: url(../images/new/postitdone.png);
 }
 .on-hold, .on-hold button{
-  background-image: url(../images/postitonhold.jpg);
+  background-image: url(../images/new/postitonhold.png);
 }
 
 .not-started:hover, .in-progress:hover, .done:hover, .on-hold:hover{
@@ -159,7 +164,6 @@ wb-post-it-status-panel{
 .create-form{
   min-height: 250px;
   width: 250px;
-  position: absolute; 
   right: 18px;
   left: auto;
   top: 80px;
