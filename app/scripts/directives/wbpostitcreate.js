@@ -7,11 +7,11 @@
  * # wbPostitCreate
  */
 angular.module('whiteboardApp')
-	.directive('wbPostItCreate', function($document, CRUDFactory) {
+	.directive('wbPostItCreate', function ($document, CRUDFactory) {
 		return {
 			templateUrl: './scripts/directives/templates/postit-create.html',
 			restrict: 'E',
-			link: function(scope, element, attrs) {
+			link: function (scope, element, attrs) {
 				var ghost = $('#post-it-ghost'),
 					postItDiv = $('#createPostItDiv'),
 					whiteBoard = $('.whiteboard'),
@@ -25,7 +25,8 @@ angular.module('whiteboardApp')
 					scope.ghostActive = false;
 				}
 
-				scope.toggleForm = function() {
+
+				scope.toggleForm = function () {
 					if (postItDiv.is(':visible')) {
 						scope.cancelCreation();
 					} else {
@@ -33,12 +34,13 @@ angular.module('whiteboardApp')
 					}
 				};
 
-				scope.cancelCreation = function() {
+
+				scope.cancelCreation = function () {
 					postItDiv.hide();
 					unbindEvents();
 				};
 
-				scope.createPostItGhost = function() {
+				scope.createPostItGhost = function () {
 					var date = new Date();
 
 					scope.postItTemplate = {
@@ -110,9 +112,11 @@ angular.module('whiteboardApp')
 					scope.postItTemplate.position.x = x;
 					scope.postItTemplate.position.y = y;
 
-					CRUDFactory.createPostIt(scope.postItTemplate, function(postItCreated) {
+
+					CRUDFactory.createPostIt(scope.postItTemplate, function (postItCreated) {
 						scope.postItTemplate.id = postItCreated.id;
 						scope.postits.push(scope.postItTemplate);
+
 						unbindEvents();
 						console.log("PostIt was created on the server with an id of " + postItCreated.id);
 					});
