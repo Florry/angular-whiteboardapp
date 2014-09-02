@@ -6,6 +6,7 @@ body {
   user-select: none;
 }
 
+
 body:before { 
   content: "";
   position: fixed;
@@ -172,3 +173,13 @@ wb-post-it-status-panel{
   display: none;
 }
 
+.undo-buttons{
+  width: 50px;
+  height: 40px;
+}
+
+.undo-buttons span{
+  font-size: 25px;
+  vertical-align:middle
+  display: inline-block;
+}
