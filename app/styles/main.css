@@ -48,6 +48,8 @@ wb-post-it, #post-it-ghost{
   position:absolute;
 }
 
+
+
 wb-post-it:hover{
   z-index: 1000;
 }
@@ -167,10 +169,14 @@ wb-post-it-status-panel{
   display: none;
 }
 
+.outsideBoundaries{
+  background-image: url(../images/postitnotallowed.png);
+}
+
 #about-text{
   width: 100%;
   height: 100%;
   font-family: AYearWithoutRain;
   font-size: 200px;
   text-align: center;
-}
+

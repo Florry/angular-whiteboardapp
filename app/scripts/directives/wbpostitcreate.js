@@ -7,11 +7,11 @@
  * # wbPostitCreate
  */
 angular.module('whiteboardApp')
-	.directive('wbPostItCreate', function($document, CRUDFactory) {
+	.directive('wbPostItCreate', function ($document, CRUDFactory) {
 		return {
 			templateUrl: './scripts/directives/templates/postit-create.html',
 			restrict: 'E',
-			link: function(scope, element, attrs) {
+			link: function (scope, element, attrs) {
 				var ghost = $('#post-it-ghost'),
 					postItDiv = $('#createPostItDiv'),
 					whiteBoard = $('.whiteboard'),
@@ -25,7 +25,7 @@ angular.module('whiteboardApp')
 
 				init();
 
-				scope.toggleForm = function() {
+				scope.toggleForm = function () {
 					if (postItDiv.is(':visible')) {
 						scope.cancelCreation();
 					} else {
@@ -34,12 +34,12 @@ angular.module('whiteboardApp')
 				};
 
 
-				scope.cancelCreation = function() {
+				scope.cancelCreation = function () {
 					postItDiv.hide();
 					unbindEvents();
 				};
 
-				scope.createPostItGhost = function() {
+				scope.createPostItGhost = function () {
 					var date = new Date();
 
 					scope.postItTemplate = {
@@ -52,7 +52,7 @@ angular.module('whiteboardApp')
 							y: 0
 						},
 						removed: false,
-						timestamp: date.getFullYear() + '-' + ((date.getMonth() + 1 < 10) ? '0' : '') + (date.getMonth() + 1) + '-' + date.getDate()
+						timestamp: date.getFullYear() + '-' + ((date.getMonth() + 1 < 10) ? '0' : '') + (date.getMonth() + 1) + '-' + ((date.getDate() + 1 < 10) ? '0' : '') + (date.getDate() + 1) + ' - ' + date.getHours() + ':' + date.getMinutes()
 					};
 
 					$document.bind('mouseup', createPostItAtGhostPosition);
@@ -112,7 +112,7 @@ angular.module('whiteboardApp')
 					scope.postItTemplate.position.y = y;
 
 
-					CRUDFactory.createPostIt(scope.postItTemplate, function(postItCreated) {
+					CRUDFactory.createPostIt(scope.postItTemplate, function (postItCreated) {
 						scope.postItTemplate.id = postItCreated.id;
 						scope.postits.push(scope.postItTemplate);
 
