@@ -84,7 +84,7 @@ wb-post-it-status-panel .btn-group button{
 .postit-scroll-read{
   padding: 10px;
   width: 100%;
-  height: 126px;
+  height: 105px;
   overflow-y:hidden;
   overflow-x: hidden;
 }
