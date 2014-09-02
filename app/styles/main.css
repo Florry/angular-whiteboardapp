@@ -45,9 +45,13 @@ wb-post-it, #post-it-ghost{
 
 wb-post-it:before{
   height: 153px;
-  background-color: red;
   width: 153px;
-  background-image: url(../images/new/postitshadow.png);
+  content: "";
+  left: 3px;
+  top: 3px;
+  z-index: 1;
+  position: absolute;
+  background-image: url(../images/new/postitshadow2.png);
 }
 
 wb-post-it:hover{

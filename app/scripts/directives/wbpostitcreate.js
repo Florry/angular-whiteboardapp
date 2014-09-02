@@ -33,6 +33,7 @@ angular.module('whiteboardApp')
 					}
 				};
 
+
 				scope.cancelCreation = function() {
 					postItDiv.hide();
 					unbindEvents();
@@ -110,9 +111,11 @@ angular.module('whiteboardApp')
 					scope.postItTemplate.position.x = x;
 					scope.postItTemplate.position.y = y;
 
+
 					CRUDFactory.createPostIt(scope.postItTemplate, function(postItCreated) {
 						scope.postItTemplate.id = postItCreated.id;
 						scope.postits.push(scope.postItTemplate);
+
 						unbindEvents();
 						console.log('PostIt was created on the server with an id of ' + postItCreated.id);
 					});
