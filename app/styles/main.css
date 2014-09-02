@@ -47,17 +47,6 @@ wb-post-it, #post-it-ghost{
   position:absolute;
 }
 
-wb-post-it:before{
-  z-index: auto;
-  height: 153px; 
-  width: 153px; 
-  content: "";
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  background-image: url(../images/new/postitshadow2.png);
-}
-
 wb-post-it:hover{
   z-index: 1000;
 }
