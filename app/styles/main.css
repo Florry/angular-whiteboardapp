@@ -19,10 +19,6 @@ body:before {
   box-shadow: 0px 0px 10px rgba(0,0,0,.8);
 }
 
-.wrapper-whiteborad{
-  width: 1360px;
-}
-
 .whiteboard{
   height: 600px;
   width: 1360px;
@@ -44,7 +40,7 @@ wb-post-it, #post-it-ghost{
   background-image: url(../images/new/postit.png);
   float: left;
   cursor: move;
-  position:absolute;
+  position: absolute;
 }
 
 wb-post-it:before{
@@ -63,7 +59,9 @@ wb-post-it:hover{
 }
 
 #post-it-ghost{
+  background-color: #FFFA6B;
   opacity: 0.3;
+  z-index: 1010;
 }
 
 wb-post-it-status-panel .btn-group button{
@@ -71,20 +69,15 @@ wb-post-it-status-panel .btn-group button{
   min-width: 80px;
 }
 
-
-.not-started, .not-started button{
-  transition: all 0.5s ease-in-out;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background-image: url(../images/new/postit.png);
+.not-started, .not-started button, .in-progress, .in-progress button, .done, .done button, .on-hold, .on-hold button{
+ transition: all 0.5s ease-in-out;
+ width: 100%;
+ height: 100%;
+ overflow: hidden;
 }
 
-.in-progress, .in-progress button, .done, .done button, .on-hold, .on-hold button{
-  transition: all 0.5s ease-in-out;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+.not-started, .not-started button{
+  background-image: url(../images/new/postit.png);
 }
 
 .in-progress, .in-progress button{
@@ -151,6 +144,7 @@ wb-post-it-status-panel{
  overflow: visible; 
  display: block;
 }
+
 .edit-form textarea, .create-form textarea{
   margin-bottom: 5px;
   max-width: 228px;
