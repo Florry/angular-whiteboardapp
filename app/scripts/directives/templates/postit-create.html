@@ -1,6 +1,6 @@
 <button class="btn btn-warning" ng-click="toggleForm()"><span class="glyphicon glyphicon-plus"></span></button>
 
-<div class="dropdown-menu create-form" id="createPostItDiv">
+<div id="createPostItDiv" class="dropdown-menu create-form">
 	<form name="createForm" ng-submit="createPostItGhost()">
 		<fieldset>
 			<label>Create Post It</label>
@@ -12,9 +12,6 @@
 </div>
 <div id="post-it-ghost" ng-show="ghostActive">
 	<center>
-		<!-- <wb-post-it-status-panel content="content" ng-class="$parent.ghostActive ? 
-		'wb-post-it-status-panel-hidden' : ''"></wb-post-it-status-panel>
-		<div  class="clearfix"></div> -->
 		</br>
 		<b>{{postItTemplate.author}}<br/></b>
 		<i>{{postItTemplate.text}}<br/></i>

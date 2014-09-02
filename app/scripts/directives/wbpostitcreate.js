@@ -26,7 +26,7 @@ angular.module('whiteboardApp')
 				}
 
 				scope.toggleForm = function() {
-					if (postItDiv.is(":visible")) {
+					if (postItDiv.is(':visible')) {
 						scope.cancelCreation();
 					} else {
 						postItDiv.show();
