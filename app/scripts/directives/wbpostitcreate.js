@@ -13,7 +13,7 @@ angular.module('whiteboardApp')
 			restrict: 'E',
 			link: function(scope, element, attrs) {
 				var ghost = $('#post-it-ghost'),
-					createPostItDiv = $('#createPostItDiv'),
+					createPostItDiv = $('#create-post-it-div'),
 					whiteBoard = $('.whiteboard'),
 					x,
 					y;
@@ -35,7 +35,7 @@ angular.module('whiteboardApp')
 
 
 				scope.cancelCreationOfPostIt = function() {
-					unbindEvents();
+					$document.unbind('mouseup', createPostItAtGhostPosition);
 					scope.ghostActive = false;
 				};
 
@@ -52,7 +52,7 @@ angular.module('whiteboardApp')
 							y: 0
 						},
 						removed: false,
-						timestamp: date.getFullYear() + '-' + ((date.getMonth() + 1 < 10) ? '0' : '') + (date.getMonth() + 1) + '-' + date.getDate()
+						timestamp: date.getFullYear() + '-' + ((date.getMonth() + 1 < 10) ? '0' : '') + (date.getMonth() + 1) + '-' + ((date.getDate() + 1 < 10) ? '0' : '') + (date.getDate() + 1) + ' - ' + date.getHours() + ':' + date.getMinutes()
 					};
 
 					restrictCreationOfPostItToWhiteboard();
@@ -64,12 +64,18 @@ angular.module('whiteboardApp')
 				};
 
 				function restrictCreationOfPostItToWhiteboard() {
+
 					ghost.hover(function() {
 						$document.bind('mouseup', createPostItAtGhostPosition);
-						ghost.removeClass('outsideBoundaries');
+						ghost.children().show();
+						ghost.addClass('inside-boundaries').removeClass("outside-boundaries");
 					}, function() {
 						$document.unbind('mouseup', createPostItAtGhostPosition);
-						ghost.addClass('outsideBoundaries');
+					});
+
+					whiteBoard.mouseleave(function() {
+						ghost.children().hide();
+						ghost.addClass('outside-boundaries').removeClass("inside-boundaries");
 					});
 				}
 
@@ -111,20 +117,18 @@ angular.module('whiteboardApp')
 					});
 				}
 
-				function unbindEvents() {
-					$document.unbind('mouseup', createPostItAtGhostPosition);
-					scope.ghostActive = false;
-				}
-
 				function createPostItAtGhostPosition() {
 					scope.postItTemplate.position.x = x;
 					scope.postItTemplate.position.y = y;
+
+					$document.unbind('mouseup', createPostItAtGhostPosition);
 
 					CRUDFactory.createPostIt(scope.postItTemplate, function(postItCreated) {
 						scope.postItTemplate.id = postItCreated.id;
 						scope.postits.push(scope.postItTemplate);
 
-						unbindEvents();
+						scope.ghostActive = false;
+
 						console.log('PostIt was created on the server with an id of ' + postItCreated.id);
 					});
 				}

@@ -27,7 +27,7 @@ body:before {
   border-radius: 10px;
   overflow: hidden;
   background-color: white;
-  box-shadow: 10px 10px 5px rgba(10, 10, 10, 0.4);
+  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.1);
 }
 
 .wb-post-it-status-panel-hidden{
@@ -38,21 +38,9 @@ wb-post-it, #post-it-ghost{
   height: 150px; 
   width: 150px; 
   margin: 10px; 
-  background-image: url(../images/new/postit.png);
   float: left;
   cursor: move;
-  position: absolute;
-}
-
-wb-post-it:before{
-  height: 153px;
-  width: 153px;
-  content: "";
-  left: 3px;
-  top: 3px;
-  z-index: 1;
-  position: absolute;
-  background-image: url(../images/new/postitshadow2.png);
+  position:absolute;
 }
 
 wb-post-it:hover{
@@ -60,9 +48,7 @@ wb-post-it:hover{
 }
 
 #post-it-ghost{
-  background-color: #FFFA6B;
   opacity: 0.3;
-  z-index: 1010;
 }
 
 wb-post-it-status-panel .btn-group button{
@@ -71,10 +57,10 @@ wb-post-it-status-panel .btn-group button{
 }
 
 .not-started, .not-started button, .in-progress, .in-progress button, .done, .done button, .on-hold, .on-hold button{
- transition: all 0.5s ease-in-out;
- width: 100%;
- height: 100%;
- overflow: hidden;
+  transition: all 0.5s ease-in-out;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 .not-started, .not-started button{
@@ -145,7 +131,6 @@ wb-post-it-status-panel{
  overflow: visible; 
  display: block;
 }
-
 .edit-form textarea, .create-form textarea{
   margin-bottom: 5px;
   max-width: 228px;
@@ -182,4 +167,12 @@ wb-post-it-status-panel{
   font-size: 25px;
   vertical-align:middle
   display: inline-block;
+}
+
+.outside-boundaries{
+  background-image: url(../images/new/postitnotallowed.png);
+}
+
+.inside-boundaries{
+  background-image: url(../images/new/postit.png);
 }

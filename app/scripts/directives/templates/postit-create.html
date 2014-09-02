@@ -1,7 +1,7 @@
 <button class="btn btn-warning undo-buttons" ng-click="toggleForm()" ng-show="!ghostActive"><span class="glyphicon glyphicon-plus"></span></button>
-<button class="btn btn-danger undo-buttons" ng-click="cancelCreationOfPostIt()" ng-show="ghostActive"><span class="glyphicon glyphicon-remove-circle"></span></button>
+<button class="btn btn-danger undo-buttons" ng-click="cancelCreationOfPostIt()" ng-show="ghostActive"><span class="glyphicon glyphicon-remove"></span></button>
 
-<div id="createPostItDiv" class="dropdown-menu create-form">
+<div id="create-post-it-div" class="dropdown-menu create-form">
 	<form name="createForm" ng-submit="createPostItGhost()">
 		<fieldset>
 			<label>Create Post It</label>

@@ -20,18 +20,20 @@
 		</div>
 	</div>
 
-	<div id="whiteboardId" class="whiteboard">
+	<div class="whiteboard">
 		<wb-post-it ng-repeat="postit in postits" content="postit"></wb-post-it>
 	</div>
 	
 	<div id="post-it-ghost" ng-show="ghostActive">
-		<center>
-		</br>
-		<b>{{postItTemplate.author}}<br/></b>
-		<i>{{postItTemplate.text}}<br/></i>
-		<h6>{{postItTemplate.timestamp}}<br/></h6>
-		<b>{{postItTemplate.status}}</b><br/>
-		</center>
+		<div>
+			<center>
+				</br>
+				<b>{{postItTemplate.author}}<br/></b>
+				<i>{{postItTemplate.text}}<br/></i>
+				<h6>{{postItTemplate.timestamp}}<br/></h6>
+				<b>{{postItTemplate.status}}</b><br/>
+			</center>
+		</div>
 	</div>
 
 </div>

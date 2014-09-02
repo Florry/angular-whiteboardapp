@@ -198,5 +198,4 @@ angular.module('whiteboardApp')
 			$scope.postits.push(postit);
 			CRUDFactory.createPostIt(postit);
 		};
-
 	});
