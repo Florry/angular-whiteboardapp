@@ -20,7 +20,7 @@ angular.module('whiteboardApp')
 					if ($scope.content.text !== $scope.inputText) {
 						var date = new Date();
 						$scope.content.text = $scope.inputText;
-						$scope.content.timestamp = date.getFullYear() + '-' + ((date.getMonth() + 1 < 10) ? '0' : '') + (date.getMonth() + 1) + '-' + ((date.getDate() + 1 < 10) ? '0' : '') + (date.getDate() + 1) + ' - ' + date.getHours() + ':' + date.getMinutes();
+						$scope.content.timestamp = date.getFullYear() + '-' + ((date.getMonth() + 1 < 10) ? '0' : '') + (date.getMonth() + 1) + '-' + ((date.getDate() < 10) ? '0' : '') + (date.getDate()) + ' - ' + date.getHours() + ':' + ((date.getMinutes() < 10) ? '0' : '') + (date.getMinutes());
 						CRUDFactory.updatePostIt($scope.content);
 					}
 					$scope.closeEditForm();
