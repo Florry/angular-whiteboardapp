@@ -8,7 +8,13 @@ body {
   padding: 20px;
   background-color: lightgrey;
   background-image: url(../images/brick_wall_pattern.jpg);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
+
 }
 
 body:before { 
@@ -55,11 +61,13 @@ wb-post-it:hover{
 }
 
 #post-it-ghost{
+  padding-top: 0x;
   opacity: 0.3;
+  overflow: hidden;
 }
 
 wb-post-it-status-panel .btn-group button{
-  padding: 1px;
+  padding: 0px;
   min-width: 80px;
 }
 
