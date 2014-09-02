@@ -52,7 +52,7 @@ angular.module('whiteboardApp')
 							y: 0
 						},
 						removed: false,
-						timestamp: date.getFullYear() + '-' + ((date.getMonth() + 1 < 10) ? '0' : '') + (date.getMonth() + 1) + '-' + ((date.getDate() + 1 < 10) ? '0' : '') + (date.getDate() + 1) + ' - ' + date.getHours() + ':' + date.getMinutes()
+						timestamp: date.getFullYear() + '-' + ((date.getMonth() + 1 < 10) ? '0' : '') + (date.getMonth() + 1) + '-' + ((date.getDate() < 10) ? '0' : '') + (date.getDate()) + ' - ' + date.getHours() + ':' + ((date.getMinutes() < 10) ? '0' : '') + (date.getMinutes())
 					};
 
 					restrictCreationOfPostItToWhiteboard();

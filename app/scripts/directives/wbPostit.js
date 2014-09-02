@@ -75,12 +75,10 @@ angular.module('whiteboardApp')
 					$document.unbind('mousemove', movePostit);
 					$document.unbind('mouseup', mouseup);
 					if (!scope.isBeingEdited) {
-
 						element.css({
 							top: y + 'px',
 							left: x + 'px'
 						});
-
 						if (x !== scope.content.position.x || y !== scope.content.position.y) {
 							scope.content.position.x = x;
 							scope.content.position.y = y;
@@ -88,6 +86,7 @@ angular.module('whiteboardApp')
 						}
 					}
 				}
+
 				scope.getStatusCss = function () {
 					return scope.content.status.replace(' ', '-');
 				};
@@ -106,6 +105,7 @@ angular.module('whiteboardApp')
 						}
 					}
 				);
+
 			}
 		};
 	});
