@@ -18,12 +18,12 @@ angular.module('whiteboardApp')
 					x,
 					y;
 
-				init();
-
 				function init() {
 					$document.bind('mousemove', moveGhost);
 					scope.ghostActive = false;
 				}
+
+				init();
 
 				scope.toggleForm = function() {
 					if (postItDiv.is(':visible')) {
@@ -114,7 +114,7 @@ angular.module('whiteboardApp')
 						scope.postItTemplate.id = postItCreated.id;
 						scope.postits.push(scope.postItTemplate);
 						unbindEvents();
-						console.log("PostIt was created on the server with an id of " + postItCreated.id);
+						console.log('PostIt was created on the server with an id of ' + postItCreated.id);
 					});
 				}
 			}
