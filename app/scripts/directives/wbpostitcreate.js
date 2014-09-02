@@ -35,7 +35,7 @@ angular.module('whiteboardApp')
 
 
 				scope.cancelCreationOfPostIt = function() {
-					$document.unbind('mouseup', createPostItAtGhostPosition);
+					unbindEvents();
 					scope.ghostActive = false;
 				};
 
@@ -64,18 +64,18 @@ angular.module('whiteboardApp')
 				};
 
 				function restrictCreationOfPostItToWhiteboard() {
-
 					ghost.hover(function() {
-						$document.bind('mouseup', createPostItAtGhostPosition);
 						ghost.children().show();
-						ghost.addClass('inside-boundaries').removeClass("outside-boundaries");
+						ghost.removeClass('outside-boundaries').addClass('inside-boundaries');
+						$document.bind('mouseup', createPostItAtGhostPosition);
 					}, function() {
 						$document.unbind('mouseup', createPostItAtGhostPosition);
 					});
 
 					whiteBoard.mouseleave(function() {
+						console.log("Classes: " + ghost.prop("class"));
+						ghost.removeClass('inside-boundaries').addClass('outside-boundaries');
 						ghost.children().hide();
-						ghost.addClass('outside-boundaries').removeClass("inside-boundaries");
 					});
 				}
 
@@ -117,11 +117,17 @@ angular.module('whiteboardApp')
 					});
 				}
 
+				function unbindEvents() {
+					$document.unbind('mouseup', createPostItAtGhostPosition);
+					ghost.unbind('hover');
+					whiteBoard.unbind('mouseleave');
+				}
+
 				function createPostItAtGhostPosition() {
 					scope.postItTemplate.position.x = x;
 					scope.postItTemplate.position.y = y;
 
-					$document.unbind('mouseup', createPostItAtGhostPosition);
+					unbindEvents();
 
 					CRUDFactory.createPostIt(scope.postItTemplate, function(postItCreated) {
 						scope.postItTemplate.id = postItCreated.id;
