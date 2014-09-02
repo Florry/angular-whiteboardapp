@@ -8,7 +8,7 @@ angular.module('whiteboardApp')
 		// U PUT OBJ TO URL http://api.beta2.se/wb-div-postits/:id
 		// D DELETE OBJ TO URL http://api.beta2.se/wb-div-postits/:id
 
-		var URL = 'http://localhost:14782/wb-div-postits';
+		var URL = 'http://api.beta2.se/wb-div-postits5';
 
 		return {
 			//C
@@ -32,11 +32,6 @@ angular.module('whiteboardApp')
 			deletePostIt: function(postIt) {
 				$http.delete(URL + '/' + postIt);
 				console.log(postIt + ' was deleted from the server');
-			},
-
-			getPostIts: function() {
-				// console.log(postits);
-				return postits;
 			}
 		};
 

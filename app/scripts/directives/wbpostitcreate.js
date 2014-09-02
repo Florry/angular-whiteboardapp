@@ -13,50 +13,40 @@ angular.module('whiteboardApp')
 			restrict: 'E',
 			link: function(scope, element, attrs) {
 				var ghost = $('#post-it-ghost'),
-					postItDiv = $('#createPostItDiv'),
+					postItForm = $('#createPostItForm'),
 					whiteBoard = $('.whiteboard'),
 					x,
 					y;
 
-				init();
+				$document.bind('mousemove', moveGhost);
 
-				function init() {
-					$document.bind('mousemove', moveGhost);
-					scope.ghostActive = false;
-				}
+				scope.ghostActive = false;
 
 				scope.toggleForm = function() {
 					if (postItDiv.is(':visible')) {
 						scope.cancelCreation();
 					} else {
-						postItDiv.show();
+						postItForm.show();
 					}
 				};
 
 				scope.cancelCreation = function() {
-					postItDiv.hide();
+					postItForm.hide();
 					unbindEvents();
 				};
 
-				scope.createPostItGhost = function() {
-					var date = new Date();
-
-					scope.postItTemplate = {
-						id: '',
+				scope.createPostItGhost = function($event) {
+					scope.postIt = {
 						author: scope.username,
 						text: scope.postItText,
 						status: 'not started',
-						position: {
-							x: 0,
-							y: 0
-						},
+						position: {},
 						removed: false,
-						timestamp: date.getFullYear() + '-' + ((date.getMonth() + 1 < 10) ? '0' : '') + (date.getMonth() + 1) + '-' + date.getDate()
+						timestamp: scope.date.getFullYear() + '-' + ((scope.date.getMonth() + 1 < 10) ? '0' : '') + (scope.date.getMonth() + 1) + '-' + scope.date.getDate()
 					};
+					bindGhostSpecificEvents($event);
 
-					$document.bind('mouseup', createPostItAtGhostPosition);
-
-					postItDiv.hide();
+					postItForm.hide();
 
 					scope.postItText = '';
 
@@ -76,7 +66,7 @@ angular.module('whiteboardApp')
 				}
 
 				function clampHeight(value) {
-					var maxValue = whiteBoard.height() + whiteBoard.offset().top - 50,
+					var maxValue = whiteBoard.height() + whiteBoard.offset().top - ghost.height() - 15,
 						minValue = whiteBoard.offset().top;
 					if (value > maxValue) {
 						return maxValue;
@@ -85,6 +75,12 @@ angular.module('whiteboardApp')
 					} else {
 						return value;
 					}
+				}
+
+				function bindGhostSpecificEvents($event) {
+					$document.bind('mouseup', createPostItAtGhostPosition);
+
+					updateGraphicalPositions($event.pageX - ghost.width(), $event.pageX - ghost.height());
 				}
 
 				function moveGhost() {
@@ -102,17 +98,19 @@ angular.module('whiteboardApp')
 				}
 
 				function unbindEvents() {
+					$document.unbind('mousedown', unbindEvents);
 					$document.unbind('mouseup', createPostItAtGhostPosition);
+
 					scope.ghostActive = false;
 				}
 
 				function createPostItAtGhostPosition() {
-					scope.postItTemplate.position.x = x;
-					scope.postItTemplate.position.y = y;
+					scope.postIt.position.x = x;
+					scope.postIt.position.y = y;
 
-					CRUDFactory.createPostIt(scope.postItTemplate, function(postItCreated) {
-						scope.postItTemplate.id = postItCreated.id;
-						scope.postits.push(scope.postItTemplate);
+					CRUDFactory.createPostIt(scope.postIt).success(function(postItCreated) {
+						scope.postIt.id = postItCreated.id;
+						scope.postits.push(scope.postIt);
 						unbindEvents();
 						console.log("PostIt was created on the server with an id of " + postItCreated.id);
 					});
