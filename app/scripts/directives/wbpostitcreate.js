@@ -7,11 +7,11 @@
  * # wbPostitCreate
  */
 angular.module('whiteboardApp')
-	.directive('wbPostItCreate', function($document, CRUDFactory) {
+	.directive('wbPostItCreate', function ($document, CRUDFactory) {
 		return {
 			templateUrl: './scripts/directives/templates/postit-create.html',
 			restrict: 'E',
-			link: function(scope, element, attrs) {
+			link: function (scope, element, attrs) {
 				var ghost = $('#post-it-ghost'),
 					postItForm = $('#createPostItForm'),
 					whiteBoard = $('.whiteboard'),
@@ -22,7 +22,7 @@ angular.module('whiteboardApp')
 
 				scope.ghostActive = false;
 
-				scope.toggleForm = function() {
+				scope.toggleForm = function () {
 					if (postItForm.is(":visible")) {
 						scope.cancelCreation();
 					} else {
@@ -30,12 +30,12 @@ angular.module('whiteboardApp')
 					}
 				};
 
-				scope.cancelCreation = function() {
+				scope.cancelCreation = function () {
 					postItForm.hide();
 					unbindEvents();
 				};
 
-				scope.createPostItGhost = function($event) {
+				scope.createPostItGhost = function ($event) {
 					scope.postIt = {
 						author: scope.username,
 						text: scope.postItText,
@@ -108,7 +108,7 @@ angular.module('whiteboardApp')
 					scope.postIt.position.x = x;
 					scope.postIt.position.y = y;
 
-					CRUDFactory.createPostIt(scope.postIt).success(function(postItCreated) {
+					CRUDFactory.createPostIt(scope.postIt).success(function (postItCreated) {
 						scope.postIt.id = postItCreated.id;
 						scope.postits.push(scope.postIt);
 						unbindEvents();
