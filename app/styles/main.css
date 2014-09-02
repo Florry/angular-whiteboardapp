@@ -167,3 +167,7 @@ wb-post-it-status-panel{
   overflow: visible; 
   display: none;
 }
+
+.outsideBoundaries{
+  background-image: url(../images/postitnotallowed.png);
+}
