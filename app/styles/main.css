@@ -54,6 +54,10 @@ wb-post-it, #post-it-ghost{
   position:absolute;
 }
 
+wb-post-it i, #post-it-ghost i{
+white-space: pre-wrap;
+}
+
 wb-post-it:hover{
   z-index: 1000;
 }
