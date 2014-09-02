@@ -47,6 +47,8 @@ wb-post-it, #post-it-ghost{
   position:absolute;
 }
 
+
+
 wb-post-it:hover{
   z-index: 1000;
 }
