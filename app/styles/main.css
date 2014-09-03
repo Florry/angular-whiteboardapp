@@ -63,7 +63,6 @@ wb-post-it:hover{
 }
 
 #post-it-ghost{
-  padding-top: 0x;
   opacity: 0.3;
   overflow: hidden;
 }

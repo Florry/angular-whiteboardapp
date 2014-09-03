@@ -8,7 +8,7 @@ angular.module('whiteboardApp')
 		// U PUT OBJ TO URL http://api.beta2.se/wb-div-postits/:id
 		// D DELETE OBJ TO URL http://api.beta2.se/wb-div-postits/:id
 
-		var URL = 'http://api.beta2.se/wb-div-postits24';
+		var URL = 'http://api.beta2.se/wb-div-postits26';
 
 		return {
 			//C

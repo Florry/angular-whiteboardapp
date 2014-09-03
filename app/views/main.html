@@ -27,13 +27,14 @@
 	<div id="post-it-ghost" class="inside-boundaries" ng-show="ghostActive">
 		<div>
 			<center>
-				</br>
+			</br>
+			<div class="postit-scroll-read">
 				<b>{{postItTemplate.author}}<br/></b>
 				<i>{{postItTemplate.text}}<br/></i>
-				<h6>{{postItTemplate.timestamp}}<br/></h6>
-				<b>{{postItTemplate.status}}</b><br/>
-			</center>
-		</div>
+			</div>
+			<p style="font-size: 10px;">{{postItTemplate.timestamp}}</p>
+		</center>
 	</div>
+</div>
 
 </div>

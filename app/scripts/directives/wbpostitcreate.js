@@ -33,10 +33,11 @@ angular.module('whiteboardApp')
 					}
 				};
 
-
 				scope.cancelCreationOfPostIt = function() {
 					unbindEvents();
 					scope.ghostActive = false;
+					ghost.removeClass('outside-boundaries').addClass('inside-boundaries');
+					ghost.children().show();
 				};
 
 				scope.createPostItGhost = function() {
@@ -65,45 +66,60 @@ angular.module('whiteboardApp')
 
 				function restrictCreationOfPostItToWhiteboard() {
 					ghost.hover(function() {
-						ghost.children().show();
-						ghost.removeClass('outside-boundaries').addClass('inside-boundaries');
 						$document.bind('mouseup', createPostItAtGhostPosition);
 					}, function() {
 						$document.unbind('mouseup', createPostItAtGhostPosition);
 					});
-
-					whiteBoard.mouseleave(function() {
-						console.log("Classes: " + ghost.prop("class"));
-						ghost.removeClass('inside-boundaries').addClass('outside-boundaries');
-						ghost.children().hide();
-					});
 				}
 
 				function clampWidth(value) {
-					var maxValue = whiteBoard.width() - ghost.width(),
-						minValue = whiteBoard.offset().left;
-					if (value >= maxValue) {
-						return maxValue;
-					} else if (value <= minValue) {
-						return minValue;
+					var maxWidthValue = whiteBoard.width() - ghost.width(),
+						minWidthValue = whiteBoard.offset().left;
+
+					if (value >= maxWidthValue) {
+						return maxWidthValue;
+					} else if (value <= minWidthValue) {
+						return minWidthValue;
 					} else {
 						return value;
 					}
 				}
 
 				function clampHeight(value) {
-					var maxValue = whiteBoard.height() + whiteBoard.offset().top - 50,
-						minValue = whiteBoard.offset().top;
-					if (value > maxValue) {
-						return maxValue;
-					} else if (value < minValue) {
-						return minValue;
+					var maxHeightValue = whiteBoard.height() + whiteBoard.offset().top - 50,
+						minHeightValue = whiteBoard.offset().top;
+
+					if (value > maxHeightValue) {
+						return maxHeightValue;
+					} else if (value < minHeightValue) {
+						return minHeightValue;
 					} else {
 						return value;
 					}
 				}
 
-				function moveGhost() {
+				function isOutsideOfPlaceableArea(x, y) {
+					var ghostMargin = parseInt(ghost.css('margin'));
+
+					var maxWidthValue = whiteBoard.width() + whiteBoard.offset().left - ghostMargin - 1,
+						minWidthValue = whiteBoard.offset().left + ghostMargin,
+						maxHeightValue = whiteBoard.height() + whiteBoard.offset().top - 50 + ghost.height(),
+						minHeightValue = whiteBoard.offset().top + ghostMargin;
+
+					return x > maxWidthValue ||
+						x < minWidthValue ||
+						y > maxHeightValue ||
+						y < minHeightValue;
+				}
+
+				function moveGhost(event) {
+					if (isOutsideOfPlaceableArea(event.pageX, event.pageY)) {
+						ghost.removeClass('inside-boundaries').addClass('outside-boundaries');
+						ghost.children().hide();
+					} else {
+						ghost.removeClass('outside-boundaries').addClass('inside-boundaries');
+						ghost.children().show();
+					}
 					updateGraphicalPositions(event.pageX - ghost.width(), event.pageY - ghost.height());
 				}
 
@@ -120,7 +136,6 @@ angular.module('whiteboardApp')
 				function unbindEvents() {
 					$document.unbind('mouseup', createPostItAtGhostPosition);
 					ghost.unbind('hover');
-					whiteBoard.unbind('mouseleave');
 				}
 
 				function createPostItAtGhostPosition() {
