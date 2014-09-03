@@ -7,11 +7,11 @@
  * # wbPostitCreate
  */
 angular.module('whiteboardApp')
-	.directive('wbPostItCreate', function($document, CRUDFactory) {
+	.directive('wbPostItCreate', function ($document, CRUDFactory) {
 		return {
 			templateUrl: './scripts/directives/templates/postit-create.html',
 			restrict: 'E',
-			link: function(scope, element, attrs) {
+			link: function (scope, element, attrs) {
 				var ghost = $('#post-it-ghost'),
 					createPostItDiv = $('#create-post-it-div'),
 					whiteBoard = $('.whiteboard'),
@@ -25,7 +25,7 @@ angular.module('whiteboardApp')
 
 				init();
 
-				scope.toggleForm = function() {
+				scope.toggleForm = function () {
 					if (createPostItDiv.is(':visible')) {
 						createPostItDiv.hide();
 					} else {
@@ -34,12 +34,12 @@ angular.module('whiteboardApp')
 				};
 
 
-				scope.cancelCreationOfPostIt = function() {
+				scope.cancelCreationOfPostIt = function () {
 					$document.unbind('mouseup', createPostItAtGhostPosition);
 					scope.ghostActive = false;
 				};
 
-				scope.createPostItGhost = function() {
+				scope.createPostItGhost = function () {
 					var date = new Date();
 
 					scope.postItTemplate = {
@@ -65,15 +65,15 @@ angular.module('whiteboardApp')
 
 				function restrictCreationOfPostItToWhiteboard() {
 
-					ghost.hover(function() {
+					ghost.hover(function () {
 						$document.bind('mouseup', createPostItAtGhostPosition);
 						ghost.children().show();
 						ghost.addClass('inside-boundaries').removeClass("outside-boundaries");
-					}, function() {
+					}, function () {
 						$document.unbind('mouseup', createPostItAtGhostPosition);
 					});
 
-					whiteBoard.mouseleave(function() {
+					whiteBoard.mouseleave(function () {
 						ghost.children().hide();
 						ghost.addClass('outside-boundaries').removeClass("inside-boundaries");
 					});
@@ -123,7 +123,7 @@ angular.module('whiteboardApp')
 
 					$document.unbind('mouseup', createPostItAtGhostPosition);
 
-					CRUDFactory.createPostIt(scope.postItTemplate, function(postItCreated) {
+					CRUDFactory.createPostIt(scope.postItTemplate, function (postItCreated) {
 						scope.postItTemplate.id = postItCreated.id;
 						scope.postits.push(scope.postItTemplate);
 

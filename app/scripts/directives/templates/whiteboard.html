@@ -1,0 +1,12 @@
+<div class="whiteboard">
+	<wb-post-it ng-repeat="postit in postits" content="postit"></wb-post-it>
+</div>
+<div id="post-it-ghost" ng-show="ghostActive">
+	<center>
+	</br>
+	<b>{{postItTemplate.author}}</b><br/>
+	<i>{{postItTemplate.text}}</i><br/>
+	<h6>{{postItTemplate.timestamp}}</h6><br/>
+	<b>{{postItTemplate.status}}<br/></b>
+</center>
+</div>

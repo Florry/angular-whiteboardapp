@@ -17,7 +17,6 @@ body {
 
 }
 
-
 body:before { 
   content: "";
   position: fixed;
@@ -34,11 +33,9 @@ body:before {
 .whiteboard{
   height: 600px;
   width: 1360px;
-  border: 2px solid #949494;
-  border-radius: 10px;
+  border: 1px solid #aaa;
   overflow: hidden;
   background-color: white;
-  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.1);
 }
 
 .wb-post-it-status-panel-hidden{
@@ -55,7 +52,7 @@ wb-post-it, #post-it-ghost{
 }
 
 wb-post-it i, #post-it-ghost i{
-white-space: pre-wrap;
+  white-space: pre-wrap;
 }
 
 wb-post-it:hover{
@@ -235,3 +232,6 @@ wb-post-it-status-panel{
   text-align: center;
 }
 
+.whiteboard-title{
+  position: absolute;
+}
