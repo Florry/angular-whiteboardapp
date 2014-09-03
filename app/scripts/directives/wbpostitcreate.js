@@ -11,7 +11,7 @@ angular.module('whiteboardApp')
 		return {
 			templateUrl: './scripts/directives/templates/postit-create.html',
 			restrict: 'E',
-			link: function(scope, element, attrs) {
+			link: function(scope) {
 				var ghost = $('#post-it-ghost'),
 					createPostItDiv = $('#create-post-it-div'),
 					whiteBoard = $('.whiteboard'),
@@ -56,7 +56,7 @@ angular.module('whiteboardApp')
 						timestamp: date.getFullYear() + '-' + ((date.getMonth() + 1 < 10) ? '0' : '') + (date.getMonth() + 1) + '-' + ((date.getDate() < 10) ? '0' : '') + (date.getDate()) + ' - ' + date.getHours() + ':' + ((date.getMinutes() < 10) ? '0' : '') + (date.getMinutes())
 					};
 
-					restrictCreationOfPostItToWhiteboard();
+					restrictCreationOfPostItToWhenMouseIsOnGhost();
 
 					createPostItDiv.hide();
 					scope.postItText = '';
@@ -64,7 +64,7 @@ angular.module('whiteboardApp')
 					scope.ghostActive = true;
 				};
 
-				function restrictCreationOfPostItToWhiteboard() {
+				function restrictCreationOfPostItToWhenMouseIsOnGhost() {
 					ghost.hover(function() {
 						$document.bind('mouseup', createPostItAtGhostPosition);
 					}, function() {
