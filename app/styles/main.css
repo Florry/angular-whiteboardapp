@@ -85,6 +85,7 @@ wb-post-it:hover{
 #post-it-ghost{
   opacity: 0.3;
   overflow: hidden;
+  z-index: 1010;
 }
 
 ::-webkit-scrollbar{
@@ -110,8 +111,6 @@ wb-post-it-status-panel .btn-group button{
   height: 100%;
   overflow: hidden;
 }
-
-
 
 .postit-scroll-read{
   padding: 2px;
