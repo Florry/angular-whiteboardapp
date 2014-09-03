@@ -1,40 +1,5 @@
 <div class="container-full">
-	<div class="not-logged-in" ng-show="!loggedIn"> 
-	</div>	
-	<div class="login-create-form">
-		<h1 style="display: inline">Whiteboard</h1>
-		<div class="pull-right">
-			<span ng-show="!loggedIn">
-				<span class="label label-default">Username: </span>
-				<input ng-model="username" type="text"></input>
-				<button type="submit" class="btn btn-primary" style="color: white;" ng-disabled="!username" ng-click="login()">
-					Login
-				</button>
-			</span>
-			<span ng-show="loggedIn">
-				<span class="label label-default" ng-click="logout()" style="cursor:pointer;">Logout</span><br/>
-				<span class="label label-primary">Logged in as {{username}} </span>
-			</span>			
-
-			<wb-post-it-create ng-show="loggedIn"></wb-post-it-create>
-		</div>
-	</div>
-
-	<div class="whiteboard">
-		<wb-post-it ng-repeat="postit in postits" content="postit"></wb-post-it>
-	</div>
-	
-	<div id="post-it-ghost" class="inside-boundaries" ng-show="ghostActive">
-		<div>
-			<center>
-			</br>
-			<div class="postit-scroll-read">
-				<b>{{postItTemplate.author}}<br/></b>
-				<i>{{postItTemplate.text}}<br/></i>
-			</div>
-			<p style="font-size: 10px;">{{postItTemplate.timestamp}}</p>
-		</center>
-	</div>
-</div>
-
+	<h1 class="whiteboard-title">Whiteboard</h1>
+	<wb-login></wb-login>
+	<wb-whiteboard></wb-whiteboard>
 </div>

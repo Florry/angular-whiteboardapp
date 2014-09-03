@@ -134,8 +134,8 @@ angular.module('whiteboardApp')
 				}
 
 				function unbindEvents() {
-					$document.unbind('mouseup', createPostItAtGhostPosition);
 					ghost.unbind('hover');
+					$document.unbind('mouseup', createPostItAtGhostPosition);
 				}
 
 				function createPostItAtGhostPosition() {

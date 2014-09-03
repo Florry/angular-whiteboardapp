@@ -51,10 +51,12 @@ angular.module('whiteboardApp')
 
 				(function bindElementMove() {
 					element.bind('mousedown', function(event) {
-						startX = event.screenX - element.offset().left;
-						startY = event.screenY - element.offset().top;
-						$document.bind('mousemove', movePostit);
-						$document.bind('mouseup', mouseup);
+						if (!scope.isBeingEdited && !scope.$parent.ghostActive) {
+							startX = event.screenX - element.offset().left;
+							startY = event.screenY - element.offset().top;
+							$document.bind('mousemove', movePostit);
+							$document.bind('mouseup', mouseup);
+						}
 					});
 				}());
 
@@ -74,16 +76,14 @@ angular.module('whiteboardApp')
 				function mouseup() {
 					$document.unbind('mousemove', movePostit);
 					$document.unbind('mouseup', mouseup);
-					if (!scope.isBeingEdited) {
-						element.css({
-							top: y + 'px',
-							left: x + 'px'
-						});
-						if (x !== scope.content.position.x || y !== scope.content.position.y) {
-							scope.content.position.x = x;
-							scope.content.position.y = y;
-							CRUDFactory.updatePostIt(scope.content);
-						}
+					element.css({
+						top: y + 'px',
+						left: x + 'px'
+					});
+					if (x !== scope.content.position.x || y !== scope.content.position.y) {
+						scope.content.position.x = x;
+						scope.content.position.y = y;
+						CRUDFactory.updatePostIt(scope.content);
 					}
 				}
 
