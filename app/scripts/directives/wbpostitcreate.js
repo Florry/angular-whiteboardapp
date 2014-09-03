@@ -56,7 +56,7 @@ angular.module('whiteboardApp')
 						timestamp: date.getFullYear() + '-' + ((date.getMonth() + 1 < 10) ? '0' : '') + (date.getMonth() + 1) + '-' + ((date.getDate() < 10) ? '0' : '') + (date.getDate()) + ' - ' + date.getHours() + ':' + ((date.getMinutes() < 10) ? '0' : '') + (date.getMinutes())
 					};
 
-					restrictCreationOfPostItToWhenMouseIsOnGhost();
+					bindEvents();
 
 					createPostItDiv.hide();
 					scope.postItText = '';
@@ -64,7 +64,7 @@ angular.module('whiteboardApp')
 					scope.ghostActive = true;
 				};
 
-				function restrictCreationOfPostItToWhenMouseIsOnGhost() {
+				function bindEvents() {
 					ghost.hover(function() {
 						$document.bind('mouseup', createPostItAtGhostPosition);
 					}, function() {
@@ -134,24 +134,28 @@ angular.module('whiteboardApp')
 				}
 
 				function unbindEvents() {
-					ghost.unbind('hover');
+					ghost.unbind('mouseenter mouseleave');
 					$document.unbind('mouseup', createPostItAtGhostPosition);
 				}
 
 				function createPostItAtGhostPosition() {
+					unbindEvents();
+
 					scope.postItTemplate.position.x = x;
 					scope.postItTemplate.position.y = y;
 
-					unbindEvents();
+					CRUDFactory.createPostIt(scope.postItTemplate,
+						function created(postItCreated) {
+							scope.postItTemplate.id = postItCreated.id;
+							scope.postits.push(scope.postItTemplate);
 
-					CRUDFactory.createPostIt(scope.postItTemplate, function(postItCreated) {
-						scope.postItTemplate.id = postItCreated.id;
-						scope.postits.push(scope.postItTemplate);
+							console.log('After CREATE success: PostIt was created on the server with an id of ' + postItCreated.id);
 
-						scope.ghostActive = false;
-
-						console.log('PostIt was created on the server with an id of ' + postItCreated.id);
-					});
+							scope.ghostActive = false;
+						},
+						function error() {
+							bindEvents();
+						});
 				}
 			}
 		};

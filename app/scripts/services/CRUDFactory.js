@@ -8,13 +8,15 @@ angular.module('whiteboardApp')
 		// U PUT OBJ TO URL http://api.beta2.se/wb-div-postits/:id
 		// D DELETE OBJ TO URL http://api.beta2.se/wb-div-postits/:id
 
-		var URL = 'http://api.beta2.se/wb-div-postits9';
+		var URL = 'http://api.beta2.se/wb-div-postits32';
 
 		return {
 			//C
-			createPostIt: function(newPostIt, callback) {
+			createPostIt: function(newPostIt, successCallback, errorCallback) {
 				$http.post(URL, newPostIt).success(function(data) {
-					callback(data);
+					successCallback(data);
+				}).error(function() {
+					errorCallback();
 				});
 			},
 			//R
