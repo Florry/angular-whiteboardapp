@@ -20,10 +20,21 @@ angular.module('whiteboardApp')
 
 				function init() {
 					$document.bind('mousemove', moveGhost);
+					$document.bind('keydown', cancelOnEsc);
 					scope.ghostActive = false;
 				}
 
 				init();
+
+				function cancelOnEsc(event) {
+					if (event.keyCode === 27) {
+						if (scope.ghostActive) {
+							scope.cancelCreationOfPostIt();
+						} else {
+							createPostItDiv.hide();
+						}
+					}
+				}
 
 				scope.toggleForm = function() {
 					if (createPostItDiv.is(':visible')) {
