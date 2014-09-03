@@ -1,11 +1,4 @@
 'use strict';
-
-/**
- * @ngdoc directive
- * @name whiteboardApp.directive:wbPostItStatusPanel
- * @description
- * # wbPostItStatusPanel
- */
 angular.module('whiteboardApp')
 	.directive('wbPostItStatusPanel', function () {
 		return {
@@ -15,6 +8,7 @@ angular.module('whiteboardApp')
 				content: '='
 			},
 			controller: function postLink($scope, CRUDFactory) {
+				$scope.postIts = $scope.$parent.$parent.postits;
 				$scope.done = 'done';
 				$scope.inProgress = 'in progress';
 				$scope.notStarted = 'not started';
@@ -33,9 +27,9 @@ angular.module('whiteboardApp')
 
 				$scope.deletePostIt = function (id) {
 					CRUDFactory.deletePostIt(id);
-					for (var i = 0; i < $scope.$parent.$parent.postits.length; i++) {
-						if ($scope.$parent.$parent.postits[i].id === id) {
-							$scope.$parent.$parent.postits.splice(i, 1);
+					for (var i = 0; i < $scope.postIts.length; i++) {
+						if ($scope.postIts[i].id === id) {
+							$scope.postIts.splice(i, 1);
 						}
 					}
 				};
