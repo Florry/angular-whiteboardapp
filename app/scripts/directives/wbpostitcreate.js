@@ -49,6 +49,8 @@ angular.module('whiteboardApp')
 					scope.ghostActive = false;
 					ghost.removeClass('outside-boundaries').addClass('inside-boundaries');
 					ghost.children().show();
+					scope.postItText = '';
+					scope.toggleForm();
 				};
 
 				scope.createPostItGhost = function() {

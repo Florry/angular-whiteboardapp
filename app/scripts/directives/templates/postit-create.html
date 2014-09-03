@@ -6,7 +6,7 @@
 		<fieldset>
 			<label>Create Post It</label>
 			<textarea class="form-control" ng-model="postItText" rows="10" required>Write something here</textarea>
-			<input type="button" class="btn btn-default btn-sm" value="Cancel" ng-click="toggleForm()"/>
+			<input type="button" class="btn btn-default btn-sm" value="Cancel" ng-click="cancelCreationOfPostIt()"/>
 			<input type="submit" class="btn btn-primary btn-sm" value="Create" ng-disabled="createForm.$invalid"/>
 		</fieldset>
 	</form>
