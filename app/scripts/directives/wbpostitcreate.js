@@ -22,6 +22,7 @@ angular.module('whiteboardApp')
 					$document.bind('mousemove', moveGhost);
 					$document.bind('keydown', cancelOnEsc);
 					scope.ghostActive = false;
+					scope.toggleForm = true;
 				}
 
 				init();
@@ -44,13 +45,16 @@ angular.module('whiteboardApp')
 					}
 				};
 
-				scope.cancelCreationOfPostIt = function() {
+				scope.cancelCreationOfPostIt = function(toggleForm) {
 					unbindEvents();
 					scope.ghostActive = false;
 					ghost.removeClass('outside-boundaries').addClass('inside-boundaries');
 					ghost.children().show();
 					scope.postItText = '';
-					scope.toggleForm();
+
+					if (toggleForm) {
+						scope.toggleForm();
+					}
 				};
 
 				scope.createPostItGhost = function() {
