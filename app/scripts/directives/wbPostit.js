@@ -18,8 +18,8 @@ angular.module('whiteboardApp')
 				var startX = element.offset().left,
 					startY = element.offset().top,
 					y = scope.content.position.y,
-					x = scope.content.position.x;
-				var whiteBoard = $('.whiteboard');
+					x = scope.content.position.x,
+					whiteBoard = $('.whiteboard');
 
 				function clampWidth(value) {
 					var maxValue = whiteBoard.width() - element.width(),
@@ -62,10 +62,8 @@ angular.module('whiteboardApp')
 
 				function movePostit(event) {
 					if (!scope.isBeingEdited) {
-						y = event.screenY - startY;
-						x = event.screenX - startX;
-						y = clampHeight(y);
-						x = clampWidth(x);
+						y = clampHeight(event.screenY - startY);
+						x = clampWidth(event.screenX - startX);
 						element.css({
 							top: y + 'px',
 							left: x + 'px'
