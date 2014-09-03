@@ -186,11 +186,16 @@ wb-post-it-status-panel{
 
 .login-create-form{
  position: relative; 
- margin-bottom: 20px; 
+ margin-bottom: 0px; 
+ height: 45px;
  width: 100%; 
  max-width: 1360px; 
- min-width: 350px; 
+ min-width: 250px; 
  z-index: 50010
+}
+
+.login-group{
+  width: 220px;
 }
 
 .create-form{
@@ -235,4 +240,6 @@ wb-post-it-status-panel{
 
 .whiteboard-title{
   position: absolute;
+  top: 0px;
+  left: 30px;
 }
