@@ -264,4 +264,5 @@ wb-post-it-status-panel{
   position: absolute;
   top: 0px;
   left: 30px;
+  z-index: 50011;
 }

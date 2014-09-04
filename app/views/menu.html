@@ -1,0 +1,60 @@
+<div class="container-full">
+	<h1 class="whiteboard-title">Whiteboard</h1>
+	<br/>
+	<br/>
+	<br/>
+</div>
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel panel-heading">Whiteboardz</div>
+		<div class="col-lg-6">
+			Welcome to the whiteboard-app, please select a whiteboard below
+			<div class="input-group">
+				<span class="input-group-btn">
+					<button class="btn btn-default disabled" type="button">Filter:</button>
+				</span>
+				<input type="text" class="form-control" ng-model="filterQuery">
+			</div>
+		</div>
+		<br/>
+		<br/>
+		<div class="panel panel-body">
+
+			<table class="table table-striped">
+				<thead>
+					<tr> 
+						<th>Id</th>
+						<th>Name</th>
+						<th>				
+							<button ng-show="!addingWhiteboard" ng-click="addWhiteboardForm()" style="float: right" class="btn btn-primary undo-buttons">
+								<span class="glyphicon glyphicon-plus"></span>
+							</button>
+
+							<form ng-show="addingWhiteboard" style="max-width: 400px; float: right;">
+								<fieldset>
+									<label>Add Whiteboard</label>
+									<input type="text" placeholder="Whiteboard Name" class="form-control" ng-model="whiteBoardNameInput">
+								</input>
+								<a type="button" class="btn btn-default btn-sm" ng-click="cancelWhiteboardForm()">Cancel</a>
+								<a type="button" ng-click="addWhiteboard()" class="btn btn-primary btn-sm">Add</a>
+							</fieldset>
+						</form>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="whiteboard in whiteboards | orderBy: name:reverse | filter:filterQuery">
+					<td>
+						<a href="/#/whiteboard/{{whiteboard.id}}">#{{whiteboard.id}}</a>
+					</td>
+					<td>
+						<a href="/#/whiteboard/{{whiteboard.id}}">{{whiteboard.name}}</a>
+					</td>
+				</tr>
+			</tbody>
+
+		</table>
+	</div>
+</div>
+</div>
+

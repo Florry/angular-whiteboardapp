@@ -18,13 +18,17 @@ angular
 		'ngTouch',
 		'LocalStorageModule'
 	]).config(['localStorageServiceProvider',
-		function(localStorageServiceProvider) {
+		function (localStorageServiceProvider) {
 			localStorageServiceProvider.setPrefix('wb-div');
 		}
 	])
-	.config(function($routeProvider) {
+	.config(function ($routeProvider) {
 		$routeProvider
 			.when('/', {
+				templateUrl: 'views/menu.html',
+				controller: 'MenuCtrl'
+			})
+			.when('/whiteboard/:whiteboardId', {
 				templateUrl: 'views/main.html',
 				controller: 'MainCtrl'
 			})
