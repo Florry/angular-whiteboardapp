@@ -265,3 +265,8 @@ wb-post-it-status-panel{
   top: 0px;
   left: 30px;
 }
+
+.whiteboard-list-item:hover{
+  cursor: pointer;
+  background-color: #F7F7F7;
+}

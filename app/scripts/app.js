@@ -24,15 +24,15 @@ angular
 	])
 	.config(function($routeProvider) {
 		$routeProvider
-			.when('/', {
+			.when('/selection', {
+				templateUrl: 'views/selection.html',
+				controller: 'SelectionCtrl'
+			})
+			.when('/whiteboard-:id', {
 				templateUrl: 'views/main.html',
 				controller: 'MainCtrl'
 			})
-			.when('/about', {
-				templateUrl: 'views/about.html',
-				controller: 'AboutCtrl'
-			})
 			.otherwise({
-				redirectTo: '/'
+				redirectTo: '/selection'
 			});
 	});

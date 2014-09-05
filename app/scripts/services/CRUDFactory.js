@@ -8,12 +8,26 @@ angular.module('whiteboardApp')
 		// U PUT OBJ TO URL http://api.beta2.se/wb-div-postits/:id
 		// D DELETE OBJ TO URL http://api.beta2.se/wb-div-postits/:id
 
-		var URL = 'http://api.beta2.se/wb-div-postits32';
+		var baseURL = 'http://api.beta2.se',
+			whiteboardSpecificURL;
 
 		return {
+			setActiveWhiteboard: function(whiteboardId) {
+				whiteboardSpecificURL = 'http://api.beta2.se/wb-div-whiteboard-' + whiteboardId;
+			},
+			readWhiteboards: function(successCallback) {
+				$http.get(baseURL + '/wb-div-whiteboards').success(function(data) {
+					successCallback(data);
+				});
+			},
+			createWhiteboard: function(whiteboardName, successCallback) {
+				$http.post(baseURL + '/wb-div-whiteboards', whiteboardName).success(function(createdWhiteboard) {
+					successCallback(createdWhiteboard);
+				});
+			},
 			//C
 			createPostIt: function(newPostIt, successCallback, errorCallback) {
-				$http.post(URL, newPostIt).success(function(data) {
+				$http.post(whiteboardSpecificURL, newPostIt).success(function(data) {
 					successCallback(data);
 				}).error(function() {
 					errorCallback();
@@ -21,18 +35,18 @@ angular.module('whiteboardApp')
 			},
 			//R
 			readPostIts: function(callback) {
-				$http.get(URL + '/').success(function(data) {
+				$http.get(whiteboardSpecificURL).success(function(data) {
 					callback(data);
 				});
 			},
 			//U
 			updatePostIt: function(postIt) {
-				$http.put(URL + '/' + postIt.id, postIt);
+				$http.put(whiteboardSpecificURL + '/' + postIt.id, postIt);
 				console.log(postIt + ' was updated on the server');
 			},
 			//D
 			deletePostIt: function(postIt) {
-				$http.delete(URL + '/' + postIt);
+				$http.delete(whiteboardSpecificURL + '/' + postIt);
 				console.log(postIt + ' was deleted from the server');
 			}
 		};
