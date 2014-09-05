@@ -1,20 +1,22 @@
 'use strict';
 angular.module('whiteboardApp')
-	.controller('MainCtrl', function ($interval, $scope, CRUDFactory) {
+	.controller('MainCtrl', function($location, $interval, $scope, CRUDFactory) {
+		CRUDFactory.setActiveWhiteboard($location.path().substring($location.path().search('-') + 1));
+
 		$scope.postits = [];
 
 		function updatePostits(postitArray, current, iterator) {
-			CRUDFactory.readPostIts(function (data) {
+			CRUDFactory.readPostIts(function(data) {
 				postitArray = data;
 			});
 			current = postitArray[iterator];
 		}
 
-		CRUDFactory.readPostIts(function (data) {
+		CRUDFactory.readPostIts(function(data) {
 			$scope.postits = data;
 		});
-		$interval(function () {
-			CRUDFactory.readPostIts(function (data) {
+		$interval(function() {
+			CRUDFactory.readPostIts(function(data) {
 				var getPostits = data;
 				if (getPostits.length > 0) {
 					for (var i = 0; i < $scope.postits.length; i++) {
