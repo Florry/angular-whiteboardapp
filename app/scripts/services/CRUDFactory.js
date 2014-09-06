@@ -9,7 +9,7 @@ angular.module('whiteboardApp')
 		// D DELETE OBJ TO URL http://api.beta2.se/wb-div-postits/:id
 
 		var baseURL = 'http://api.beta2.se',
-			whiteboardSpecificURL = "";
+			whiteboardSpecificURL;
 
 		return {
 			setActiveWhiteboard: function(whiteboardId) {

@@ -240,7 +240,6 @@ wb-post-it-status-panel{
 
 .undo-buttons span{
   font-size: 25px;
-  vertical-align:middle
   display: inline-block;
 }
 
@@ -269,4 +268,12 @@ wb-post-it-status-panel{
 .whiteboard-list-item:hover{
   cursor: pointer;
   background-color: #F7F7F7;
+}
+
+#filter-form {
+  margin-bottom: 5px;
+}
+
+#create-whiteboard-form {
+  margin-bottom: 10px;
 }

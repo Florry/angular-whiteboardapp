@@ -14,7 +14,6 @@ angular.module('whiteboardApp')
 		};
 
 		$scope.readWhiteboard = function(whiteboardId) {
-			CRUDFactory.setActiveWhiteboard(whiteboardId);
 			$location.path('/whiteboard-' + whiteboardId);
 		};
 	});

@@ -1,15 +1,22 @@
 <div class="container">
+
+	<div id="filter-form" class="col-md-2 input-group">
+		<h4 style="margin: 0px"><span class="label label-primary">Filter</span></h4>
+		<input type="text" class="form-control" ng-model="whiteboardSearchrName" placeholder="Enter name of whiteboard"/>
+	</div>
+
+	<div id="create-whiteboard-form" class="col-md-3 input-group selection-form">
+		<input type="text" class="form-control" ng-model="whiteboardName" placeholder="Enter name of new whiteboard"/>
+		<span class="input-group-btn">
+			<button class="btn btn-primary" type="button" ng-click="createWhiteboard(whiteboardName)" ng-disabled="!whiteboardName">Create</button>
+		</span>
+	</div>
+
 	<div class="list-group">
 		<span class="list-group-item active">
 			Please select a whiteboard
 		</span>
-		<span ng-repeat="whiteboard in whiteboards" class="list-group-item whiteboard-list-item" ng-click="readWhiteboard(whiteboard.id)">{{whiteboard.name}}</span>
+		<span ng-repeat="whiteboard in whiteboards | filter: whiteboardSearchrName" class="list-group-item whiteboard-list-item" ng-click="readWhiteboard(whiteboard.id)">{{whiteboard.name}}</span>
 	</div>
 
-	<div class="input-group">
-		<input type="text" class="form-control" ng-model="whiteboardName">
-		<span class="input-group-btn">
-		<button class="btn btn-primary" type="button" ng-click="createWhiteboard(whiteboardName)" ng-disabled="!whiteboardName">Create</button>
-		</span>
-	</div>
 </div>
