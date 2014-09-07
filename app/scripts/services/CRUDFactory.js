@@ -13,12 +13,16 @@ angular.module('whiteboardApp')
 
 		return {
 			setActiveWhiteboard: function(whiteboardId) {
-				whiteboardSpecificURL = 'http://api.beta2.se/wb-div-whiteboard-' + whiteboardId;
+				whiteboardSpecificURL = baseURL + '/wb-div-whiteboard-' + whiteboardId;
 			},
-			readWhiteboards: function(successCallback) {
-				$http.get(baseURL + '/wb-div-whiteboards').success(function(data) {
-					successCallback(data);
-				});
+			readWhiteboards: function(successCallback, errorCallback) {
+				$http.get(baseURL + '/wb-div-whiteboards')
+					.success(function(data) {
+						successCallback(data);
+					})
+					.error(function() {
+						errorCallback();
+					});
 			},
 			createWhiteboard: function(whiteboardName, successCallback) {
 				$http.post(baseURL + '/wb-div-whiteboards', whiteboardName).success(function(createdWhiteboard) {

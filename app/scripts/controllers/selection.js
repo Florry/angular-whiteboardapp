@@ -1,8 +1,10 @@
 'use strict';
 angular.module('whiteboardApp')
 	.controller('SelectionCtrl', function($location, $scope, CRUDFactory) {
-		CRUDFactory.readWhiteboards(function(data) {
+		CRUDFactory.readWhiteboards(function success(data) {
 			$scope.whiteboards = data;
+		}, function error() {
+			alert('List of whiteboards could not be read because of connection issues, please try again');
 		});
 
 		$scope.createWhiteboard = function(whiteboardName) {

@@ -251,14 +251,6 @@ wb-post-it-status-panel{
   background-image: url(../images/new/postit.png);
 }
 
-#about-text{
-  width: 100%;
-  height: 100%;
-  font-family: AYearWithoutRain;
-  font-size: 200px;
-  text-align: center;
-}
-
 .whiteboard-title{
   position: absolute;
   top: 0px;
