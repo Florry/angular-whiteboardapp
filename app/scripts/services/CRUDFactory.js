@@ -15,7 +15,7 @@ angular.module('whiteboardApp')
 
 		return {
 			//C
-			createPostIt: function (newPostIt, successCallback, errorCallback) {
+			create: function (newPostIt, successCallback, errorCallback) {
 				$http.post(URL, newPostIt).success(function (data) {
 					successCallback(data);
 				}).error(function () {
@@ -23,7 +23,7 @@ angular.module('whiteboardApp')
 				});
 			},
 			//R
-			readPostIts: function (callback) {
+			read: function (callback) {
 				$http.get(URL + '/').success(function (data) {
 					callback(data);
 				});
@@ -43,12 +43,12 @@ angular.module('whiteboardApp')
 				case 'menu':
 					http = httpWhiteboards;
 					URL = http;
-					console.log(http);
+					// console.log(http);
 					break;
 				case 'whiteboard':
 					whiteboardId = $routeParams.whiteboardId;
 					URL = httpWhiteboard + whiteboardId;
-					console.log(whiteboardId);
+					// console.log(whiteboardId);
 					break;
 				default:
 				}

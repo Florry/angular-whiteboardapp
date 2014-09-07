@@ -18,7 +18,7 @@ angular.module('whiteboardApp')
 		}());
 
 		function updatePostits(postitArray, current, iterator) {
-			CRUDFactory.readPostIts(function (data) {
+			CRUDFactory.read(function (data) {
 				postitArray = data;
 			});
 			current = postitArray[iterator];
@@ -28,12 +28,12 @@ angular.module('whiteboardApp')
 			$location.path('#');
 		};
 
-		CRUDFactory.readPostIts(function (data) {
+		CRUDFactory.read(function (data) {
 			$scope.postits = data;
 		});
 		var updateInterval =
 			$interval(function () {
-				CRUDFactory.readPostIts(function (data) {
+				CRUDFactory.read(function (data) {
 					var getPostits = data;
 					if (getPostits.length > 0) {
 						for (var i = 0; i < $scope.postits.length; i++) {

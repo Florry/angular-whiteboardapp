@@ -6,7 +6,7 @@ angular.module('whiteboardApp')
 
 		(function () {
 			CRUDFactory.setMode('menu');
-			CRUDFactory.readPostIts(function (data) {
+			CRUDFactory.read(function (data) {
 				console.log(data);
 				$scope.whiteboards = data;
 			});
@@ -27,7 +27,7 @@ angular.module('whiteboardApp')
 				'name': $scope.whiteBoardNameInput
 			};
 			CRUDFactory.setMode('menu');
-			CRUDFactory.createPostIt(newWhiteboard,
+			CRUDFactory.create(newWhiteboard,
 				function success(data) {
 					$scope.whiteboards.push(data);
 					$scope.cancelWhiteboardForm();
