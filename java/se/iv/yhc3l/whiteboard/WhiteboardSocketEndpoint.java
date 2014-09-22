@@ -8,10 +8,6 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
-import se.florry.yhc3l.websockets.ChatMessage;
-import se.florry.yhc3l.websockets.ChatMessageTextDecoder;
-import se.florry.yhc3l.websockets.ChatMessageTextEncoder;
-
 @ServerEndpoint(value = "/whiteboard")
 public class WhiteboardSocketEndpoint
 {	
