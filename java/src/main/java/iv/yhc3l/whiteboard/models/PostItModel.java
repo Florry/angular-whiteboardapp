@@ -5,17 +5,20 @@ import iv.yhc3l.whiteboard.utils.Utils;
 public class PostItModel
 {
 	private final int id;
+	private final int whiteboardId;
 	private final String author;
 	private final String text;
 	private final String status;
 	private final PositionModel position;
 	private final boolean removed;
-	private final String timestamp;
+	private String timestamp;
 	
-	public PostItModel(final int id, final String author, final String text, final String status,
-			final PositionModel position, final boolean removed)
+	public PostItModel(final int id, final int whiteboardId, final String author,
+			final String text, final String status, final PositionModel position,
+			final boolean removed)
 	{
 		this.id = id;
+		this.whiteboardId = whiteboardId;
 		this.author = author;
 		this.text = text;
 		this.status = status;
@@ -26,12 +29,26 @@ public class PostItModel
 	
 	public PostItModel(final PostItModel postit)
 	{
-		this(postit.id, postit.author, postit.text, postit.status, postit.position, postit.removed);
+		this(postit.id, postit.whiteboardId, postit.author, postit.text, postit.status,
+				postit.position, postit.removed);
+	}
+	
+	public PostItModel(final int id, final int whiteboardId, final String author,
+			final String text, final String status, final PositionModel position,
+			final boolean removed, String timestamp)
+	{
+		this(id, whiteboardId, author, text, status, position, removed);
+		this.timestamp = timestamp;
 	}
 	
 	public int getId()
 	{
 		return id;
+	}
+	
+	public int getWhiteboardId()
+	{
+		return whiteboardId;
 	}
 	
 	public String getAuthor()
@@ -75,6 +92,10 @@ public class PostItModel
 		stringBuilder.append("\n");
 		stringBuilder.append(timestamp);
 		stringBuilder.append("\n");
+		stringBuilder.append("\n x:");
+		stringBuilder.append(position.x);
+		stringBuilder.append("\n y:");
+		stringBuilder.append(position.y);
 		
 		return stringBuilder.toString();
 	}
