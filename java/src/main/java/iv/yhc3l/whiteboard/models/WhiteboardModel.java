@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 public class WhiteboardModel {
 
-	int id;
-	String name;
-	String timestamp;
-	ArrayList<PostItModel> PostItModels;
+	private final int id;
+	private final String name;
+	private String timestamp;
+	private final ArrayList<PostItModel> PostItModels;
 	
 	public WhiteboardModel(int id, String name) {
 		this.id = id;
