@@ -8,7 +8,7 @@ import javax.json.Json;
 
 public class WhiteboardDecoder
 {
-	public WhiteboardModel decode(String json)
+	public static WhiteboardModel decode(String json)
 	{
 		int id = Json.createReader(new StringReader(json)).readObject().getInt("id");
 		String name = Json.createReader(new StringReader(json)).readObject().getString("name");

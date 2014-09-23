@@ -1,5 +1,6 @@
 package iv.yhc3l.whiteboard.models;
 
+import iv.yhc3l.whiteboard.encoders.WhiteboardEncoder;
 import iv.yhc3l.whiteboard.utils.Utils;
 
 import java.util.ArrayList;
@@ -57,5 +58,10 @@ public class WhiteboardModel
 	{
 		PostItModels.add(postItModel);
 		this.timestamp = Utils.getFormattedDate();
+	}
+	
+	public String encode()
+	{
+		return WhiteboardEncoder.encode(this);
 	}
 }
