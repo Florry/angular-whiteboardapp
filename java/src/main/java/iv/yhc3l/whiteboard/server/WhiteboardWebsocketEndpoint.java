@@ -1,4 +1,4 @@
-package iv.yhc3l.whiteboard;
+package iv.yhc3l.whiteboard.server;
 
 import iv.yhc3l.whiteboard.decoders.PostItDecoder;
 import iv.yhc3l.whiteboard.models.PostItModel;
