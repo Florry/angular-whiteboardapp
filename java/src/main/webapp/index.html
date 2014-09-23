@@ -13,7 +13,7 @@ var ws = new WebSocket(url);
 console.log(url);
 ws.onopen = function(e) {
 	console.log("connected");
-
+	ws.send("{\"id\":195, \"whiteboardId\": 32, \"author\":\"-Viktor-\",\"text\":\"Implementera postit model\",\"status\":\"in progress\",\"position\":{\"x\":499,\"y\":65},\"removed\":false,\"timestamp\":\"2014-09-23 - 9:20\"}")
 	};
 
 ws.onerror = function (error) {
