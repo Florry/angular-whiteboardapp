@@ -28,5 +28,5 @@ public class WhiteboardWebsocketEndpoint
 	@OnError
 	public void myOnError(Session session, Throwable throwable)
 	{}
-
+	
 }
