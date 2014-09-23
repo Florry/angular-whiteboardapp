@@ -15,7 +15,7 @@ import javax.websocket.server.ServerEndpoint;
 @ServerEndpoint(value = "/whiteboard", decoders =
 { PostItDecoder.class }, encoders =
 { PostItEncoder.class })
-public class WhiteboardWebsocketEndpoint
+public class WebsocketEndpoint
 {
 	@OnOpen
 	public void myOnOpen(Session session)
