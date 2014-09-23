@@ -1,5 +1,8 @@
 package iv.yhc3l.whiteboard;
 
+import iv.yhc3l.whiteboard.decoders.PostItDecoder;
+import iv.yhc3l.whiteboard.models.PostItModel;
+
 import javax.websocket.CloseReason;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
@@ -8,7 +11,8 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
-@ServerEndpoint(value = "/whiteboard")
+@ServerEndpoint(value = "/whiteboard", decoders =
+{ PostItDecoder.class })
 public class WhiteboardWebsocketEndpoint
 {
 	@OnOpen
@@ -16,8 +20,9 @@ public class WhiteboardWebsocketEndpoint
 	{}
 	
 	@OnMessage
-	public void myOnMessage(Session session, String msg)
+	public void myOnMessage(Session session, PostItModel msg)
 	{
+		System.out.println(msg);
 		session.getAsyncRemote().sendText("This works!");
 	}
 	
@@ -28,5 +33,5 @@ public class WhiteboardWebsocketEndpoint
 	@OnError
 	public void myOnError(Session session, Throwable throwable)
 	{}
-
+	
 }
