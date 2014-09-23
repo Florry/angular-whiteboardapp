@@ -14,14 +14,6 @@ import javax.websocket.EndpointConfig;
 public class PostItDecoder implements Decoder.Text<PostItModel>
 {
 	@Override
-	public void init(EndpointConfig endpointConfig)
-	{}
-	
-	@Override
-	public void destroy()
-	{}
-	
-	@Override
 	public PostItModel decode(String json) throws DecodeException
 	{
 		int id = Json.createReader(new StringReader(json)).readObject().getInt("id");
@@ -56,5 +48,13 @@ public class PostItDecoder implements Decoder.Text<PostItModel>
 			return false;
 		}
 	}
+	
+	@Override
+	public void init(EndpointConfig endpointConfig)
+	{}
+	
+	@Override
+	public void destroy()
+	{}
 	
 }
