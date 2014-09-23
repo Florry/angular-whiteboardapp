@@ -61,7 +61,7 @@ angular.module('whiteboardApp')
 						}
 						updatePostits(getPostits, null, null);
 						if (getPostits.length > $scope.postits.length) {
-							for (i = 0; i < getPostits.length - $scope.postits.length; i++) {
+							for (i = $scope.postits.length; i < getPostits.length; i++) {
 								$scope.postits.push(getPostits[i]);
 							}
 						}
