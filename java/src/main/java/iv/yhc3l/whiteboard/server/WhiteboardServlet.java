@@ -70,4 +70,9 @@ public class WhiteboardServlet extends HttpServlet
 		
 		repository.createWhiteboard(newWhiteboard);
 	}
+	
+	protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
+	{	
+		
+	}
 }

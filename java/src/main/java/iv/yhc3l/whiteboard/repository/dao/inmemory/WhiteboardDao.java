@@ -3,12 +3,14 @@ package iv.yhc3l.whiteboard.repository.dao.inmemory;
 import iv.yhc3l.whiteboard.models.WhiteboardModel;
 import iv.yhc3l.whiteboard.repository.WhiteboardRepository;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class WhiteboardDao implements WhiteboardRepository
 {
-	private static Map<Integer, WhiteboardModel> whiteboards = new LinkedHashMap<Integer, WhiteboardModel>();
+	private static Map<Integer, WhiteboardModel> whiteboards = Collections
+			.synchronizedMap(new LinkedHashMap<Integer, WhiteboardModel>());
 	private static int id = 0;
 	
 	@Override

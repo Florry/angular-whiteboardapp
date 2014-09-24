@@ -13,6 +13,7 @@ public class WhiteboardModel
 	private final String name;
 	private String timestamp;
 	private final Map<Integer, PostItModel> postIts;
+	private int postItId = 0;
 	
 	public WhiteboardModel(int id, String name)
 	{
@@ -67,7 +68,8 @@ public class WhiteboardModel
 	
 	public void addPostIt(PostItModel postIt)
 	{
-		postIts.put(postIt.getId(), postIt);
+		postIts.put(postItId, postIt);
+		postItId += 1;
 		updateTimestamp();
 	}
 	

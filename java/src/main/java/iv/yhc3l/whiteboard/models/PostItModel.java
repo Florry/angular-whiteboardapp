@@ -2,7 +2,7 @@ package iv.yhc3l.whiteboard.models;
 
 import iv.yhc3l.whiteboard.utils.Utils;
 
-public class PostItModel
+public class PostItModel extends WhiteboardObjectModel
 {
 	private final int id;
 	private final int whiteboardId;

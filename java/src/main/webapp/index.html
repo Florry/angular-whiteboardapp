@@ -2,48 +2,52 @@
 <html>
 <head>
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	<title>Hello World - Web Socket</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <meta charset="US-ASCII">
 <title>Insert title here</title>
 </head>
 <body>
-<div class="container"><h1>test page</h1></div>
+<div class="container"><h1 id="whiteboard">test page</h1>
+<h1 id="connections">test page</h1></div>
 <script>
-var port = "";
-var url = 'ws://' + window.location.host + port + '/ng-whiteboard-app-websocket/whiteboard';
-var ws = new WebSocket(url);
-
-console.log(url);
-ws.onopen = function(e) {
-	console.log("connected");
-	ws.send("{\"id\":195, \"whiteboardId\": 32, \"author\":\"-Viktor-\",\"text\":\"Implementera postit model\",\"status\":\"in progress\",\"position\":{\"x\":499,\"y\":65},\"removed\":false,\"timestamp\":\"2014-09-23 - 9:20\"}")
-	getAllWhiteboards();
-};
-
-ws.onerror = function (error) {
-	console.log(error);
-};
-
-ws.onclose = function(event){
-	console.log("Remote host closed or refused WebSocket connection");
-};
-
-ws.onmessage = function(message) {
-	console.log(message);
-};
-
-function getAllWhiteboards()
-{
-	console.log("hello");
-	$.get( "http://localhost:8080/ng-whiteboard-app-websocket/whiteboards?id=49", function( data ) {
-		console.log("hello");
-	console.log(JSON.parse(data));
-	});
-}
-
-
+	var port = "";
+	var url = 'ws://' + window.location.host + port + '/ng-whiteboard-app-websocket/whiteboard';
+	var ws = new WebSocket(url);
+	
+	console.log(url);
+	ws.onopen = function(e) {
+		console.log("connected");
+		var hello = "{\"data\" : {\"id\":195, \"whiteboardId\": 32, \"author\":\"-Viktor-\",\"text\":\"Implementera postit model\",\"status\":\"in progress\",\"position\":{\"x\":499,\"y\":65},\"removed\":false,\"timestamp\":\"2014-09-23 - 9:20\"}, \"message\": \"postit-delete\"}";
+		console.log(JSON.parse(hello));
+		ws.send(hello);
+		getAllWhiteboards();
+	};
+	
+	ws.onerror = function (error) {
+		console.log(error);
+	};
+	
+	ws.onclose = function(event){
+		console.log("Remote host closed or refused WebSocket connection");
+	};
+	
+	ws.onmessage = function(message) {
+		console.log(message);
+		var connections = JSON.parse(message.data);
+		if(parseInt(connections.message)){
+			$("#connections").text(connections.message);
+		}
+	};
+	
+	function getAllWhiteboards()
+	{
+		$.get( "http://localhost:8080/ng-whiteboard-app-websocket/whiteboards?id=1", function( data ) {
+			console.log(JSON.parse(data));
+			var whiteboard = JSON.parse(data);
+			$("#whiteboard").text(whiteboard.name + " " + whiteboard.timestamp);
+		});
+	}
 </script>
 </body>
 </html>
