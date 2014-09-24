@@ -9,11 +9,14 @@ import java.util.Map;
 public class WhiteboardDao implements WhiteboardRepository
 {
 	private static Map<Integer, WhiteboardModel> whiteboards = new LinkedHashMap<Integer, WhiteboardModel>();
+	private static int id = 0;
 	
 	@Override
 	public void createWhiteboard(WhiteboardModel whiteboard)
 	{
-		whiteboards.put(whiteboard.getId(), whiteboard);
+		WhiteboardModel newWhiteboard = new WhiteboardModel(id, whiteboard.getName());
+		whiteboards.put(id, newWhiteboard);
+		id += 1;
 	}
 	
 	@Override
@@ -21,7 +24,7 @@ public class WhiteboardDao implements WhiteboardRepository
 	{
 		WhiteboardModel whiteboard = whiteboards.get(id);
 		WhiteboardModel updatedWhiteboard = new WhiteboardModel(whiteboard.getId(), whiteboardName,
-				whiteboard.getPostItModels());
+				whiteboard.getPostIts());
 		
 		whiteboards.put(id, updatedWhiteboard);
 	}

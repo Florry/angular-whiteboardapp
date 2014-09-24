@@ -2,12 +2,11 @@ package iv.yhc3l.whiteboard.server;
 
 import iv.yhc3l.whiteboard.decoders.WhiteboardDecoder;
 import iv.yhc3l.whiteboard.models.WhiteboardModel;
+import iv.yhc3l.whiteboard.repository.service.WhiteboardService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,8 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 public class WhiteboardServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
-	private static List<WhiteboardModel> whiteboards = new ArrayList<WhiteboardModel>();
-	private static int id = 0;
+	public static WhiteboardService repository = WebsocketEndpoint.whiteboardRepository;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
@@ -29,25 +27,19 @@ public class WhiteboardServlet extends HttpServlet
 		PrintWriter out = response.getWriter();
 		
 		String requestId = request.getParameter("id");
-		if (requestId != null && requestId != "")
+		if (requestId != null && requestId != "" && repository.getAllWhiteboards().size() > 0)
 		{
 			int whiteboardId = Integer.parseInt(requestId);
-			for (int i = 0; i < whiteboards.size(); i++)
-			{
-				if (whiteboards.get(i).getId() == whiteboardId)
-				{
-					out.write(whiteboards.get(i).encode());
-					break;
-				}
-			}
+			out.write(repository.getWhiteboard(whiteboardId).encode());
 		} else
 		{
 			StringBuilder whiteboardsJson = new StringBuilder();
 			whiteboardsJson.append("[");
-			for (int i = 0; i < whiteboards.size(); i++)
+			
+			for (int i = 0; i < repository.getAllWhiteboards().size(); i++)
 			{
-				whiteboardsJson.append(whiteboards.get(i).encode());
-				if (i != whiteboards.size() - 1)
+				whiteboardsJson.append(repository.getWhiteboard(i).encode());
+				if (i != repository.getAllWhiteboards().size() - 1)
 				{
 					whiteboardsJson.append(",");
 				}
@@ -74,8 +66,8 @@ public class WhiteboardServlet extends HttpServlet
 		}
 		String jsonString = stringBuffer.toString();
 		WhiteboardModel whiteboard = WhiteboardDecoder.decode(jsonString);
-		WhiteboardModel newWhiteboard = new WhiteboardModel(id, whiteboard.getName());
-		whiteboards.add(newWhiteboard);
-		id += 1;
+		WhiteboardModel newWhiteboard = new WhiteboardModel(0, whiteboard.getName());
+		
+		repository.createWhiteboard(newWhiteboard);
 	}
 }

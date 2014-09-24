@@ -3,7 +3,7 @@ package iv.yhc3l.whiteboard.repository.service;
 import iv.yhc3l.whiteboard.models.WhiteboardModel;
 import iv.yhc3l.whiteboard.repository.WhiteboardRepository;
 
-import java.util.List;
+import java.util.Map;
 
 public class WhiteboardService
 {
@@ -34,7 +34,7 @@ public class WhiteboardService
 		return whiteboardRepository.getWhiteboard(id);
 	}
 	
-	public List<WhiteboardModel> getAllWhiteboards()
+	public Map<Integer, WhiteboardModel> getAllWhiteboards()
 	{
 		return whiteboardRepository.getAllWhiteboards();
 	}

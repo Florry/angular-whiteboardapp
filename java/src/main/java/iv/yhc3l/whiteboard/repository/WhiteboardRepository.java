@@ -2,7 +2,7 @@ package iv.yhc3l.whiteboard.repository;
 
 import iv.yhc3l.whiteboard.models.WhiteboardModel;
 
-import java.util.List;
+import java.util.Map;
 
 public interface WhiteboardRepository
 {
@@ -14,5 +14,5 @@ public interface WhiteboardRepository
 	
 	public WhiteboardModel getWhiteboard(int id);
 	
-	public List<WhiteboardModel> getAllWhiteboards();
+	public Map<Integer, WhiteboardModel> getAllWhiteboards();
 }
