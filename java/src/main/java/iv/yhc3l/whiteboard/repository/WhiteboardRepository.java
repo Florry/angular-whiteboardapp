@@ -12,8 +12,7 @@ public interface WhiteboardRepository
 	
 	public void removeWhiteboard(int id);
 	
-	public WhiteboardModel readWhiteboard(int id);
+	public WhiteboardModel getWhiteboard(int id);
 	
-	public List<WhiteboardModel> readWhiteboards();
-	
+	public List<WhiteboardModel> getAllWhiteboards();
 }

@@ -8,7 +8,7 @@ public class Utils
 	public static String getFormattedDate()
 	{
 		Date date = new Date();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		String formattedDate = formatter.format(date);
 		return formattedDate;
 	}
