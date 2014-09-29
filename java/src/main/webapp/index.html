@@ -42,7 +42,7 @@
 	
 	function getAllWhiteboards()
 	{
-		$.get( "http://localhost:8080/ng-whiteboard-app-websocket/whiteboards?id=1", function( data ) {
+		$.get( "http://localhost:8080/ng-whiteboard-app-websocket/whiteboards", function( data ) {
 			console.log(JSON.parse(data));
 			var whiteboard = JSON.parse(data);
 			$("#whiteboard").text(whiteboard.name + " " + whiteboard.timestamp);

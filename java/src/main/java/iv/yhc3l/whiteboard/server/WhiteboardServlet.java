@@ -36,11 +36,12 @@ public class WhiteboardServlet extends HttpServlet
 		{
 			Map<Integer, WhiteboardModel> whiteboards = repository.getAllWhiteboards();
 			StringBuilder whiteboardsJson = new StringBuilder();
+			
 			whiteboardsJson.append("[");
-			for (Object key : whiteboards.keySet())
+			for (WhiteboardModel whiteboard : whiteboards.values())
 			{
-				whiteboardsJson.append(whiteboards.get(key).encode());
-				if (!whiteboards.get(key).equals(whiteboards.get(whiteboards.size() - 1)))
+				whiteboardsJson.append(whiteboard.encode());
+				if (!whiteboard.equals(whiteboards.get(whiteboards.size() - 1)))
 				{
 					whiteboardsJson.append(",");
 				}

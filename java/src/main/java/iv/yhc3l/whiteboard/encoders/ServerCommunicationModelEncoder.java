@@ -78,10 +78,9 @@ public class ServerCommunicationModelEncoder implements Encoder.Text<ServerCommu
 					} else if (methodResponse instanceof Map)
 					{
 						JsonArrayBuilder jsonArray = Json.createArrayBuilder();
-						for (Object object : ((Map<?, ?>) methodResponse).keySet())
+						for (Object object : ((Map<?, ?>) methodResponse).values())
 						{
-							jsonArray.add(encodeObjectToJson(((Map<?, ?>) methodResponse)
-									.get(object)));
+							jsonArray.add(encodeObjectToJson(object));
 						}
 						encoder.add(name, jsonArray);
 					} else
