@@ -7,6 +7,7 @@ import iv.yhc3l.whiteboard.repository.service.WhiteboardService;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,12 +34,13 @@ public class WhiteboardServlet extends HttpServlet
 			out.write(repository.getWhiteboard(whiteboardId).encode());
 		} else
 		{
+			Map<Integer, WhiteboardModel> whiteboards = repository.getAllWhiteboards();
 			StringBuilder whiteboardsJson = new StringBuilder();
 			whiteboardsJson.append("[");
-			for (int i = 0; i < repository.getAllWhiteboards().size(); i++)
+			for (Object key : whiteboards.keySet())
 			{
-				whiteboardsJson.append(repository.getWhiteboard(i).encode());
-				if (i != repository.getAllWhiteboards().size() - 1)
+				whiteboardsJson.append(whiteboards.get(key).encode());
+				if (!whiteboards.get(key).equals(whiteboards.get(whiteboards.size() - 1)))
 				{
 					whiteboardsJson.append(",");
 				}
@@ -70,8 +72,26 @@ public class WhiteboardServlet extends HttpServlet
 		repository.createWhiteboard(newWhiteboard);
 	}
 	
-	protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
-	{	
+	protected void doDelete(HttpServletRequest request, HttpServletResponse resp)
+	{
+		StringBuffer stringBuffer = new StringBuffer();
+		String line = null;
+		try
+		{
+			BufferedReader reader = request.getReader();
+			while ((line = reader.readLine()) != null)
+			{
+				stringBuffer.append(line);
+			}
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		String jsonString = stringBuffer.toString();
+		WhiteboardModel whiteboard = WhiteboardDecoder.decode(jsonString);
+		WhiteboardModel newWhiteboard = new WhiteboardModel(whiteboard.getId(),
+				whiteboard.getName());
 		
+		repository.removeWhiteboard(newWhiteboard.getId());
 	}
 }
