@@ -6,11 +6,11 @@ import java.util.Map;
 
 public interface PostItRepository
 {
-	public void createPostIt(PostItModel postIt, int whiteboardId);
+	public void createPostIt(PostItModel postIt);
 	
-	public void updatePostIt(PostItModel postIt, int whiteboardId);
+	public void updatePostIt(PostItModel postIt);
 	
-	public void removePostIt(PostItModel postIt, int whiteboardId);
+	public void removePostIt(PostItModel postIt);
 	
 	public PostItModel getPostIt(int id, int whiteboardId);
 	

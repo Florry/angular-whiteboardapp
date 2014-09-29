@@ -1,12 +1,12 @@
 package iv.yhc3l.whiteboard.models;
 
-import iv.yhc3l.whiteboard.encoders.WhiteboardEncoder;
+import iv.yhc3l.whiteboard.encoders.ServerCommunicationModelEncoder;
 import iv.yhc3l.whiteboard.utils.Utils;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class WhiteboardModel
+public class WhiteboardModel extends WhiteboardObjectModel
 {
 	
 	private final int id;
@@ -68,7 +68,10 @@ public class WhiteboardModel
 	
 	public void addPostIt(PostItModel postIt)
 	{
-		postIts.put(postItId, postIt);
+		PostItModel addPostIt = new PostItModel(postItId, postIt.getWhiteboardId(),
+				postIt.getAuthor(), postIt.getText(), postIt.getStatus(), postIt.getPosition(),
+				postIt.isRemoved(), postIt.getTimestamp());
+		postIts.put(addPostIt.getId(), addPostIt);
 		postItId += 1;
 		updateTimestamp();
 	}
@@ -87,7 +90,7 @@ public class WhiteboardModel
 	
 	public String encode()
 	{
-		return WhiteboardEncoder.encode(this);
+		return ServerCommunicationModelEncoder.encodeObject(this);
 	}
 	
 }

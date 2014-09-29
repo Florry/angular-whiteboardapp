@@ -2,16 +2,16 @@ package iv.yhc3l.whiteboard.models;
 
 public class ServerCommunicationModel
 {
-	private WhiteboardObjectModel data;
+	private Object data;
 	private String message;
 	
-	public ServerCommunicationModel(WhiteboardObjectModel postit, String message)
+	public ServerCommunicationModel(Object data, String message)
 	{
-		this.data = postit;
+		this.data = data;
 		this.message = message;
 	}
 	
-	public WhiteboardObjectModel getPostit()
+	public Object getData()
 	{
 		return data;
 	}

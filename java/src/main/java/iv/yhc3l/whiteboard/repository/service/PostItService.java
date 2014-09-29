@@ -16,21 +16,21 @@ public class PostItService implements PostItRepository
 	}
 	
 	@Override
-	public void createPostIt(PostItModel postIt, int whiteboardId)
+	public void createPostIt(PostItModel postIt)
 	{
-		whiteboardRepository.getWhiteboard(whiteboardId).addPostIt(postIt);
+		whiteboardRepository.getWhiteboard(postIt.getWhiteboardId()).addPostIt(postIt);
 	}
 	
 	@Override
-	public void updatePostIt(PostItModel postIt, int whiteboardId)
+	public void updatePostIt(PostItModel postIt)
 	{
-		whiteboardRepository.getWhiteboard(whiteboardId).updatePostIt(postIt);
+		whiteboardRepository.getWhiteboard(postIt.getWhiteboardId()).updatePostIt(postIt);
 	}
 	
 	@Override
-	public void removePostIt(PostItModel postIt, int whiteboardId)
+	public void removePostIt(PostItModel postIt)
 	{
-		whiteboardRepository.getWhiteboard(whiteboardId).removePostIt(postIt);
+		whiteboardRepository.getWhiteboard(postIt.getWhiteboardId()).removePostIt(postIt);
 	}
 	
 	@Override

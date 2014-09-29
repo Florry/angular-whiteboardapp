@@ -1,6 +1,6 @@
 package iv.yhc3l.whiteboard.models;
 
-public class PositionModel
+public class PositionModel extends WhiteboardObjectModel
 {
 	public final int x;
 	public final int y;
@@ -9,5 +9,15 @@ public class PositionModel
 	{
 		this.x = x;
 		this.y = y;
+	}
+	
+	public int getX()
+	{
+		return x;
+	}
+	
+	public int getY()
+	{
+		return y;
 	}
 }

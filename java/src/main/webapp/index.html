@@ -18,8 +18,8 @@
 	console.log(url);
 	ws.onopen = function(e) {
 		console.log("connected");
-		var hello = "{\"data\" : {\"id\":195, \"whiteboardId\": 32, \"author\":\"-Viktor-\",\"text\":\"Implementera postit model\",\"status\":\"in progress\",\"position\":{\"x\":499,\"y\":65},\"removed\":false,\"timestamp\":\"2014-09-23 - 9:20\"}, \"message\": \"postit-delete\"}";
-		console.log(JSON.parse(hello));
+		var hello = "{\"data\" : {\"id\":195, \"whiteboardId\": 1, \"author\":\"-ISK-\",\"text\":\"Implementera postit model\",\"status\":\"in progress\",\"position\":{\"x\":499,\"y\":65},\"removed\":false,\"timestamp\":\"2014-09-23 - 9:20\"}, \"message\": \"postit-create\"}";
+
 		ws.send(hello);
 		getAllWhiteboards();
 	};
@@ -33,10 +33,10 @@
 	};
 	
 	ws.onmessage = function(message) {
-		console.log(message);
-		var connections = JSON.parse(message.data);
-		if(parseInt(connections.message)){
-			$("#connections").text(connections.message);
+		console.log(JSON.parse(message.data));
+		var messageObj = JSON.parse(message.data);
+		if(messageObj.message === "connections"){
+			$("#connections").text(messageObj.data.connections);
 		}
 	};
 	

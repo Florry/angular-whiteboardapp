@@ -35,7 +35,6 @@ public class WhiteboardServlet extends HttpServlet
 		{
 			StringBuilder whiteboardsJson = new StringBuilder();
 			whiteboardsJson.append("[");
-			
 			for (int i = 0; i < repository.getAllWhiteboards().size(); i++)
 			{
 				whiteboardsJson.append(repository.getWhiteboard(i).encode());

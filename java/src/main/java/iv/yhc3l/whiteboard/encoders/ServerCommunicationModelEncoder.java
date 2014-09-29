@@ -1,9 +1,14 @@
 package iv.yhc3l.whiteboard.encoders;
 
-import iv.yhc3l.whiteboard.models.PostItModel;
 import iv.yhc3l.whiteboard.models.ServerCommunicationModel;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Map;
+
 import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
 import javax.websocket.EncodeException;
 import javax.websocket.Encoder;
 import javax.websocket.EndpointConfig;
@@ -14,30 +19,7 @@ public class ServerCommunicationModelEncoder implements Encoder.Text<ServerCommu
 	@Override
 	public String encode(ServerCommunicationModel communicationModel) throws EncodeException
 	{
-		if (communicationModel.getPostit() instanceof PostItModel)
-		{
-			PostItModel postit = (PostItModel) communicationModel.getPostit();
-			return Json
-					.createObjectBuilder()
-					.add("data",
-							Json.createObjectBuilder()
-									.add("id", postit.getId())
-									.add("whiteboardId", postit.getWhiteboardId())
-									.add("author", postit.getAuthor())
-									.add("text", postit.getText())
-									.add("status", postit.getStatus())
-									.add("position",
-											Json.createObjectBuilder()
-													.add("x", postit.getPosition().x)
-													.add("y", postit.getPosition().y))
-									.add("removed", postit.isRemoved())
-									.add("timestamp", postit.getTimestamp()))
-					.add("message", communicationModel.getMessage()).build().toString();
-		} else
-		{
-			return Json.createObjectBuilder().add("data", "")
-					.add("message", communicationModel.getMessage()).build().toString();
-		}
+		return encodeObject(communicationModel);
 	}
 	
 	@Override
@@ -47,4 +29,70 @@ public class ServerCommunicationModelEncoder implements Encoder.Text<ServerCommu
 	@Override
 	public void init(EndpointConfig endpointConfig)
 	{}
+	
+	public static String encodeObject(Object objectModel)
+	{
+		return encodeObjectToJson(objectModel).build().toString();
+	}
+	
+	private static JsonObjectBuilder encodeObjectToJson(Object objectModel)
+	{
+		JsonObjectBuilder encoder = Json.createObjectBuilder();
+		if (objectModel != null)
+		{
+			for (Method method : objectModel.getClass().getMethods())
+			{
+				String methodName = method.getName();
+				if ((methodName.startsWith("get") || methodName.startsWith("is"))
+						&& !method.getName().equals("getClass")
+						&& method.getParameterTypes().length == 0)
+				{
+					String name = "";
+					if (methodName.startsWith("is"))
+					{
+						name = method.getName().substring(2).toLowerCase();
+					} else
+					{
+						name = method.getName().substring(3).toLowerCase();
+					}
+					
+					Object methodResponse = null;
+					try
+					{
+						methodResponse = method.invoke(objectModel);
+					} catch (IllegalAccessException | InvocationTargetException
+							| IllegalArgumentException e)
+					{
+						e.printStackTrace();
+					}
+					
+					if (methodResponse instanceof String)
+					{
+						encoder.add(name, (String) methodResponse);
+					} else if (methodResponse instanceof Integer)
+					{
+						encoder.add(name, (Integer) methodResponse);
+					} else if (methodResponse instanceof Boolean)
+					{
+						encoder.add(name, (Boolean) methodResponse);
+					} else if (methodResponse instanceof Map)
+					{
+						JsonArrayBuilder jsonArray = Json.createArrayBuilder();
+						for (Object object : ((Map<?, ?>) methodResponse).keySet())
+						{
+							jsonArray.add(encodeObjectToJson(((Map<?, ?>) methodResponse)
+									.get(object)));
+						}
+						encoder.add(name, jsonArray);
+					} else
+					{
+						JsonObjectBuilder value = encodeObjectToJson(methodResponse);
+						encoder.add(name, value);
+					}
+					
+				}
+			}
+		}
+		return encoder;
+	}
 }
