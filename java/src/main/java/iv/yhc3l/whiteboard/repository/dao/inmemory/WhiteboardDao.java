@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class WhiteboardDao implements WhiteboardRepository
+public final class WhiteboardDao implements WhiteboardRepository
 {
 	private static Map<Integer, WhiteboardModel> whiteboards = Collections
 			.synchronizedMap(new LinkedHashMap<Integer, WhiteboardModel>());

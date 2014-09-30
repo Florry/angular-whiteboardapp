@@ -2,7 +2,7 @@ package iv.yhc3l.whiteboard.models;
 
 import iv.yhc3l.whiteboard.utils.Utils;
 
-public class PostItModel extends WhiteboardObjectModel
+public final class PostItModel
 {
 	private final int id;
 	private final int whiteboardId;
@@ -117,7 +117,7 @@ public class PostItModel extends WhiteboardObjectModel
 	@Override
 	public boolean equals(Object other)
 	{
-		PostItModel otherPostIt = (PostItModel) other;
+		final PostItModel otherPostIt = (PostItModel) other;
 		if (other == this || otherPostIt.getId() == this.getId())
 		{
 			return true;

@@ -1,6 +1,6 @@
 package iv.yhc3l.whiteboard.models;
 
-public class ServerCommunicationModel
+public final class ServerCommunicationModel
 {
 	private Object data;
 	private String message;

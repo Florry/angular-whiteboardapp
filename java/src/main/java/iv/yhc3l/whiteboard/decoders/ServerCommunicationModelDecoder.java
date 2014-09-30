@@ -12,7 +12,8 @@ import javax.websocket.DecodeException;
 import javax.websocket.Decoder;
 import javax.websocket.EndpointConfig;
 
-public class ServerCommunicationModelDecoder implements Decoder.Text<ServerCommunicationModel>
+public final class ServerCommunicationModelDecoder implements
+		Decoder.Text<ServerCommunicationModel>
 {
 	@Override
 	public ServerCommunicationModel decode(String json) throws DecodeException

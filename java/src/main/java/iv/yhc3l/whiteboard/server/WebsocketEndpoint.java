@@ -22,7 +22,7 @@ import javax.websocket.server.ServerEndpoint;
 @ServerEndpoint(value = "/whiteboard", decoders =
 { ServerCommunicationModelDecoder.class }, encoders =
 { ServerCommunicationModelEncoder.class })
-public class WebsocketEndpoint
+public final class WebsocketEndpoint
 {
 	private static final WhiteboardDao wbd = new WhiteboardDao();
 	public static final WhiteboardService whiteboardRepository = new WhiteboardService(wbd);
@@ -39,12 +39,23 @@ public class WebsocketEndpoint
 			whiteboardRepository.createWhiteboard(whiteboard2);
 			whiteboardRepository.createWhiteboard(whiteboard3);
 			
-			PostItModel postit = new PostItModel(1, 1, "hello", "ello there", "in progress",
-					new PositionModel(2, 4), false);
-			
 			for (int i = 0; i < 10; i++)
 			{
-				postItRepository.createPostIt(postit);
+				{
+					PostItModel postit = new PostItModel(1, 1, "hello", "ello there",
+							"in progress", new PositionModel(2, 4), false);
+					postItRepository.createPostIt(postit);
+				}
+				{
+					PostItModel postit = new PostItModel(1, 2, "hello", "ello there",
+							"in progress", new PositionModel(2, 4), false);
+					postItRepository.createPostIt(postit);
+				}
+				{
+					PostItModel postit = new PostItModel(1, 3, "hello", "ello there",
+							"in progress", new PositionModel(2, 4), false);
+					postItRepository.createPostIt(postit);
+				}
 			}
 		}// DEBUG END
 		

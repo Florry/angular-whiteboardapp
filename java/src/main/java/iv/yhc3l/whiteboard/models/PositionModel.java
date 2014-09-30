@@ -1,6 +1,6 @@
 package iv.yhc3l.whiteboard.models;
 
-public class PositionModel extends WhiteboardObjectModel
+public final class PositionModel
 {
 	public final int x;
 	public final int y;

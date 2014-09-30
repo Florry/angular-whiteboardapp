@@ -6,7 +6,7 @@ import iv.yhc3l.whiteboard.repository.WhiteboardRepository;
 
 import java.util.Map;
 
-public class PostItService implements PostItRepository
+public final class PostItService implements PostItRepository
 {
 	private WhiteboardRepository whiteboardRepository;
 	

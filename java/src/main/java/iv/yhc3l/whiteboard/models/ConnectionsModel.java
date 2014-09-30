@@ -1,6 +1,6 @@
 package iv.yhc3l.whiteboard.models;
 
-public class ConnectionsModel extends WhiteboardObjectModel
+public final class ConnectionsModel
 {
 	private int connections;
 	

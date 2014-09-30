@@ -6,7 +6,7 @@ import iv.yhc3l.whiteboard.utils.Utils;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class WhiteboardModel extends WhiteboardObjectModel
+public final class WhiteboardModel
 {
 	
 	private final int id;

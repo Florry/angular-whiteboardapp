@@ -6,7 +6,7 @@ import java.io.StringReader;
 
 import javax.json.Json;
 
-public class WhiteboardDecoder
+public final class WhiteboardDecoder
 {
 	public static WhiteboardModel decode(String json)
 	{

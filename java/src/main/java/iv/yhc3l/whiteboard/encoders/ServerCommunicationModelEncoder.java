@@ -1,5 +1,6 @@
 package iv.yhc3l.whiteboard.encoders;
 
+import iv.yhc3l.whiteboard.models.PostItModel;
 import iv.yhc3l.whiteboard.models.ServerCommunicationModel;
 
 import java.lang.reflect.InvocationTargetException;
@@ -7,13 +8,13 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 import javax.json.Json;
-import javax.json.JsonArrayBuilder;
 import javax.json.JsonObjectBuilder;
 import javax.websocket.EncodeException;
 import javax.websocket.Encoder;
 import javax.websocket.EndpointConfig;
 
-public class ServerCommunicationModelEncoder implements Encoder.Text<ServerCommunicationModel>
+public final class ServerCommunicationModelEncoder implements
+		Encoder.Text<ServerCommunicationModel>
 {
 	
 	@Override
@@ -77,12 +78,13 @@ public class ServerCommunicationModelEncoder implements Encoder.Text<ServerCommu
 						encoder.add(name, (Boolean) methodResponse);
 					} else if (methodResponse instanceof Map)
 					{
-						JsonArrayBuilder jsonArray = Json.createArrayBuilder();
+						JsonObjectBuilder value = Json.createObjectBuilder();
 						for (Object object : ((Map<?, ?>) methodResponse).values())
 						{
-							jsonArray.add(encodeObjectToJson(object));
+							value.add(((PostItModel) object).getId() + "",
+									encodeObjectToJson(object));
 						}
-						encoder.add(name, jsonArray);
+						encoder.add(name, value);
 					} else
 					{
 						JsonObjectBuilder value = encodeObjectToJson(methodResponse);

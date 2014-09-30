@@ -5,7 +5,7 @@ import iv.yhc3l.whiteboard.repository.WhiteboardRepository;
 
 import java.util.Map;
 
-public class WhiteboardService
+public final class WhiteboardService
 {
 	WhiteboardRepository whiteboardRepository;
 	
