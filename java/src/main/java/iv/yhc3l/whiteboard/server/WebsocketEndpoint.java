@@ -39,8 +39,8 @@ public final class WebsocketEndpoint
 				once = false;
 				WhiteboardModel whiteboard = new WhiteboardModel(-1, "bob");
 				WhiteboardModel whiteboard2 = new WhiteboardModel(-1, "bob2");
-				Message.whiteboardRepository.createWhiteboard(whiteboard);
-				Message.whiteboardRepository.createWhiteboard(whiteboard2);
+				Message.getWhiteboardrepository().createWhiteboard(whiteboard);
+				Message.getWhiteboardrepository().createWhiteboard(whiteboard2);
 			}
 		}// DEBUG END
 		

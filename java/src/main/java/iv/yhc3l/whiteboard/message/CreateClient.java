@@ -2,6 +2,7 @@ package iv.yhc3l.whiteboard.message;
 
 import iv.yhc3l.whiteboard.message.utils.MessageUtils;
 import iv.yhc3l.whiteboard.models.ClientModel;
+import iv.yhc3l.whiteboard.models.ServerCommunicationModel;
 
 import javax.websocket.Session;
 
@@ -17,6 +18,8 @@ public class CreateClient extends Message
 	{
 		ClientModel client = new ClientModel(session);
 		clientRepository.addClient(client);
-		MessageUtils.sendMessage(client.getSession(), client);
+		
+		ServerCommunicationModel response = new ServerCommunicationModel(client, "client-added");
+		MessageUtils.sendMessage(client.getSession(), response);
 	}
 }

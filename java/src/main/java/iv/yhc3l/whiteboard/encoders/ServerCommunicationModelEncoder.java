@@ -46,6 +46,7 @@ public final class ServerCommunicationModelEncoder implements
 				String methodName = method.getName();
 				if ((methodName.startsWith("get") || methodName.startsWith("is"))
 						&& !method.getName().equals("getClass")
+						&& !method.getName().equals("getSession")
 						&& method.getParameterTypes().length == 0)
 				{
 					String name = "";

@@ -12,7 +12,7 @@ public abstract class Message
 {
 	private static final WhiteboardDao wbDao = new WhiteboardDao();
 	private static final ClientDao clDao = new ClientDao();
-	public static final WhiteboardService whiteboardRepository = new WhiteboardService(wbDao);
+	private static final WhiteboardService whiteboardRepository = new WhiteboardService(wbDao);
 	protected static final PostItService postItRepository = new PostItService(wbDao);
 	protected static final ClientService clientRepository = new ClientService(clDao);
 	
@@ -28,4 +28,9 @@ public abstract class Message
 	
 	public void run(Session session, Object data)
 	{}
+
+	public static WhiteboardService getWhiteboardrepository()
+	{
+		return whiteboardRepository;
+	}
 }

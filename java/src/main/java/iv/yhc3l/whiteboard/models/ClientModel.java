@@ -10,6 +10,7 @@ public final class ClientModel
 	public ClientModel(Session session)
 	{
 		this.session = session;
+		this.whiteboardId = -1;
 	}
 	
 	public ClientModel(ClientModel client)
