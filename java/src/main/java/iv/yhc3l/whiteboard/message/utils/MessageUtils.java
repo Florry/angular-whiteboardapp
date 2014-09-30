@@ -14,4 +14,10 @@ public final class MessageUtils
 			}
 		}
 	}
+	
+	public static void sendMessage(Session session, Object data)
+	{
+		session.getAsyncRemote().sendObject(data);
+		
+	}
 }

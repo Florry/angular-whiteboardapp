@@ -2,12 +2,13 @@ package iv.yhc3l.whiteboard.server;
 
 import iv.yhc3l.whiteboard.decoders.ServerCommunicationModelDecoder;
 import iv.yhc3l.whiteboard.encoders.ServerCommunicationModelEncoder;
-import iv.yhc3l.whiteboard.message.utils.Create;
-import iv.yhc3l.whiteboard.message.utils.Message;
-import iv.yhc3l.whiteboard.message.utils.MessageHandler;
+import iv.yhc3l.whiteboard.message.CreateClient;
+import iv.yhc3l.whiteboard.message.CreatePostIt;
+import iv.yhc3l.whiteboard.message.Message;
+import iv.yhc3l.whiteboard.message.MessageHandler;
+import iv.yhc3l.whiteboard.message.RemovePostIt;
+import iv.yhc3l.whiteboard.message.UpdatePostIt;
 import iv.yhc3l.whiteboard.message.utils.MessageUtils;
-import iv.yhc3l.whiteboard.message.utils.Remove;
-import iv.yhc3l.whiteboard.message.utils.Update;
 import iv.yhc3l.whiteboard.models.ConnectionsModel;
 import iv.yhc3l.whiteboard.models.ServerCommunicationModel;
 import iv.yhc3l.whiteboard.models.WhiteboardModel;
@@ -25,8 +26,8 @@ import javax.websocket.server.ServerEndpoint;
 { ServerCommunicationModelEncoder.class })
 public final class WebsocketEndpoint
 {
-	private static MessageHandler messageHandler = new MessageHandler(new Create(), new Update(),
-			new Remove());
+	private static MessageHandler messageHandler = new MessageHandler(new CreatePostIt(),
+			new UpdatePostIt(), new RemovePostIt(), new CreateClient());
 	private static boolean once = true;
 	
 	@OnOpen

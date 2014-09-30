@@ -1,16 +1,17 @@
-package iv.yhc3l.whiteboard.message.utils;
+package iv.yhc3l.whiteboard.message;
 
 import iv.yhc3l.whiteboard.models.PostItModel;
 import iv.yhc3l.whiteboard.models.ServerCommunicationModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.websocket.Session;
 
 public final class MessageHandler
 {
-	private List<Message> messageTypes = new ArrayList<Message>();
+	private List<Message> messageTypes = Collections.synchronizedList(new ArrayList<Message>());
 	
 	public MessageHandler(Message... messages)
 	{
