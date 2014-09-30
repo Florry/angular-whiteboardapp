@@ -5,7 +5,6 @@ angular.module('whiteboardApp')
 		$scope.whiteboards = [];
 
 		(function () {
-			CRUDFactory.setMode('menu');
 			CRUDFactory.read(function (data) {
 				console.log(data);
 				$scope.whiteboards = data;

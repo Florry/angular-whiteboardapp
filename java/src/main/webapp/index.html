@@ -19,8 +19,14 @@
 	ws.onopen = function(e) {
 		console.log("connected");
 		var hello = "{\"data\" : {\"id\":195, \"whiteboardId\": 1, \"author\":\"-ISK-\",\"text\":\"Implementera postit model\",\"status\":\"in progress\",\"position\":{\"x\":499,\"y\":65},\"removed\":false,\"timestamp\":\"2014-09-23 - 9:20\"}, \"message\": \"postit-create\"}";
-
 		ws.send(hello);
+		var hello2 = "{\"data\" : {\"id\":0, \"whiteboardId\": 1, \"author\":\"-ISK-\",\"text\":\"Implementera postit2 model\",\"status\":\"in progress\",\"position\":{\"x\":499,\"y\":65},\"removed\":false,\"timestamp\":\"2014-09-23 - 9:20\"}, \"message\": \"postit-update\"}";
+		ws.send(hello2);
+		console.log(hello2);
+		var hello3 = "{\"data\" : {\"id\":0, \"whiteboardId\": 1, \"author\":\"-ISK-\",\"text\":\"Implementera postit model\",\"status\":\"in progress\",\"position\":{\"x\":499,\"y\":65},\"removed\":false,\"timestamp\":\"2014-09-23 - 9:20\"}, \"message\": \"postit-remove\"}";
+		ws.send(hello3);
+		
+		console.log(hello3);
 		getAllWhiteboards();
 	};
 	

@@ -1,6 +1,7 @@
 package iv.yhc3l.whiteboard.server;
 
 import iv.yhc3l.whiteboard.decoders.WhiteboardDecoder;
+import iv.yhc3l.whiteboard.message.utils.Message;
 import iv.yhc3l.whiteboard.models.WhiteboardModel;
 import iv.yhc3l.whiteboard.repository.service.WhiteboardService;
 
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 public final class WhiteboardServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
-	public static WhiteboardService repository = WebsocketEndpoint.whiteboardRepository;
+	public static WhiteboardService repository = Message.whiteboardRepository;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
