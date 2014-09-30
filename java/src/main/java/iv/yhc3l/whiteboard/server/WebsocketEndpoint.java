@@ -2,12 +2,12 @@ package iv.yhc3l.whiteboard.server;
 
 import iv.yhc3l.whiteboard.decoders.ServerCommunicationModelDecoder;
 import iv.yhc3l.whiteboard.encoders.ServerCommunicationModelEncoder;
-import iv.yhc3l.whiteboard.message.utils.Create;
-import iv.yhc3l.whiteboard.message.utils.Message;
-import iv.yhc3l.whiteboard.message.utils.MessageHandler;
+import iv.yhc3l.whiteboard.message.Create;
+import iv.yhc3l.whiteboard.message.Message;
+import iv.yhc3l.whiteboard.message.MessageHandler;
+import iv.yhc3l.whiteboard.message.Remove;
+import iv.yhc3l.whiteboard.message.Update;
 import iv.yhc3l.whiteboard.message.utils.MessageUtils;
-import iv.yhc3l.whiteboard.message.utils.Remove;
-import iv.yhc3l.whiteboard.message.utils.Update;
 import iv.yhc3l.whiteboard.models.ConnectionsModel;
 import iv.yhc3l.whiteboard.models.ServerCommunicationModel;
 import iv.yhc3l.whiteboard.models.WhiteboardModel;

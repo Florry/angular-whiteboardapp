@@ -1,4 +1,4 @@
-package iv.yhc3l.whiteboard.message.utils;
+package iv.yhc3l.whiteboard.message;
 
 import iv.yhc3l.whiteboard.models.PostItModel;
 import iv.yhc3l.whiteboard.repository.dao.inmemory.WhiteboardDao;
