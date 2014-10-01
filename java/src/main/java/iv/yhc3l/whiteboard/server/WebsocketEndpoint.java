@@ -7,6 +7,7 @@ import iv.yhc3l.whiteboard.message.CreatePostIt;
 import iv.yhc3l.whiteboard.message.Message;
 import iv.yhc3l.whiteboard.message.MessageHandler;
 import iv.yhc3l.whiteboard.message.RemovePostIt;
+import iv.yhc3l.whiteboard.message.UpdateClient;
 import iv.yhc3l.whiteboard.message.UpdatePostIt;
 import iv.yhc3l.whiteboard.message.utils.MessageUtils;
 import iv.yhc3l.whiteboard.models.ConnectionsModel;
@@ -27,7 +28,7 @@ import javax.websocket.server.ServerEndpoint;
 public final class WebsocketEndpoint
 {
 	private static MessageHandler messageHandler = new MessageHandler(new CreatePostIt(),
-			new UpdatePostIt(), new RemovePostIt(), new CreateClient());
+			new UpdatePostIt(), new RemovePostIt(), new CreateClient(), new UpdateClient());
 	private static boolean once = true;
 	
 	@OnOpen
@@ -47,7 +48,6 @@ public final class WebsocketEndpoint
 		ServerCommunicationModel message = new ServerCommunicationModel(new ConnectionsModel(
 				session.getOpenSessions().size()), "connections");
 		MessageUtils.sendMessageToAll(session, message, true);
-		
 	}
 	
 	@OnMessage
