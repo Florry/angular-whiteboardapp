@@ -2,6 +2,7 @@ package iv.yhc3l.whiteboard.server;
 
 import iv.yhc3l.whiteboard.decoders.ServerCommunicationModelDecoder;
 import iv.yhc3l.whiteboard.encoders.ServerCommunicationModelEncoder;
+import iv.yhc3l.whiteboard.message.Connections;
 import iv.yhc3l.whiteboard.message.Message;
 import iv.yhc3l.whiteboard.message.MessageHandler;
 import iv.yhc3l.whiteboard.message.client.CreateClient;
@@ -10,8 +11,6 @@ import iv.yhc3l.whiteboard.message.client.UpdateClient;
 import iv.yhc3l.whiteboard.message.postit.CreatePostIt;
 import iv.yhc3l.whiteboard.message.postit.RemovePostIt;
 import iv.yhc3l.whiteboard.message.postit.UpdatePostIt;
-import iv.yhc3l.whiteboard.message.utils.MessageUtils;
-import iv.yhc3l.whiteboard.models.ConnectionsModel;
 import iv.yhc3l.whiteboard.models.ServerCommunicationModel;
 import iv.yhc3l.whiteboard.models.WhiteboardModel;
 
@@ -30,7 +29,8 @@ public final class WebsocketEndpoint
 {
 	private static MessageHandler messageHandler = new MessageHandler(new CreatePostIt(),
 			new UpdatePostIt(), new RemovePostIt(), new CreateClient(), new UpdateClient(),
-			new RemoveClient());
+			new RemoveClient(), new Connections());
+	
 	private static boolean once = true;
 	
 	@OnOpen
@@ -46,11 +46,7 @@ public final class WebsocketEndpoint
 				Message.getWhiteboardrepository().createWhiteboard(whiteboard2);
 			}
 		}// DEBUG END
-		
-		ServerCommunicationModel message = new ServerCommunicationModel(new ConnectionsModel(
-				session.getOpenSessions().size()), "connections");
-		System.out.println("Websocket is open!!!");
-		MessageUtils.sendMessageToAll(session, message, true);
+		messageHandler.onOpen(session);
 	}
 	
 	@OnMessage
@@ -64,12 +60,19 @@ public final class WebsocketEndpoint
 	{
 		System.out.println("Session: " + session.getId() + " disconnected, reason: "
 				+ reason.getReasonPhrase());
+		messageHandler.onClose(session);
 	}
 	
 	@OnError
 	public void whiteboardOnError(Session session, Throwable throwable)
 	{
 		System.err.println(throwable.getLocalizedMessage());
+		messageHandler.onError(session);
+	}
+	
+	public static MessageHandler getMessageHandler()
+	{
+		return messageHandler;
 	}
 	
 }

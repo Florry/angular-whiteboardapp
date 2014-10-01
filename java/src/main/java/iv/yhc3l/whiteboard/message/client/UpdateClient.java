@@ -5,6 +5,7 @@ import iv.yhc3l.whiteboard.message.utils.MessageUtils;
 import iv.yhc3l.whiteboard.models.ClientMessageModel;
 import iv.yhc3l.whiteboard.models.ClientModel;
 import iv.yhc3l.whiteboard.models.ServerCommunicationModel;
+import iv.yhc3l.whiteboard.server.WebsocketEndpoint;
 import iv.yhc3l.whiteboard.utils.Utils;
 
 import javax.websocket.Session;
@@ -21,11 +22,24 @@ public class UpdateClient extends Message
 	{
 		Utils.println(this);
 		
-		ClientModel client = new ClientModel(session);
-		client.setWhiteboardId(((ClientMessageModel) data).getWhiteboardId());
-		clientRepository.updateClient(client);
+		ClientMessageModel message = (ClientMessageModel) data;
 		
-		ServerCommunicationModel response = new ServerCommunicationModel(client, "client-updated");
-		MessageUtils.sendMessage(client.getSession(), response);
+		if (whiteboardRepository.getWhiteboard(message.getWhiteboardId()) != null)
+		{
+			ClientModel client = new ClientModel(session);
+			client.setWhiteboardId(((ClientMessageModel) data).getWhiteboardId());
+			clientRepository.updateClient(client);
+			
+			ServerCommunicationModel response = new ServerCommunicationModel(client,
+					"client-updated");
+			MessageUtils.sendMessage(client.getSession(), response);
+			
+			ServerCommunicationModel response2 = new ServerCommunicationModel(client,
+					"connections-new");
+			
+			// TODO - FIXA
+			WebsocketEndpoint.getMessageHandler().handle(session, response2);
+		}
 	}
+	
 }

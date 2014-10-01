@@ -31,4 +31,26 @@ public final class MessageHandler
 			}
 		}
 	}
+	
+	public void onOpen(Session session)
+	{
+		ServerCommunicationModel clientMessage = new ServerCommunicationModel(null, "client-create");
+		handle(session, clientMessage);
+	}
+	
+	public void onClose(Session session)
+	{
+		removeClient(session);
+	}
+	
+	public void onError(Session session)
+	{
+		removeClient(session);
+	}
+	
+	public void removeClient(Session session)
+	{
+		ServerCommunicationModel clientMessage = new ServerCommunicationModel(null, "client-remove");
+		handle(session, clientMessage);
+	}
 }
