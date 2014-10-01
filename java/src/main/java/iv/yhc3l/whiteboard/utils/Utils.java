@@ -12,4 +12,9 @@ public final class Utils
 		String formattedDate = formatter.format(date);
 		return formattedDate;
 	}
+	
+	public static void println(Object obj)
+	{
+		System.out.println(obj.getClass().getSimpleName() + " says hello");
+	}
 }

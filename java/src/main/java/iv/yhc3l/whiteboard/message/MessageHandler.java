@@ -1,6 +1,5 @@
 package iv.yhc3l.whiteboard.message;
 
-import iv.yhc3l.whiteboard.models.PostItModel;
 import iv.yhc3l.whiteboard.models.ServerCommunicationModel;
 
 import java.util.ArrayList;
@@ -23,12 +22,12 @@ public final class MessageHandler
 	
 	public void handle(Session session, ServerCommunicationModel msg)
 	{
-		PostItModel postIt = new PostItModel((PostItModel) msg.getData());
+		Object data = msg.getData();
 		for (Message message : messageTypes)
 		{
 			if (message.getMessage().equals(msg.getMessage()))
 			{
-				message.run(session, postIt);
+				message.run(session, data);
 			}
 		}
 	}
