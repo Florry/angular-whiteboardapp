@@ -2,13 +2,14 @@ package iv.yhc3l.whiteboard.server;
 
 import iv.yhc3l.whiteboard.decoders.ServerCommunicationModelDecoder;
 import iv.yhc3l.whiteboard.encoders.ServerCommunicationModelEncoder;
-import iv.yhc3l.whiteboard.message.CreateClient;
-import iv.yhc3l.whiteboard.message.CreatePostIt;
 import iv.yhc3l.whiteboard.message.Message;
 import iv.yhc3l.whiteboard.message.MessageHandler;
-import iv.yhc3l.whiteboard.message.RemovePostIt;
-import iv.yhc3l.whiteboard.message.UpdateClient;
-import iv.yhc3l.whiteboard.message.UpdatePostIt;
+import iv.yhc3l.whiteboard.message.client.CreateClient;
+import iv.yhc3l.whiteboard.message.client.RemoveClient;
+import iv.yhc3l.whiteboard.message.client.UpdateClient;
+import iv.yhc3l.whiteboard.message.postit.CreatePostIt;
+import iv.yhc3l.whiteboard.message.postit.RemovePostIt;
+import iv.yhc3l.whiteboard.message.postit.UpdatePostIt;
 import iv.yhc3l.whiteboard.message.utils.MessageUtils;
 import iv.yhc3l.whiteboard.models.ConnectionsModel;
 import iv.yhc3l.whiteboard.models.ServerCommunicationModel;
@@ -28,7 +29,8 @@ import javax.websocket.server.ServerEndpoint;
 public final class WebsocketEndpoint
 {
 	private static MessageHandler messageHandler = new MessageHandler(new CreatePostIt(),
-			new UpdatePostIt(), new RemovePostIt(), new CreateClient(), new UpdateClient());
+			new UpdatePostIt(), new RemovePostIt(), new CreateClient(), new UpdateClient(),
+			new RemoveClient());
 	private static boolean once = true;
 	
 	@OnOpen

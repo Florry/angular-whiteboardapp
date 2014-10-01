@@ -1,5 +1,6 @@
-package iv.yhc3l.whiteboard.message;
+package iv.yhc3l.whiteboard.message.client;
 
+import iv.yhc3l.whiteboard.message.Message;
 import iv.yhc3l.whiteboard.message.utils.MessageUtils;
 import iv.yhc3l.whiteboard.models.ClientMessageModel;
 import iv.yhc3l.whiteboard.models.ClientModel;
