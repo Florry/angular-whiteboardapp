@@ -26,6 +26,10 @@ public class UpdateClient extends Message
 		
 		if (whiteboardRepository.getWhiteboard(message.getWhiteboardId()) != null)
 		{
+			ClientModel oldClient = new ClientModel(session);
+			oldClient
+					.setWhiteboardId(clientRepository.getClient(session.getId()).getWhiteboardId());
+			
 			ClientModel client = new ClientModel(session);
 			client.setWhiteboardId(((ClientMessageModel) data).getWhiteboardId());
 			clientRepository.updateClient(client);
@@ -34,7 +38,7 @@ public class UpdateClient extends Message
 					"client-updated");
 			MessageUtils.sendMessage(client.getSession(), response);
 			
-			ServerCommunicationModel response2 = new ServerCommunicationModel(client,
+			ServerCommunicationModel response2 = new ServerCommunicationModel(oldClient,
 					"connections-new");
 			
 			// TODO - FIXA

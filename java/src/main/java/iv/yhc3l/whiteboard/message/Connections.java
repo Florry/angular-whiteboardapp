@@ -21,18 +21,33 @@ public class Connections extends Message
 		Utils.println(this);
 		
 		ClientModel client = (ClientModel) data;
-		int openSessionsOnBoard = getSessionCount(client);
 		
+		int newWhiteboardId = new Integer(clientRepository.getClient(client.getId())
+				.getWhiteboardId());
+		int lastWhiteboardId = client.getWhiteboardId();
+		
+		System.out.println("LAst ID: " + lastWhiteboardId + "  newId: " + newWhiteboardId);
+		
+		int openSessionsOnBoard = getSessionCount(newWhiteboardId);
 		ConnectionsModel connectionsModel = new ConnectionsModel(openSessionsOnBoard);
 		ServerCommunicationModel connectionResponse = new ServerCommunicationModel(
 				connectionsModel, "connections-new");
+		sendMessageToWhiteboardClients(newWhiteboardId, connectionResponse);
 		
+		openSessionsOnBoard = getSessionCount(lastWhiteboardId);
+		connectionsModel = new ConnectionsModel(openSessionsOnBoard);
+		connectionResponse = new ServerCommunicationModel(connectionsModel, "connections-new");
+		sendMessageToWhiteboardClients(lastWhiteboardId, connectionResponse);
+	}
+	
+	private void sendMessageToWhiteboardClients(int whiteboardId,
+			ServerCommunicationModel connectionResponse)
+	{
 		for (ClientModel clientModel : clientRepository.getAllClients().values())
 		{
 			if (clientModel.getSession().isOpen())
 			{
-				System.out.println(clientModel.getWhiteboardId() + " " + client.getWhiteboardId());
-				if (clientModel.getWhiteboardId() == client.getWhiteboardId())
+				if (clientModel.getWhiteboardId() == whiteboardId)
 				{
 					MessageUtils.sendMessage(clientModel.getSession(), connectionResponse);
 				}
@@ -40,12 +55,12 @@ public class Connections extends Message
 		}
 	}
 	
-	private int getSessionCount(ClientModel client)
+	private int getSessionCount(int whiteboardId)
 	{
 		int openSessionsOnBoard = 0;
 		for (ClientModel clientModel : clientRepository.getAllClients().values())
 		{
-			if (clientModel.getWhiteboardId() == client.getWhiteboardId())
+			if (clientModel.getWhiteboardId() == whiteboardId)
 			{
 				if (clientModel.getSession().isOpen())
 				{
