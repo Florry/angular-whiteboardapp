@@ -47,6 +47,7 @@ public final class WebsocketEndpoint
 		
 		ServerCommunicationModel message = new ServerCommunicationModel(new ConnectionsModel(
 				session.getOpenSessions().size()), "connections");
+		System.out.println("Websocket is open!!!");
 		MessageUtils.sendMessageToAll(session, message, true);
 	}
 	
