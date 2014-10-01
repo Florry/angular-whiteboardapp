@@ -20,9 +20,11 @@ public final class RemovePostIt extends Message
 		{
 			PostItModel postIt = new PostItModel((PostItModel) data);
 			postItRepository.removePostIt(postIt);
+			
 			ServerCommunicationModel response = new ServerCommunicationModel(postIt,
-					"postit-deleted");
-			MessageUtils.sendMessageToAll(session, response, false);
+					"postit-removed");
+			MessageUtils.sendPostItMessageToBoard(session, clientRepository.getAllClients(),
+					response, false);
 		}
 	}
 	

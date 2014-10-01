@@ -45,7 +45,6 @@ public final class ServerCommunicationModelDecoder implements
 			
 			PostItModel postIt = new PostItModel(id, whiteboardId, author, text, status, position,
 					removed, timestamp);
-			
 			return new ServerCommunicationModel(postIt, messageString);
 			
 		} else if (messageString.contains("client"))
@@ -54,6 +53,7 @@ public final class ServerCommunicationModelDecoder implements
 			ClientMessageModel clientMessage = new ClientMessageModel(whiteboardId);
 			return new ServerCommunicationModel(clientMessage, messageString);
 		}
+		
 		return null;
 	}
 	

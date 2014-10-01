@@ -20,11 +20,14 @@ public class CreatePostIt extends Message
 		if (data instanceof PostItModel)
 		{
 			Utils.println(this);
+			
 			PostItModel postIt = new PostItModel((PostItModel) data);
 			postItRepository.createPostIt(postIt);
+			
 			ServerCommunicationModel response = new ServerCommunicationModel(postIt,
 					"postit-created");
-			MessageUtils.sendMessageToAll(session, response, false);
+			MessageUtils.sendPostItMessageToBoard(session, clientRepository.getAllClients(),
+					response, false);
 		}
 	}
 }

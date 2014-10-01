@@ -11,6 +11,12 @@ public final class ServerCommunicationModel
 		this.message = message;
 	}
 	
+	public ServerCommunicationModel(ServerCommunicationModel communicationModel)
+	{
+		this.data = communicationModel.getData();
+		this.message = communicationModel.getMessage();
+	}
+	
 	public Object getData()
 	{
 		return data;

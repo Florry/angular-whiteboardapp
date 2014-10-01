@@ -20,9 +20,11 @@ public class UpdatePostIt extends Message
 		{
 			PostItModel postIt = new PostItModel((PostItModel) data);
 			postItRepository.updatePostIt(postIt);
+			
 			ServerCommunicationModel response = new ServerCommunicationModel(postIt,
 					"postit-updated");
-			MessageUtils.sendMessageToAll(session, response, false);
+			MessageUtils.sendPostItMessageToBoard(session, clientRepository.getAllClients(),
+					response, false);
 		}
 	}
 	

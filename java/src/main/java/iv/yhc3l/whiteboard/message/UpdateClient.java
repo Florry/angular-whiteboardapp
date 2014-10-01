@@ -25,6 +25,6 @@ public class UpdateClient extends Message
 		clientRepository.updateClient(client);
 		
 		ServerCommunicationModel response = new ServerCommunicationModel(client, "client-updated");
-		MessageUtils.sendMessageToAll(client.getSession(), response, false);
+		MessageUtils.sendMessage(client.getSession(), response);
 	}
 }
