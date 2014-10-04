@@ -7,7 +7,7 @@ import iv.yhc3l.whiteboard.models.ServerCommunicationModel;
 
 import javax.websocket.Session;
 
-public class CreateClient extends Message
+public final class CreateClient extends Message
 {
 	public CreateClient()
 	{

@@ -1,16 +1,9 @@
 package iv.yhc3l.whiteboard.server;
 
+import iv.yhc3l.whiteboard.app.App;
 import iv.yhc3l.whiteboard.decoders.ServerCommunicationModelDecoder;
 import iv.yhc3l.whiteboard.encoders.ServerCommunicationModelEncoder;
-import iv.yhc3l.whiteboard.message.Connections;
-import iv.yhc3l.whiteboard.message.Message;
 import iv.yhc3l.whiteboard.message.MessageHandler;
-import iv.yhc3l.whiteboard.message.client.CreateClient;
-import iv.yhc3l.whiteboard.message.client.RemoveClient;
-import iv.yhc3l.whiteboard.message.client.UpdateClient;
-import iv.yhc3l.whiteboard.message.postit.CreatePostIt;
-import iv.yhc3l.whiteboard.message.postit.RemovePostIt;
-import iv.yhc3l.whiteboard.message.postit.UpdatePostIt;
 import iv.yhc3l.whiteboard.models.ServerCommunicationModel;
 import iv.yhc3l.whiteboard.models.WhiteboardModel;
 
@@ -27,9 +20,7 @@ import javax.websocket.server.ServerEndpoint;
 { ServerCommunicationModelEncoder.class })
 public final class WebsocketEndpoint
 {
-	private static MessageHandler messageHandler = new MessageHandler(new CreatePostIt(),
-			new UpdatePostIt(), new RemovePostIt(), new CreateClient(), new UpdateClient(),
-			new RemoveClient(), new Connections());
+	private static MessageHandler messageHandler = App.messageHandler;
 	
 	private static boolean once = true;
 	
@@ -42,8 +33,8 @@ public final class WebsocketEndpoint
 				once = false;
 				WhiteboardModel whiteboard = new WhiteboardModel(-1, "bob");
 				WhiteboardModel whiteboard2 = new WhiteboardModel(-1, "bob2");
-				Message.getWhiteboardrepository().createWhiteboard(whiteboard);
-				Message.getWhiteboardrepository().createWhiteboard(whiteboard2);
+				App.whiteboardRepository.createWhiteboard(whiteboard);
+				App.whiteboardRepository.createWhiteboard(whiteboard2);
 			}
 		}// DEBUG END
 		messageHandler.onOpen(session);

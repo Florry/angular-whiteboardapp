@@ -7,7 +7,7 @@ import iv.yhc3l.whiteboard.models.ServerCommunicationModel;
 
 import javax.websocket.Session;
 
-public class UpdatePostIt extends Message
+public final class UpdatePostIt extends Message
 {
 	public UpdatePostIt()
 	{

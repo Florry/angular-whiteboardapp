@@ -7,7 +7,7 @@ import iv.yhc3l.whiteboard.models.ServerCommunicationModel;
 
 import javax.websocket.Session;
 
-public class RemoveClient extends Message
+public final class RemoveClient extends Message
 {
 	public RemoveClient()
 	{

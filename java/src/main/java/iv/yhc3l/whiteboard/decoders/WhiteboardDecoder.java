@@ -10,8 +10,9 @@ public final class WhiteboardDecoder
 {
 	public static WhiteboardModel decode(String json)
 	{
-		int id = Json.createReader(new StringReader(json)).readObject().getInt("id");
-		String name = Json.createReader(new StringReader(json)).readObject().getString("name");
+		final int id = Json.createReader(new StringReader(json)).readObject().getInt("id");
+		final String name = Json.createReader(new StringReader(json)).readObject()
+				.getString("name");
 		
 		return new WhiteboardModel(id, name);
 	}

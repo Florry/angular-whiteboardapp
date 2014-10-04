@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ClientDao implements ClientRepository
+public final class ClientDao implements ClientRepository
 {
 	
 	private static Map<String, ClientModel> clients = Collections

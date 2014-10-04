@@ -10,7 +10,7 @@ import iv.yhc3l.whiteboard.utils.Utils;
 
 import javax.websocket.Session;
 
-public class UpdateClient extends Message
+public final class UpdateClient extends Message
 {
 	public UpdateClient()
 	{

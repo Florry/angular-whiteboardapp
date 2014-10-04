@@ -5,7 +5,7 @@ import iv.yhc3l.whiteboard.repository.ClientRepository;
 
 import java.util.Map;
 
-public class ClientService implements ClientRepository
+public final class ClientService implements ClientRepository
 {
 	private ClientRepository clientRepository;
 	

@@ -1,6 +1,6 @@
 package iv.yhc3l.whiteboard.models;
 
-public class ClientMessageModel
+public final class ClientMessageModel
 {
 	private int whiteboardId;
 	

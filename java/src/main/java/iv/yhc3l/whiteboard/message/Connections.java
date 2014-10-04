@@ -8,7 +8,7 @@ import iv.yhc3l.whiteboard.utils.Utils;
 
 import javax.websocket.Session;
 
-public class Connections extends Message
+public final class Connections extends Message
 {
 	public Connections()
 	{
