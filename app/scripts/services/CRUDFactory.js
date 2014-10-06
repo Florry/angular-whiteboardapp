@@ -37,9 +37,15 @@ angular.module('whiteboardApp')
 				$http.delete(URL + '/' + postIt);
 				console.log(postIt + ' was deleted from the server');
 			},
-			readWhiteboard: function () {
-				$http.get(whteboardUrl + '/').success(function (data) {
+			readWhiteboard: function (callback) {
+				$http.get(whteboardUrl).success(function (data) {
 					callback(data);
+				});
+			},
+			deleteWhiteboard: function (whiteboardId, callback) {
+				$http.delete(whteboardUrl + '?id=' + whiteboardId).success(function () {
+					console.log('Whiteboard was removed');
+					callback();
 				});
 			}
 		};
