@@ -48,6 +48,7 @@ public final class WhiteboardServlet extends HttpServlet
 				}
 			}
 			whiteboardsJson.append("]");
+			
 			out.write(whiteboardsJson.toString());
 		}
 	}
@@ -95,7 +96,7 @@ public final class WhiteboardServlet extends HttpServlet
 		repository.updateWhiteboard(whiteboard.getId(), whiteboard.getName());
 	}
 	
-	protected void doDelete(HttpServletRequest request, HttpServletResponse resp)
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 	{
 		StringBuffer stringBuffer = new StringBuffer();
 		String line = null;
@@ -116,5 +117,20 @@ public final class WhiteboardServlet extends HttpServlet
 				whiteboard.getName());
 		
 		repository.removeWhiteboard(newWhiteboard.getId());
+	}
+	
+	protected void doOptions(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException
+	{
+		addResponseHeaders(response);
+	}
+	
+	public void addResponseHeaders(HttpServletResponse response)
+	{
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE");
+		response.addHeader("Access-Control-Allow-Headers",
+				"X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
+		response.addHeader("Access-Control-Max-Age", "1728000");
 	}
 }
