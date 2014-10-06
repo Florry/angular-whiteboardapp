@@ -7,11 +7,9 @@ angular.module('whiteboardApp')
 		// R GET OBJ FROM URL http://api.beta2.se/wb-div-postits
 		// U PUT OBJ TO URL http://api.beta2.se/wb-div-postits/:id
 		// D DELETE OBJ TO URL http://api.beta2.se/wb-div-postits/:id
-		var whiteboardId = $routeParams.whiteboardId,
-			httpWhiteboard = 'http://api.beta2.se/wb-div-v-vg-',
-			httpWhiteboards = 'http://api.beta2.se/wb-div-v-vg-menu',
-			http = httpWhiteboard,
-			URL = http + whiteboardId;
+
+		var url = 'ws://' + 'localhost:8080' + '/ng-whiteboard-app-websocket/whiteboard',
+			ws = new WebSocket(url);
 
 		return {
 			//C
@@ -37,27 +35,6 @@ angular.module('whiteboardApp')
 			deletePostIt: function (postIt) {
 				$http.delete(URL + '/' + postIt);
 				console.log(postIt + ' was deleted from the server');
-			},
-			setMode: function (mode) {
-				switch (mode) {
-				case 'menu':
-					http = httpWhiteboards;
-					URL = http;
-					// console.log(http);
-					break;
-				case 'whiteboard':
-					whiteboardId = $routeParams.whiteboardId;
-					URL = httpWhiteboard + whiteboardId;
-					// console.log(whiteboardId);
-					break;
-				default:
-				}
-			},
-			getWhiteBoardName: function (id, callback) {
-				console.log('getting whiteboard with name ' + id);
-				$http.get(httpWhiteboards).success(function (data) {
-					callback(data);
-				});
 			}
 		};
 	});

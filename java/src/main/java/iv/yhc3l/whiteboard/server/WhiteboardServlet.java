@@ -74,6 +74,27 @@ public final class WhiteboardServlet extends HttpServlet
 		repository.createWhiteboard(newWhiteboard);
 	}
 	
+	protected void doPut(HttpServletRequest request, HttpServletResponse response)
+	{
+		StringBuffer stringBuffer = new StringBuffer();
+		String line = null;
+		try
+		{
+			BufferedReader reader = request.getReader();
+			while ((line = reader.readLine()) != null)
+			{
+				stringBuffer.append(line);
+			}
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		String jsonString = stringBuffer.toString();
+		WhiteboardModel whiteboard = WhiteboardDecoder.decode(jsonString);
+		
+		repository.updateWhiteboard(whiteboard.getId(), whiteboard.getName());
+	}
+	
 	protected void doDelete(HttpServletRequest request, HttpServletResponse resp)
 	{
 		StringBuffer stringBuffer = new StringBuffer();
