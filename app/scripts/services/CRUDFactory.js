@@ -8,8 +8,9 @@ angular.module('whiteboardApp')
 		// U PUT OBJ TO URL http://api.beta2.se/wb-div-postits/:id
 		// D DELETE OBJ TO URL http://api.beta2.se/wb-div-postits/:id
 
-		var url = 'ws://' + 'localhost:8080' + '/ng-whiteboard-app-websocket/whiteboard',
-			ws = new WebSocket(url);
+		var webSocketUrl = 'ws://' + 'localhost:8080' + '/ng-whiteboard-app-websocket/whiteboard',
+			whteboardUrl = "http://localhost:8080/ng-whiteboard-app-websocket/whiteboards",
+			ws = new WebSocket(webSocketUrl);
 
 		return {
 			//C
@@ -35,6 +36,11 @@ angular.module('whiteboardApp')
 			deletePostIt: function (postIt) {
 				$http.delete(URL + '/' + postIt);
 				console.log(postIt + ' was deleted from the server');
+			},
+			readWhiteboard: function () {
+				$http.get(whteboardUrl + '/').success(function (data) {
+					callback(data);
+				});
 			}
 		};
 	});
