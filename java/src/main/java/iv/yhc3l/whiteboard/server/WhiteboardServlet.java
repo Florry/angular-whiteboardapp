@@ -2,6 +2,7 @@ package iv.yhc3l.whiteboard.server;
 
 import iv.yhc3l.whiteboard.app.App;
 import iv.yhc3l.whiteboard.decoders.WhiteboardDecoder;
+import iv.yhc3l.whiteboard.encoders.EncodeUtils;
 import iv.yhc3l.whiteboard.models.WhiteboardModel;
 import iv.yhc3l.whiteboard.repository.service.WhiteboardService;
 
@@ -10,6 +11,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 
+import javax.json.Json;
+import javax.json.JsonObjectBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,20 +39,14 @@ public final class WhiteboardServlet extends HttpServlet
 		} else
 		{
 			Map<Integer, WhiteboardModel> whiteboards = repository.getAllWhiteboards();
-			StringBuilder whiteboardsJson = new StringBuilder();
-			
-			whiteboardsJson.append("[");
-			for (WhiteboardModel whiteboard : whiteboards.values())
+			JsonObjectBuilder whiteboardsJson = Json.createObjectBuilder();
+			for (WhiteboardModel whiteboardModel : whiteboards.values())
 			{
-				whiteboardsJson.append(whiteboard.encode());
-				if (!whiteboard.equals(whiteboards.get(whiteboards.size() - 1)))
-				{
-					whiteboardsJson.append(",");
-				}
+				whiteboardsJson.add(whiteboardModel.getId() + "",
+						EncodeUtils.encodeObjectToJson(whiteboardModel));
 			}
-			whiteboardsJson.append("]");
 			addResponseHeaders(response);
-			out.write(whiteboardsJson.toString());
+			out.write(whiteboardsJson.build().toString());
 		}
 	}
 	
@@ -94,19 +91,20 @@ public final class WhiteboardServlet extends HttpServlet
 		WhiteboardModel whiteboard = WhiteboardDecoder.decode(jsonString);
 		addResponseHeaders(response);
 		repository.updateWhiteboard(whiteboard.getId(), whiteboard.getName());
+		
 	}
 	
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 	{
-		
-		String requestId = request.getParameter("id");
-		int whiteboardId = -1;
-		if (requestId != null && requestId != "" && repository.getAllWhiteboards().size() > 0)
+		String requestId = request.getParameter("delete");
+		if (requestId != null)
 		{
-			whiteboardId = Integer.parseInt(requestId);
+			int whiteboardId = Integer.parseInt(requestId);
+			addResponseHeaders(response);
+			
+			repository.removeWhiteboard(whiteboardId);
 		}
-		addResponseHeaders(response);
-		repository.removeWhiteboard(whiteboardId);
+		
 	}
 	
 	protected void doOptions(HttpServletRequest request, HttpServletResponse response)

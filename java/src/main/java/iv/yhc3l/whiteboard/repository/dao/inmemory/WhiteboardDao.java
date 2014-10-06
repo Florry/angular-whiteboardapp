@@ -19,6 +19,7 @@ public final class WhiteboardDao implements WhiteboardRepository
 		WhiteboardModel newWhiteboard = new WhiteboardModel(id, whiteboard.getName());
 		whiteboards.put(id, newWhiteboard);
 		id += 1;
+		System.out.println("createWhiteboard says hello");
 	}
 	
 	@Override

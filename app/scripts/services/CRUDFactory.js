@@ -37,15 +37,20 @@ angular.module('whiteboardApp')
 				$http.delete(URL + '/' + postIt);
 				console.log(postIt + ' was deleted from the server');
 			},
+			createWhiteboard: function (whiteboard, callback) {
+				$http.post(whteboardUrl, whiteboard).success(function (data) {
+					callback(data);
+				});
+			},
 			readWhiteboard: function (callback) {
 				$http.get(whteboardUrl).success(function (data) {
 					callback(data);
 				});
 			},
 			deleteWhiteboard: function (whiteboardId, callback) {
-				$http.delete(whteboardUrl + '?id=' + whiteboardId).success(function () {
+				$http.delete(whteboardUrl + '?delete=' + whiteboardId).success(function () {
+					callback(whiteboardId);
 					console.log('Whiteboard was removed');
-					callback();
 				});
 			}
 		};
