@@ -48,7 +48,7 @@ public final class WhiteboardServlet extends HttpServlet
 				}
 			}
 			whiteboardsJson.append("]");
-			
+			addResponseHeaders(response);
 			out.write(whiteboardsJson.toString());
 		}
 	}
@@ -92,7 +92,7 @@ public final class WhiteboardServlet extends HttpServlet
 		}
 		String jsonString = stringBuffer.toString();
 		WhiteboardModel whiteboard = WhiteboardDecoder.decode(jsonString);
-		
+		addResponseHeaders(response);
 		repository.updateWhiteboard(whiteboard.getId(), whiteboard.getName());
 	}
 	
@@ -105,7 +105,7 @@ public final class WhiteboardServlet extends HttpServlet
 		{
 			whiteboardId = Integer.parseInt(requestId);
 		}
-		
+		addResponseHeaders(response);
 		repository.removeWhiteboard(whiteboardId);
 	}
 	
