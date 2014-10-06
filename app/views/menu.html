@@ -25,6 +25,7 @@
 					<tr> 
 						<th>Id</th>
 						<th>Name</th>
+						<th>Last Used</th>
 						<th>				
 							<button ng-show="!addingWhiteboard" ng-click="addWhiteboardForm()" style="float: right" class="btn btn-primary undo-buttons">
 								<span class="glyphicon glyphicon-plus"></span>
@@ -48,9 +49,11 @@
 						<a href="/#/whiteboard/{{whiteboard.id}}">#{{whiteboard.id}}</a>
 					</td>
 					<td>
-						<a href="/#/whiteboard/{{whiteboard.id}}">{{whiteboard.name}}</a><span class="glyphicon glyphicon-pencil" ng-click="showEdit()"></span>
+						<a href="/#/whiteboard/{{whiteboard.id}}">{{whiteboard.timestamp}}</a> <span class="glyphicon glyphicon-pencil" ng-click="showEdit()"></span>
 					</td>
-
+					<td>
+						<span ng-click="removeWhiteboard(whiteboard.id)">DELETE</span>
+					</td>
 				</tr>
 			</tbody>
 

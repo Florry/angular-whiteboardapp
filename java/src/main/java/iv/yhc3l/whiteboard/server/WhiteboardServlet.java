@@ -98,25 +98,15 @@ public final class WhiteboardServlet extends HttpServlet
 	
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 	{
-		StringBuffer stringBuffer = new StringBuffer();
-		String line = null;
-		try
-		{
-			BufferedReader reader = request.getReader();
-			while ((line = reader.readLine()) != null)
-			{
-				stringBuffer.append(line);
-			}
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		String jsonString = stringBuffer.toString();
-		WhiteboardModel whiteboard = WhiteboardDecoder.decode(jsonString);
-		WhiteboardModel newWhiteboard = new WhiteboardModel(whiteboard.getId(),
-				whiteboard.getName());
 		
-		repository.removeWhiteboard(newWhiteboard.getId());
+		String requestId = request.getParameter("id");
+		int whiteboardId = -1;
+		if (requestId != null && requestId != "" && repository.getAllWhiteboards().size() > 0)
+		{
+			whiteboardId = Integer.parseInt(requestId);
+		}
+		
+		repository.removeWhiteboard(whiteboardId);
 	}
 	
 	protected void doOptions(HttpServletRequest request, HttpServletResponse response)
