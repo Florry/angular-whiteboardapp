@@ -74,6 +74,7 @@ public final class WhiteboardServlet extends HttpServlet
 	
 	protected void doPut(HttpServletRequest request, HttpServletResponse response)
 	{
+		addResponseHeaders(response);
 		StringBuffer stringBuffer = new StringBuffer();
 		String line = null;
 		try
@@ -89,7 +90,7 @@ public final class WhiteboardServlet extends HttpServlet
 		}
 		String jsonString = stringBuffer.toString();
 		WhiteboardModel whiteboard = WhiteboardDecoder.decode(jsonString);
-		addResponseHeaders(response);
+		
 		repository.updateWhiteboard(whiteboard.getId(), whiteboard.getName());
 		
 	}

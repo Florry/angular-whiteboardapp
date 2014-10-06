@@ -66,7 +66,6 @@ public class EncodeUtils
 						JsonObjectBuilder value = encodeObjectToJson(methodResponse);
 						encoder.add(name, value);
 					}
-					
 				}
 			}
 		}

@@ -6,7 +6,7 @@ angular.module('whiteboardApp')
 		$scope.editWhiteboard = [];
 
 		(function() {
-			CRUDFactory.readWhiteboard(function(data) {
+			CRUDFactory.readWhiteboards(function(data) {
 				$scope.whiteboards = data;
 			});
 		}());
@@ -34,7 +34,7 @@ angular.module('whiteboardApp')
 					'timestamp': ''
 				};
 				CRUDFactory.createWhiteboard(whiteboard, function() {
-					CRUDFactory.readWhiteboard(function(data) {
+					CRUDFactory.readWhiteboards(function(data) {
 						$scope.whiteboards = data;
 					});
 				});
@@ -83,9 +83,6 @@ angular.module('whiteboardApp')
 				});
 				$scope.hideEditWbForm(whiteboard.id);
 			}
-
-
-
 		};
 
 	});

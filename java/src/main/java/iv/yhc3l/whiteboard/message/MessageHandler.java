@@ -1,5 +1,6 @@
 package iv.yhc3l.whiteboard.message;
 
+import iv.yhc3l.whiteboard.models.ClientMessageModel;
 import iv.yhc3l.whiteboard.models.ServerCommunicationModel;
 
 import java.util.Collections;
@@ -49,6 +50,10 @@ public final class MessageHandler
 	
 	public void removeClient(Session session)
 	{
+		ServerCommunicationModel clientMessage1 = new ServerCommunicationModel(
+				new ClientMessageModel(-1), "client-update");
+		handle(session, clientMessage1);
+		
 		ServerCommunicationModel clientMessage = new ServerCommunicationModel(null, "client-remove");
 		handle(session, clientMessage);
 	}
