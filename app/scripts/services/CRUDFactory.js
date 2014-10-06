@@ -38,8 +38,10 @@ angular.module('whiteboardApp')
 				console.log(postIt + ' was deleted from the server');
 			},
 
-			updateWhiteboard: function(whiteboard) {
-				$http.put(whteboardUrl + '/' + whiteboard.id, whiteboard);
+			updateWhiteboard: function(whiteboard, callback) {
+				$http.put(whteboardUrl, whiteboard).success(function(data) {
+					callback(data);
+				});
 			},
 			createWhiteboard: function(whiteboard, callback) {
 				$http.post(whteboardUrl, whiteboard).success(function(data) {

@@ -67,8 +67,25 @@ angular.module('whiteboardApp')
 			}*/
 		};
 
-		$scope.updateWhiteboard = function(whiteboard) {
-			CRUDFactory.updateWhiteboard(whiteboard);
+		$scope.updateWhiteboard = function(whiteboardUpdate, name) {
+			if (name !== undefined && name !== '') {
+				var whiteboard = {
+					'id': whiteboardUpdate.id,
+					'name': name,
+					'postits': whiteboardUpdate.postits,
+					'timestamp': ''
+				};
+
+				CRUDFactory.updateWhiteboard(whiteboard, function() {
+					CRUDFactory.readWhiteboard(function(data) {
+						$scope.whiteboards = data;
+					});
+				});
+				$scope.hideEditWbForm(whiteboard.id);
+			}
+
+
+
 		};
 
 	});
