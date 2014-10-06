@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('whiteboardApp')
-	.factory('CRUDFactory', function ($http, $routeParams) {
+	.factory('CRUDFactory', function($http, $routeParams) {
 
 		// C POST OBJ TO URL http://api.beta2.se/wb-div-postits
 		// R GET OBJ FROM URL http://api.beta2.se/wb-div-postits
@@ -14,33 +14,36 @@ angular.module('whiteboardApp')
 
 		return {
 			//C
-			create: function (newPostIt, successCallback, errorCallback) {
-				$http.post(URL, newPostIt).success(function (data) {
+			create: function(newPostIt, successCallback, errorCallback) {
+				$http.post(URL, newPostIt).success(function(data) {
 					successCallback(data);
-				}).error(function () {
+				}).error(function() {
 					errorCallback();
 				});
 			},
 			//R
-			read: function (callback) {
-				$http.get(URL + '/').success(function (data) {
+			read: function(callback) {
+				$http.get(URL + '/').success(function(data) {
 					callback(data);
 				});
 			},
 			//U
-			updatePostIt: function (postIt) {
+			updatePostIt: function(postIt) {
 				$http.put(URL + '/' + postIt.id, postIt);
 				console.log(postIt + ' was updated on the server');
 			},
 			//D
-			deletePostIt: function (postIt) {
+			deletePostIt: function(postIt) {
 				$http.delete(URL + '/' + postIt);
 				console.log(postIt + ' was deleted from the server');
 			},
-			readWhiteboard: function () {
-				$http.get(whteboardUrl + '/').success(function (data) {
+			readWhiteboard: function() {
+				$http.get(whteboardUrl + '/').success(function(data) {
 					callback(data);
 				});
+			},
+			updateWhiteboard: function(whiteboard) {
+				$http.put(whteboardUrl + '/' + whiteboard.id, whiteboard);
 			}
 		};
 	});
