@@ -3,6 +3,7 @@
 angular.module('whiteboardApp')
 	.controller('MenuCtrl', function($scope, $http, CRUDFactory) {
 		$scope.whiteboards = [];
+		$scope.editWhiteboard = [];
 
 		(function() {
 			CRUDFactory.readWhiteboard(function(data) {
@@ -30,6 +31,24 @@ angular.module('whiteboardApp')
 
 		$scope.cancelWhiteboardForm = function() {
 			$scope.addingWhiteboard = false;
+		};
+
+		$scope.showEditWbForm = function(id) {
+			$scope.editWhiteboard[id] = true;
+			/*if (id === editWhiteboardId) {
+				return true;
+			} else {
+				return false;
+			}*/
+		};
+
+		$scope.hideEditWbForm = function(id) {
+			$scope.editWhiteboard[id] = false;
+			/*if (id === editWhiteboardId) {
+				return false;
+			} else {
+				return true;
+			}*/
 		};
 
 		$scope.updateWhiteboard = function(whiteboard) {

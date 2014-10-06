@@ -48,8 +48,19 @@
 					<td>
 						<a href="/#/whiteboard/{{whiteboard.id}}">#{{whiteboard.id}}</a>
 					</td>
+					<td><span ng-show="!editWhiteboard[whiteboard.id]">
+						<a href="/#/whiteboard/{{whiteboard.id}}">{{whiteboard.name}}</a>
+						<span class="glyphicon glyphicon-pencil" ng-click="showEditWbForm(whiteboard.id)"></span></span>
+						
+						<span ng-show="editWhiteboard[whiteboard.id]">
+							<input type="text" placeholder="{{whiteboard.name}}">
+							<a type="button" class="btn btn-default btn-sm" ng-click="hideEditWbForm(whiteboard.id)">Cancel</a>
+
+							<a type="button" ng-click="updateWhiteboard(whiteboard)" class="btn btn-primary btn-sm">Update</a>
+						</span>
+					</td>
 					<td>
-						<a href="/#/whiteboard/{{whiteboard.id}}">{{whiteboard.timestamp}}</a> <span class="glyphicon glyphicon-pencil" ng-click="showEdit()"></span>
+						<a href="/#/whiteboard/{{whiteboard.id}}">{{whiteboard.timestamp}}</a>
 					</td>
 					<td>
 						<span ng-click="removeWhiteboard(whiteboard.id)">DELETE</span>
