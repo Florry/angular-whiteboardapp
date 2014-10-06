@@ -2,33 +2,32 @@ package iv.yhc3l.whiteboard.message;
 
 import iv.yhc3l.whiteboard.models.ServerCommunicationModel;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.websocket.Session;
 
 public final class MessageHandler
 {
-	private List<Message> messageTypes = Collections.synchronizedList(new ArrayList<Message>());
+	private Map<String, Message> messageTypes = Collections
+			.synchronizedMap(new HashMap<String, Message>());
 	
 	public MessageHandler(Message... messages)
 	{
 		for (Message message : messages)
 		{
-			messageTypes.add(message);
+			messageTypes.put(message.getMessage(), message);
 		}
 	}
 	
 	public void handle(Session session, ServerCommunicationModel msg)
 	{
 		Object data = msg.getData();
-		for (Message message : messageTypes)
+		Message message = messageTypes.get(msg.getMessage());
+		if (message != null)
 		{
-			if (message.getMessage().equals(msg.getMessage()))
-			{
-				message.run(session, data);
-			}
+			message.run(session, data);
 		}
 	}
 	
