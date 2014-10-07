@@ -1,19 +1,19 @@
 'use strict';
 
 angular.module('whiteboardApp')
-	.controller('MenuCtrl', function ($scope, $http, CRUDFactory) {
+	.controller('MenuCtrl', function($scope, $http, CRUDFactory) {
 		$scope.whiteboards = [];
 		$scope.editWhiteboard = [];
 
-		(function () {
-			CRUDFactory.readWhiteboards(function (data) {
+		(function() {
+			CRUDFactory.readWhiteboards(function(data) {
 				$scope.whiteboards = data;
 			});
 		}());
 
-		$scope.removeWhiteboard = function (whiteboardId) {
+		$scope.removeWhiteboard = function(whiteboardId) {
 			CRUDFactory.deleteWhiteboard(whiteboardId,
-				function (whiteboardId) {
+				function(whiteboardId) {
 					var whiteboard;
 					for (whiteboard in $scope.whiteboards) {
 						if ($scope.whiteboards[whiteboard].id === whiteboardId) {
@@ -25,7 +25,7 @@ angular.module('whiteboardApp')
 		};
 
 
-		$scope.addWhiteboard = function () {
+		$scope.addWhiteboard = function() {
 			if ($scope.whiteBoardNameInput !== '' && $scope.whiteBoardNameInput !== undefined) {
 				var whiteboard = {
 					'id': -1,
@@ -33,23 +33,23 @@ angular.module('whiteboardApp')
 					'postits': {},
 					'timestamp': ''
 				};
-				CRUDFactory.createWhiteboard(whiteboard, function () {
-					CRUDFactory.readWhiteboards(function (data) {
+				CRUDFactory.createWhiteboard(whiteboard, function() {
+					CRUDFactory.readWhiteboards(function(data) {
 						$scope.whiteboards = data;
 					});
 				});
 			}
 		};
 
-		$scope.addWhiteboardForm = function () {
+		$scope.addWhiteboardForm = function() {
 			$scope.addingWhiteboard = true;
 		};
 
-		$scope.cancelWhiteboardForm = function () {
+		$scope.cancelWhiteboardForm = function() {
 			$scope.addingWhiteboard = false;
 		};
 
-		$scope.showEditWbForm = function (id) {
+		$scope.showEditWbForm = function(id) {
 			$scope.editWhiteboard[id] = true;
 			/*if (id === editWhiteboardId) {
 				return true;
@@ -58,7 +58,7 @@ angular.module('whiteboardApp')
 			}*/
 		};
 
-		$scope.hideEditWbForm = function (id) {
+		$scope.hideEditWbForm = function(id) {
 			$scope.editWhiteboard[id] = false;
 			/*if (id === editWhiteboardId) {
 				return false;
@@ -67,8 +67,22 @@ angular.module('whiteboardApp')
 			}*/
 		};
 
-		$scope.updateWhiteboard = function (whiteboard) {
-			CRUDFactory.updateWhiteboard(whiteboard);
+		$scope.updateWhiteboard = function(whiteboardUpdate, name) {
+			if (name !== undefined && name !== '') {
+				var whiteboard = {
+					'id': whiteboardUpdate.id,
+					'name': name,
+					'postits': whiteboardUpdate.postits,
+					'timestamp': ''
+				};
+
+				CRUDFactory.updateWhiteboard(whiteboard, function() {
+					CRUDFactory.readWhiteboard(function(data) {
+						$scope.whiteboards = data;
+					});
+				});
+				$scope.hideEditWbForm(whiteboard.id);
+			}
 		};
 
 	});

@@ -7,6 +7,7 @@ angular.module('whiteboardApp')
 		return {
 			updateWhiteboard: function (whiteboard) {
 				$http.put(whteboardUrl + '/' + whiteboard.id, whiteboard);
+
 			},
 			createWhiteboard: function (whiteboard, callback) {
 				$http.post(whteboardUrl, whiteboard).success(function (data) {
