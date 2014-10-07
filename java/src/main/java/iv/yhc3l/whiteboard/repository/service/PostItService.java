@@ -16,9 +16,9 @@ public final class PostItService implements PostItRepository
 	}
 	
 	@Override
-	public void createPostIt(PostItModel postIt)
+	public PostItModel createPostIt(PostItModel postIt)
 	{
-		whiteboardRepository.getWhiteboard(postIt.getWhiteboardId()).addPostIt(postIt);
+		return whiteboardRepository.getWhiteboard(postIt.getWhiteboardId()).addPostIt(postIt);
 	}
 	
 	@Override

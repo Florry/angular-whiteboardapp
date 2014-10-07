@@ -6,7 +6,7 @@ import java.util.Map;
 
 public interface PostItRepository
 {
-	public void createPostIt(PostItModel postIt);
+	public PostItModel createPostIt(PostItModel postIt);
 	
 	public void updatePostIt(PostItModel postIt);
 	

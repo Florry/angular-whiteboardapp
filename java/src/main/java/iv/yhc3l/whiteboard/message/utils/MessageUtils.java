@@ -36,6 +36,8 @@ public final class MessageUtils
 			{
 				if (client.getWhiteboardId() == postIt.getWhiteboardId())
 				{
+					System.out.println("sending to board " + postIt.getWhiteboardId() + " User: "
+							+ client.getId());
 					client.getSession().getAsyncRemote().sendObject(message);
 				}
 			}

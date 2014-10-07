@@ -18,17 +18,13 @@ public final class CreatePostIt extends Message
 	@Override
 	public void run(Session session, Object data)
 	{
-		if (data instanceof PostItModel)
-		{
-			Utils.println(this);
-			
-			PostItModel postIt = new PostItModel((PostItModel) data);
-			postItRepository.createPostIt(postIt);
-			
-			ServerCommunicationModel response = new ServerCommunicationModel(postIt,
-					"postit-created");
-			MessageUtils.sendPostItMessageToBoard(session, clientRepository.getAllClients(),
-					response, false);
-		}
+		Utils.println(this);
+		
+		PostItModel postIt = new PostItModel((PostItModel) data);
+		postIt = new PostItModel(postItRepository.createPostIt(postIt));
+		
+		ServerCommunicationModel response = new ServerCommunicationModel(postIt, "postit-created");
+		MessageUtils.sendPostItMessageToBoard(session, clientRepository.getAllClients(), response,
+				true);
 	}
 }

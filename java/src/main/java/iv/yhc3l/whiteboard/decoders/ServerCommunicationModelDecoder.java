@@ -4,7 +4,6 @@ import iv.yhc3l.whiteboard.models.ClientMessageModel;
 import iv.yhc3l.whiteboard.models.PositionModel;
 import iv.yhc3l.whiteboard.models.PostItModel;
 import iv.yhc3l.whiteboard.models.ServerCommunicationModel;
-import iv.yhc3l.whiteboard.utils.Utils;
 
 import java.io.StringReader;
 
@@ -26,10 +25,9 @@ public final class ServerCommunicationModelDecoder implements
 		String messageString = Json.createReader(new StringReader(json)).readObject()
 				.getString("message");
 		
-		Utils.println(this);
-		
 		if (messageString.contains("postit"))
 		{
+			
 			int id = dataObject.getInt("id");
 			int whiteboardId = dataObject.getInt("whiteboardId");
 			String author = dataObject.getString("author");

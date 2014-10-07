@@ -66,7 +66,7 @@ public final class WhiteboardModel
 		return postIts.get(id);
 	}
 	
-	public void addPostIt(PostItModel postIt)
+	public PostItModel addPostIt(PostItModel postIt)
 	{
 		PostItModel addPostIt = new PostItModel(postItId, postIt.getWhiteboardId(),
 				postIt.getAuthor(), postIt.getText(), postIt.getStatus(), postIt.getPosition(),
@@ -74,6 +74,8 @@ public final class WhiteboardModel
 		postIts.put(addPostIt.getId(), addPostIt);
 		postItId += 1;
 		updateTimestamp();
+		
+		return addPostIt;
 	}
 	
 	public void removePostIt(PostItModel postIt)

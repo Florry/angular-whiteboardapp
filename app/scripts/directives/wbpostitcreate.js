@@ -61,7 +61,7 @@ angular.module('whiteboardApp')
 					var date = new Date();
 
 					scope.postItTemplate = {
-						id: '',
+						id: -1,
 						author: scope.username,
 						text: scope.postItText,
 						status: 'not started',
@@ -161,18 +161,20 @@ angular.module('whiteboardApp')
 					scope.postItTemplate.position.x = x;
 					scope.postItTemplate.position.y = y;
 
-					CRUDFactory.create(scope.postItTemplate,
-						function created(postItCreated) {
-							scope.postItTemplate.id = postItCreated.id;
-							scope.postits.push(scope.postItTemplate);
+					scope.$broadcast('create-postit', scope.postItTemplate);
+					scope.ghostActive = false;
+					// CRUDFactory.create(scope.postItTemplate,
+					// 	function created(postItCreated) {
+					// 		scope.postItTemplate.id = postItCreated.id;
+					// 		scope.postits.push(scope.postItTemplate);
 
-							console.log('After CREATE success: PostIt was created on the server with an id of ' + postItCreated.id);
+					// 		console.log('After CREATE success: PostIt was created on the server with an id of ' + postItCreated.id);
 
-							scope.ghostActive = false;
-						},
-						function error() {
-							bindEvents();
-						});
+					// 		scope.ghostActive = false;
+					// 	},
+					// 	function error() {
+					// 		bindEvents();
+					// 	});
 				}
 			}
 		};

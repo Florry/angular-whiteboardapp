@@ -10,8 +10,8 @@ angular.module('whiteboardApp')
 			ws = new WebSocket(webSocketUrl);
 
 		$scope.goToMenu = function () {
-			$location.path('#');
 			ws.close();
+			$location.path('#');
 		};
 
 		(function getWhiteboard() {
@@ -23,8 +23,20 @@ angular.module('whiteboardApp')
 				}
 			);
 		}());
+
+		function setUpWhiteBoard() {
+			$scope.whiteboardName = $scope.whiteboardObject.name;
+			$scope.postits = $scope.whiteboardObject.postits;
+		}
+
 		ws.onopen = function () {
-			ws.send('{"message":"client-update","data":{"whiteboardId":' + $scope.whiteboardObject.id + '}}');
+			var message = {
+				'message': 'client-update',
+				'data': {
+					'whiteboardId': $scope.whiteboardObject.id
+				}
+			};
+			ws.send(JSON.stringify(message));
 		};
 
 		ws.onmessage = function (message) {
@@ -33,28 +45,48 @@ angular.module('whiteboardApp')
 			$scope.$broadcast(data.message, data.data);
 		};
 
+		//Create postit locally with server data
 		$scope.$on('postit-created', function (event, data) {
-			$scope.postits.put(data);
+			$scope.postits[data.id] = data;
+			$scope.$apply();
 		});
-
+		//Update postit locally with server data
 		$scope.$on('postit-updated', function (event, data) {
 			$scope.postits[data.id] = data;
+			$scope.$apply();
 		});
-
+		//Remove postit locally to match server
 		$scope.$on('postit-removed', function (event, data) {
 			delete $scope.postits[data.id];
+			$scope.$apply();
 		});
 
-		$scope.$on('client-added', function (event, data) {
+		//Create postit on server
+		$scope.$on('create-postit', function (event, data) {
 
+			var message = {
+				'message': 'postit-create',
+				'data': data
+			};
+			message.data.whiteboardId = $scope.whiteboardObject.id;
+			console.log(message);
+			ws.send(JSON.stringify(message));
 		});
 
+		$scope.$on('update-postit', function (event, data) {
+
+			var message = {
+				'message': 'postit-update',
+				'data': data
+			};
+			message.data.whiteboardId = $scope.whiteboardObject.id;
+			console.log(message);
+			ws.send(JSON.stringify(message));
+		});
+
+		//Update current open connections to whiteboard
 		$scope.$on('connections-new', function (event, data) {
 			$scope.connections = data.connections;
+			$scope.$apply();
 		});
-
-		function setUpWhiteBoard() {
-			$scope.whiteboardName = $scope.whiteboardObject.name;
-			$scope.postits = $scope.whiteboardObject.postits;
-		}
 	});

@@ -21,7 +21,8 @@ angular.module('whiteboardApp')
 						var date = new Date();
 						$scope.content.text = $scope.inputText;
 						$scope.content.timestamp = date.getFullYear() + '-' + ((date.getMonth() + 1 < 10) ? '0' : '') + (date.getMonth() + 1) + '-' + ((date.getDate() < 10) ? '0' : '') + (date.getDate()) + ' - ' + date.getHours() + ':' + ((date.getMinutes() < 10) ? '0' : '') + (date.getMinutes());
-						CRUDFactory.updatePostIt($scope.content);
+						// CRUDFactory.updatePostIt($scope.content);
+						$scope.$broadcast('update-postit', $scope.content);
 					}
 					$scope.closeEditForm();
 				};
