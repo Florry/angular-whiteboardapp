@@ -50,9 +50,4 @@ public final class WebsocketEndpoint
 		messageHandler.onError(session);
 	}
 	
-	public static MessageHandler getMessageHandler()
-	{
-		return messageHandler;
-	}
-	
 }

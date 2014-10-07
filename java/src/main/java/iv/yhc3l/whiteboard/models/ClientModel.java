@@ -19,14 +19,21 @@ public final class ClientModel
 		this.whiteboardId = client.getWhiteboardId();
 	}
 	
+	public ClientModel(ClientModel client, int whiteboardId)
+	{
+		this.session = client.getSession();
+		this.whiteboardId = whiteboardId;
+	}
+	
+	public ClientModel(Session session, int whiteboardId)
+	{
+		this.session = session;
+		this.whiteboardId = whiteboardId;
+	}
+	
 	public int getWhiteboardId()
 	{
 		return whiteboardId;
-	}
-	
-	public void setWhiteboardId(int id)
-	{
-		this.whiteboardId = id;
 	}
 	
 	public Session getSession()

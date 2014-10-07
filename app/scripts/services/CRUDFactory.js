@@ -2,7 +2,7 @@
 
 angular.module('whiteboardApp')
 	.factory('CRUDFactory', function ($http) {
-		var whteboardUrl = 'http://192.168.1.8:8080/ng-whiteboard-app-websocket/whiteboards';
+		var whteboardUrl = 'http://localhost:8080/ng-whiteboard-app-websocket/whiteboards';
 
 		return {
 			updateWhiteboard: function (whiteboard) {

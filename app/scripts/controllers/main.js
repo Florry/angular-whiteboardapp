@@ -6,7 +6,7 @@ angular.module('whiteboardApp')
 		$scope.whiteboardName = '';
 		$scope.connections = 0;
 
-		var webSocketUrl = 'ws://' + '192.168.1.8:8080' + '/ng-whiteboard-app-websocket/whiteboard',
+		var webSocketUrl = 'ws://' + 'localhost:8080' + '/ng-whiteboard-app-websocket/whiteboard',
 			ws = new WebSocket(webSocketUrl);
 
 		$scope.goToMenu = function () {
@@ -41,7 +41,7 @@ angular.module('whiteboardApp')
 
 		ws.onmessage = function (message) {
 			var data = JSON.parse(message.data);
-			// console.log(data);
+			console.log(data);
 			$scope.$broadcast(data.message, data.data);
 		};
 
