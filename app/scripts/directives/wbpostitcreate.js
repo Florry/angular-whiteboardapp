@@ -7,11 +7,11 @@
  * # wbPostitCreate
  */
 angular.module('whiteboardApp')
-	.directive('wbPostItCreate', function($document) {
+	.directive('wbPostItCreate', function ($document) {
 		return {
 			templateUrl: './scripts/directives/templates/postit-create.html',
 			restrict: 'E',
-			link: function(scope) {
+			link: function (scope) {
 				var ghost = $('#post-it-ghost'),
 					createPostItDiv = $('#create-post-it-div'),
 					whiteBoard = $('.whiteboard'),
@@ -37,7 +37,7 @@ angular.module('whiteboardApp')
 					}
 				}
 
-				scope.toggleForm = function() {
+				scope.toggleForm = function () {
 					if (createPostItDiv.is(':visible')) {
 						createPostItDiv.hide();
 					} else {
@@ -45,7 +45,7 @@ angular.module('whiteboardApp')
 					}
 				};
 
-				scope.cancelCreationOfPostIt = function(toggleForm) {
+				scope.cancelCreationOfPostIt = function (toggleForm) {
 					unbindEvents();
 					scope.ghostActive = false;
 					ghost.removeClass('outside-boundaries').addClass('inside-boundaries');
@@ -57,7 +57,7 @@ angular.module('whiteboardApp')
 					}
 				};
 
-				scope.createPostItGhost = function() {
+				scope.createPostItGhost = function () {
 					var date = new Date();
 
 					scope.postItTemplate = {
@@ -82,9 +82,9 @@ angular.module('whiteboardApp')
 				};
 
 				function bindEvents() {
-					ghost.hover(function() {
+					ghost.hover(function () {
 						$document.bind('mouseup', createPostItAtGhostPosition);
-					}, function() {
+					}, function () {
 						$document.unbind('mouseup', createPostItAtGhostPosition);
 					});
 				}
@@ -163,6 +163,12 @@ angular.module('whiteboardApp')
 
 					scope.$broadcast('create-postit', scope.postItTemplate);
 					scope.ghostActive = false;
+
+					scope.$on('postit-new-id', function (event, data) {
+						var postIt = scope.postItTemplate;
+						postIt.id = data;
+						scope.$broadcast('postit-created', postIt);
+					});
 					// CRUDFactory.create(scope.postItTemplate,
 					// 	function created(postItCreated) {
 					// 		scope.postItTemplate.id = postItCreated.id;

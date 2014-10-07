@@ -25,6 +25,10 @@ public final class CreatePostIt extends Message
 		
 		ServerCommunicationModel response = new ServerCommunicationModel(postIt, "postit-created");
 		MessageUtils.sendPostItMessageToBoard(session, clientRepository.getAllClients(), response,
-				true);
+				false);
+		
+		ServerCommunicationModel creatorReponse = new ServerCommunicationModel(new Integer(
+				postIt.getId()), "postit-new-id");
+		MessageUtils.sendMessage(session, creatorReponse);
 	}
 }

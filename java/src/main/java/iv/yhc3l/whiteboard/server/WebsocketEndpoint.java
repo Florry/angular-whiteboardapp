@@ -5,7 +5,6 @@ import iv.yhc3l.whiteboard.decoders.ServerCommunicationModelDecoder;
 import iv.yhc3l.whiteboard.encoders.ServerCommunicationModelEncoder;
 import iv.yhc3l.whiteboard.message.MessageHandler;
 import iv.yhc3l.whiteboard.models.ServerCommunicationModel;
-import iv.yhc3l.whiteboard.models.WhiteboardModel;
 
 import javax.websocket.CloseReason;
 import javax.websocket.OnClose;
@@ -27,16 +26,6 @@ public final class WebsocketEndpoint
 	@OnOpen
 	public void whiteboardOnOpen(Session session)
 	{
-		{// DEBUG
-			if (once)
-			{
-				once = false;
-				WhiteboardModel whiteboard = new WhiteboardModel(-1, "bob");
-				WhiteboardModel whiteboard2 = new WhiteboardModel(-1, "bob2");
-				App.whiteboardRepository.createWhiteboard(whiteboard);
-				App.whiteboardRepository.createWhiteboard(whiteboard2);
-			}
-		}// DEBUG END
 		messageHandler.onOpen(session);
 	}
 	
