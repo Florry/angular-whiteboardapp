@@ -7,7 +7,7 @@
  * # postIt
  */
 angular.module('whiteboardApp')
-	.directive('wbPostIt', function ($document) {
+	.directive('wbPostIt', function($document) {
 		return {
 			templateUrl: './scripts/directives/templates/post-it.html',
 			restrict: 'E',
@@ -50,7 +50,7 @@ angular.module('whiteboardApp')
 				});
 
 				(function bindElementMove() {
-					element.bind('mousedown', function (event) {
+					element.bind('mousedown', function(event) {
 						if (!scope.isBeingEdited && !scope.$parent.ghostActive) {
 							startX = event.screenX - element.offset().left;
 							startY = event.screenY - element.offset().top;
@@ -88,16 +88,16 @@ angular.module('whiteboardApp')
 					}
 				}
 
-				scope.getStatusCss = function () {
+				scope.getStatusCss = function() {
 					return scope.content.status.replace(' ', '-');
 				};
 
 				scope.isBeingEdited = false;
 				element.hover(
-					function () {
+					function() {
 						$(this).find('wb-post-it-status-panel').css('opacity', '1');
 					},
-					function () {
+					function() {
 						if (!scope.isBeingEdited) {
 							$(this).find('wb-post-it-status-panel').css('opacity', '0');
 							$(this).find('.postit-scroll-read').animate({

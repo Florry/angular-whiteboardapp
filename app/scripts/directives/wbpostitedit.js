@@ -14,7 +14,7 @@ angular.module('whiteboardApp')
 			scope: {
 				content: '='
 			},
-			controller: function postItCtrl($scope) {
+			controller: function postItCtrl($scope, $rootScope) {
 				$scope.inputText = $scope.content.text;
 				$scope.updatePostit = function() {
 					if ($scope.content.text !== $scope.inputText) {
@@ -22,7 +22,7 @@ angular.module('whiteboardApp')
 						$scope.content.text = $scope.inputText;
 						$scope.content.timestamp = date.getFullYear() + '-' + ((date.getMonth() + 1 < 10) ? '0' : '') + (date.getMonth() + 1) + '-' + ((date.getDate() < 10) ? '0' : '') + (date.getDate()) + ' - ' + date.getHours() + ':' + ((date.getMinutes() < 10) ? '0' : '') + (date.getMinutes());
 						// CRUDFactory.updatePostIt($scope.content);
-						$scope.$parent.$parent.$parent.$parent.$broadcast('update-postit', $scope.content);
+						$rootScope.$broadcast('update-postit', $scope.content);
 					}
 					$scope.closeEditForm();
 				};

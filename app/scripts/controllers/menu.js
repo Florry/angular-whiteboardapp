@@ -11,6 +11,14 @@ angular.module('whiteboardApp')
 			});
 		}());
 
+		$scope.filterWhiteboards = function (whiteboard) {
+			if (whiteboard.name.match($scope.filterQuery)) {
+				return true;
+			} else {
+				return false;
+			}
+		};
+
 		$scope.removeWhiteboard = function (whiteboardId) {
 			CRUDFactory.deleteWhiteboard(whiteboardId,
 				function (whiteboardId) {
