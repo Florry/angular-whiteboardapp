@@ -12,4 +12,4 @@ Further development by <a href="https://github.com/Florry">Viktor Söderström</
 
 Further development by <a href="https://github.com/iPrytz">Isak Prytz</a> @ https://github.com/iPrytz/angular-whiteboard-VG-Isak
 
-Websocket implementation[Work in progress] by <a href="https://github.com/iPrytz">Isak Prytz</a> and <a href="https://github.com/Florry">Viktor Söderström</a> @ https://github.com/Florry/angular-whiteboardapp/tree/websocket
+Websocket implementation by <a href="https://github.com/iPrytz">Isak Prytz</a> and <a href="https://github.com/Florry">Viktor Söderström</a> @ https://github.com/Florry/angular-whiteboardapp/tree/websocket
