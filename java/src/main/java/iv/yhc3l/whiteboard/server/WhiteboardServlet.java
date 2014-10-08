@@ -28,7 +28,7 @@ public final class WhiteboardServlet extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
-		response.setContentType("text");
+		addResponseHeaders(response);
 		PrintWriter out = response.getWriter();
 		
 		String requestId = request.getParameter("id");
@@ -45,7 +45,6 @@ public final class WhiteboardServlet extends HttpServlet
 				whiteboardsJson.add(whiteboardModel.getId() + "",
 						EncodeUtils.encodeObjectToJson(whiteboardModel));
 			}
-			addResponseHeaders(response);
 			out.write(whiteboardsJson.build().toString());
 		}
 	}
@@ -116,10 +115,12 @@ public final class WhiteboardServlet extends HttpServlet
 	
 	public void addResponseHeaders(HttpServletResponse response)
 	{
-		response.addHeader("Access-Control-Allow-Origin", "*");
-		response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE");
-		response.addHeader("Access-Control-Allow-Headers",
-				"X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
-		response.addHeader("Access-Control-Max-Age", "1728000");
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+		response.setHeader("AccessControlAllowCredentials", "true");
+		response.setHeader(
+				"Access-Control-Allow-Headers",
+				"Content-Type,X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,  Date, X-Api-Version, X-File-Name");
+		response.setContentType("application/json");
 	}
 }

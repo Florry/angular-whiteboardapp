@@ -21,8 +21,6 @@ public final class WebsocketEndpoint
 {
 	private static MessageHandler messageHandler = App.messageHandler;
 	
-	private static boolean once = true;
-	
 	@OnOpen
 	public void whiteboardOnOpen(Session session)
 	{

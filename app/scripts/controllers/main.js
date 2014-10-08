@@ -41,7 +41,7 @@ angular.module('whiteboardApp')
 
 		ws.onmessage = function (message) {
 			var data = JSON.parse(message.data);
-			console.log(data);
+			// console.log(data);
 			$scope.$broadcast(data.message, data.data);
 		};
 
