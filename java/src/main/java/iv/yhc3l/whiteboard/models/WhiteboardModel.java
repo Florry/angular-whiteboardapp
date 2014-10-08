@@ -3,6 +3,7 @@ package iv.yhc3l.whiteboard.models;
 import iv.yhc3l.whiteboard.encoders.ServerCommunicationModelEncoder;
 import iv.yhc3l.whiteboard.utils.Utils;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public final class WhiteboardModel
 		this.id = id;
 		this.name = name;
 		updateTimestamp();
-		this.postIts = new LinkedHashMap<Integer, PostItModel>();
+		this.postIts = Collections.synchronizedMap(new LinkedHashMap<Integer, PostItModel>());
 	}
 	
 	public WhiteboardModel(int id, String name, Map<Integer, PostItModel> postItModels)
