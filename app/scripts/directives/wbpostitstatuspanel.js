@@ -7,7 +7,7 @@ angular.module('whiteboardApp')
 			scope: {
 				content: '='
 			},
-			controller: function postLink($scope) {
+			controller: function postLink($scope, $rootScope) {
 				$scope.postIts = $scope.$parent.$parent.postits;
 				$scope.done = 'done';
 				$scope.inProgress = 'in progress';
@@ -22,11 +22,11 @@ angular.module('whiteboardApp')
 
 				$scope.changeStatus = function(newStatus) {
 					$scope.content.status = newStatus;
-					$scope.$parent.$parent.$parent.$broadcast('update-postit', $scope.content);
+					$rootScope.$broadcast('update-postit', $scope.content);
 				};
 
 				$scope.deletePostIt = function(id) {
-					$scope.$parent.$parent.$parent.$broadcast('delete-postit', id);
+					$rootScope.$broadcast('delete-postit', id);
 					delete $scope.$parent.$parent.$parent.postits[id];
 				};
 			}
