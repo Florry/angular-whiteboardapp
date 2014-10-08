@@ -93,9 +93,9 @@ public final class PostItModel
 		stringBuilder.append(timestamp);
 		stringBuilder.append("\n");
 		stringBuilder.append("\n x:");
-		stringBuilder.append(position.x);
+		stringBuilder.append(position.getX());
 		stringBuilder.append("\n y:");
-		stringBuilder.append(position.y);
+		stringBuilder.append(position.getY());
 		
 		return stringBuilder.toString();
 	}

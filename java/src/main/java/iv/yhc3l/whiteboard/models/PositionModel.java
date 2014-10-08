@@ -2,8 +2,8 @@ package iv.yhc3l.whiteboard.models;
 
 public final class PositionModel
 {
-	public final int x;
-	public final int y;
+	private final int x;
+	private final int y;
 	
 	public PositionModel(final int x, final int y)
 	{
