@@ -6,7 +6,7 @@ angular.module('whiteboardApp')
 		$scope.whiteboardName = '';
 		$scope.connections = 0;
 
-		var webSocketUrl = 'ws://' + 'localhost:8080' + '/ng-whiteboard-app-websocket/whiteboard',
+		var webSocketUrl = 'ws://' + '172.20.10.8:8080' + '/ng-whiteboard-app-websocket/whiteboard',
 			ws = new WebSocket(webSocketUrl);
 
 		$scope.goToMenu = function () {

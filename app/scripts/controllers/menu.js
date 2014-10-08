@@ -12,7 +12,7 @@ angular.module('whiteboardApp')
 		}());
 
 		$scope.filterWhiteboards = function (whiteboard) {
-			if (whiteboard.name.match($scope.filterQuery)) {
+			if (whiteboard.name.match($scope.filterQuery) || (whiteboard.id + '').match($scope.filterQuery) || whiteboard.timestamp.match($scope.filterQuery)) {
 				return true;
 			} else {
 				return false;
